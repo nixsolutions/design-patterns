@@ -1,0 +1,12 @@
+{
+  "require-dev": {
+    "phpunit/phpunit": ">=5.5.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "DesignPatterns\\": "patterns/",
+      "DesignPatterns\\Tests\\": "tests/"
+    },
+    "files": ["utils/utils.php"]
+  }
+}
