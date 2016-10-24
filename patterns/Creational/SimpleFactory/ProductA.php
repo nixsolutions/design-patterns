@@ -1,6 +1,6 @@
 <?php
 namespace DesignPatterns\Creational\SimpleFactory;
 
-class ProductA extends AbstractProduct
+class ProductA implements ProductInterface
 {
 }

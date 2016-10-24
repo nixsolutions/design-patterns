@@ -1,7 +1,7 @@
 <?php
 namespace DesignPatterns\Creational\SimpleFactory;
 
-class SimpleFactory implements SimpleFactoryInterface
+class SimpleFactory
 {
     public static function create(string $productType): ProductInterface
     {
