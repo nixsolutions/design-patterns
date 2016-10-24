@@ -1,14 +1,14 @@
 <?php
 namespace DesignPatterns\Creational\AbstractFactory\Factories;
 
+use DesignPatterns\Creational\AbstractFactory\Books\Php\AbstractPhpBook;
+use DesignPatterns\Creational\AbstractFactory\Books\Php\OreilBook as OreilPhp;
+
 use DesignPatterns\Creational\AbstractFactory\Books\Js\AbstractJsBook;
 use DesignPatterns\Creational\AbstractFactory\Books\Js\OreilBook as OreilJs;
 
 use DesignPatterns\Creational\AbstractFactory\Books\Mysql\AbstractMySQLBook;
 use DesignPatterns\Creational\AbstractFactory\Books\Mysql\OreilBook as OreilMySql;
-
-use DesignPatterns\Creational\AbstractFactory\Books\Php\AbstractPhpBook;
-use DesignPatterns\Creational\AbstractFactory\Books\Php\OreilBook as OreilPhp;
 
 class OreilBookFactory extends AbstractBookFactory
 {

@@ -76,6 +76,7 @@ abstract class PassportSingletonAbstract extends SingletonAbstract
         if (!$instance->passportID) {
             $instance->setPassportID();
         }
+
         return $instance;
     }
 }

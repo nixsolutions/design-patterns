@@ -53,6 +53,7 @@ final class NewbieSingleton
         if (null === static::$instance) {
             static::$instance = new static();
         }
+
         return static::$instance;
     }
 

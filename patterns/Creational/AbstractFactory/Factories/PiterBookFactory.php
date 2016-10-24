@@ -1,12 +1,14 @@
 <?php
 namespace DesignPatterns\Creational\AbstractFactory\Factories;
 
+use DesignPatterns\Creational\AbstractFactory\Books\Php\PiterBook as PiterPhp;
+use DesignPatterns\Creational\AbstractFactory\Books\Php\AbstractPhpBook;
+
 use DesignPatterns\Creational\AbstractFactory\Books\Js\AbstractJsBook;
 use DesignPatterns\Creational\AbstractFactory\Books\Js\PiterBook as PiterJs;
+
 use DesignPatterns\Creational\AbstractFactory\Books\Mysql\AbstractMySQLBook;
 use DesignPatterns\Creational\AbstractFactory\Books\Mysql\PiterBook as PiterMySql;
-use DesignPatterns\Creational\AbstractFactory\Books\Php\AbstractPhpBook;
-use DesignPatterns\Creational\AbstractFactory\Books\Php\PiterBook as PiterPhp;
 
 class PiterBookFactory extends AbstractBookFactory
 {

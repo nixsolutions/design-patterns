@@ -17,6 +17,7 @@ trait SingletonTrait
         if (null === static::$instance) {
             static::$instance = new static();
         }
+
         return static::$instance;
     }
 }
