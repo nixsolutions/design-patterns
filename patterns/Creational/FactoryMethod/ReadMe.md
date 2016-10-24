@@ -1,0 +1,1 @@
+The Factory Method design is really all about a “create” method that is implemented by sub classes.
