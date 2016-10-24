@@ -1,7 +1,9 @@
 <?php
+namespace DesignPatterns\Creational\FactoryMethod\Factories;
 
-namespace DesignPatterns\Creational\FactoryMethod;
-
+use DesignPatterns\Creational\FactoryMethod\Books\BookInterface;
+use DesignPatterns\Creational\FactoryMethod\Books\JsBook;
+use DesignPatterns\Creational\FactoryMethod\Books\PhpBook;
 
 abstract class BookFactory extends FactoryMethod
 {

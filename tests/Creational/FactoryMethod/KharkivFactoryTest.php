@@ -1,8 +1,9 @@
 <?php
 namespace DesignPatterns\Tests\Creational\FactoryMethod;
 
-use DesignPatterns\Creational\FactoryMethod\KharkivBookFactory;
-use DesignPatterns\Creational\FactoryMethod\LvivBookFactory;
+
+use DesignPatterns\Creational\FactoryMethod\Factories\KharkivBookFactory;
+use DesignPatterns\Creational\FactoryMethod\Factories\LvivBookFactory;
 use PHPUnit_Framework_TestCase;
 
 class KharkivFactoryTest extends PHPUnit_Framework_TestCase
@@ -14,8 +15,8 @@ class KharkivFactoryTest extends PHPUnit_Framework_TestCase
         $phpBook = $kharkivBookFactory->create('php');
         $jsBook = $kharkivBookFactory->create('js');
 
-        $this->assertInstanceOf('DesignPatterns\Creational\FactoryMethod\PhpBook', $phpBook);
-        $this->assertInstanceOf('DesignPatterns\Creational\FactoryMethod\JsBook', $jsBook);
+        $this->assertInstanceOf('DesignPatterns\Creational\FactoryMethod\Books\PhpBook', $phpBook);
+        $this->assertInstanceOf('DesignPatterns\Creational\FactoryMethod\Books\JsBook', $jsBook);
     }
 
     public function testCityBookFactory()

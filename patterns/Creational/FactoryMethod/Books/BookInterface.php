@@ -1,5 +1,5 @@
 <?php
-namespace DesignPatterns\Creational\FactoryMethod;
+namespace DesignPatterns\Creational\FactoryMethod\Books;
 
 interface BookInterface
 {

@@ -1,12 +1,12 @@
 <?php
-namespace DesignPatterns\Creational\FactoryMethod;
+namespace DesignPatterns\Creational\FactoryMethod\Books;
 
-class PhpBook implements BookInterface
+class JsBook implements BookInterface
 {
     private $city;
 
     /**
-     * PhpBook constructor.
+     * BookInterface constructor.
      * @param string $city
      */
     public function __construct(string $city)
@@ -25,7 +25,7 @@ class PhpBook implements BookInterface
     /**
      * @param string $city
      */
-    protected function setCity(string $city)
+    public function setCity(string $city)
     {
         $this->city = $city;
     }

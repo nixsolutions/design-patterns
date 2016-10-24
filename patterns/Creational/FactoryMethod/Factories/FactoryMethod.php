@@ -1,5 +1,7 @@
 <?php
-namespace DesignPatterns\Creational\FactoryMethod;
+namespace DesignPatterns\Creational\FactoryMethod\Factories;
+
+use DesignPatterns\Creational\FactoryMethod\Books\BookInterface;
 
 abstract class FactoryMethod
 {
