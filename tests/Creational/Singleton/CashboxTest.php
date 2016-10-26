@@ -10,7 +10,6 @@ class CashboxTest extends \PHPUnit_Framework_TestCase
      */
     private $shopCashbox;
 
-
     protected function setUp()
     {
         $this->shopCashbox = Cashbox::getInstance();
