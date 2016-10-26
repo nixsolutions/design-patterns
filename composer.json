@@ -6,7 +6,6 @@
     "psr-4": {
       "DesignPatterns\\": "patterns/",
       "DesignPatterns\\Tests\\": "tests/"
-    },
-    "files": ["utils/utils.php"]
+    }
   }
 }
