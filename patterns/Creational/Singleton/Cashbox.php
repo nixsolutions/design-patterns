@@ -7,19 +7,24 @@ namespace DesignPatterns\Creational\Singleton;
  */
 class Cashbox implements SingletonInterface
 {
-    protected $cash = [];
+    /**
+     * @var array
+     */
+    private $cash = [];
 
     use SingletonTrait;
 
     /**
-     * @return null
+     * Return sum for all cash operation on cashbox
+     * @return float
      */
-    public function getAllCash()
+    public function getAllCash(): float
     {
         return array_sum($this->cash);
     }
 
     /**
+     * Set new cash operation
      * @param float $cash
      */
     public function setCash(float $cash)
