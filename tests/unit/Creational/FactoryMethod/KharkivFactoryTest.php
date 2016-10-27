@@ -1,7 +1,6 @@
 <?php
 namespace DesignPatterns\Tests\Creational\FactoryMethod;
 
-
 use DesignPatterns\Creational\FactoryMethod\Factories\KharkivBookFactory;
 use DesignPatterns\Creational\FactoryMethod\Factories\LvivBookFactory;
 use PHPUnit_Framework_TestCase;
