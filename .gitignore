@@ -4,10 +4,10 @@
 
 # IntelliJ project files
 .idea/
-*.iml
 out
 gen
 /vendor/
 
 tests/_output/*
 TODO/
+/.project
