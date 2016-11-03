@@ -3,7 +3,7 @@ namespace DesignPatterns\Tests\Creational\Singleton;
 
 use DesignPatterns\Creational\Singleton\Cashbox;
 
-class CashboxTest extends \PHPUnit_Framework_TestCase
+class SingletonTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Cashbox

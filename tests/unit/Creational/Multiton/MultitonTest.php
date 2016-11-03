@@ -3,7 +3,7 @@ namespace DesignPatterns\Tests\Creational\Multiton;
 
 use DesignPatterns\Creational\Multiton\ShopCashSystem;
 
-class ShopCashSystemTest extends \PHPUnit_Framework_TestCase
+class MultitonTest extends \PHPUnit_Framework_TestCase
 {
     public function testUniqueness()
     {
