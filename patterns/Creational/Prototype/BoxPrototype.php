@@ -1,19 +1,23 @@
 <?php
 namespace DesignPatterns\Creational\Prototype;
 
-abstract class AbstractBookPrototype
+class BoxPrototype
 {
     /**
      * @var string
      */
     protected $title;
 
-    /**
-     * @var string
-     */
-    protected $category;
+    public function __construct($delay = false)
+    {
+        if (true === $delay) {
+            sleep(1);
+        }
+    }
 
-    abstract public function __clone();
+    public function __clone()
+    {
+    }
 
     public function getTitle(): string
     {
