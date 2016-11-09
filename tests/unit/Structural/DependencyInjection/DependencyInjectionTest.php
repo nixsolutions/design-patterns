@@ -46,6 +46,6 @@ class DependencyInjectionTest extends \PHPUnit_Framework_TestCase
 
         $worker = new Worker($mockCheeseburger);
         $burger = $worker->getBurger();
-        $this->assertEquals($this->hamburgerReturnDataFixture, $burger);
+        $this->assertEquals($this->cheeseburgerReturnDataFixture, $burger);
     }
 }
