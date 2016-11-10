@@ -2,10 +2,25 @@
 
 namespace DesignPatterns\Creational\StaticFactory\Burgers;
 
+/**
+ * Class Burger
+ * @package DesignPatterns\Creational\StaticFactory\Burgers
+ */
 abstract class Burger
 {
+    /**
+     * @var string
+     */
     protected $meat;
+
+    /**
+     * @var string
+     */
     protected $sauce;
+
+    /**
+     * @var string
+     */
     protected $withCheese;
 
     /**
