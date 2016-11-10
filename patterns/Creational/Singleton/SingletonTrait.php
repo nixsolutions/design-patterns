@@ -1,8 +1,9 @@
 <?php
+
 namespace DesignPatterns\Creational\Singleton;
 
 /**
- * Class SingletonTrait
+ * Trait SingletonTrait
  * @package DesignPatterns\Creational\Singleton
  */
 trait SingletonTrait
@@ -17,10 +18,22 @@ trait SingletonTrait
      */
     final public static function getInstance(): SingletonInterface
     {
-        if (null === static::$instance) {
+        if (!static::$instance) {
             static::$instance = new static();
         }
 
         return static::$instance;
+    }
+
+    final public function __construct()
+    {
+    }
+
+    final public function __clone()
+    {
+    }
+
+    final public function __wakeup()
+    {
     }
 }
