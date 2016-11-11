@@ -19,7 +19,7 @@ class Cheeseburger extends Burger
     protected $sauce = 'mayonnaise';
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $withCheese = true;
 }

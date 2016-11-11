@@ -19,7 +19,7 @@ class Hamburger extends Burger
     protected $sauce = 'ketchup';
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $withCheese = false;
 }

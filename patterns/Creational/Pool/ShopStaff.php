@@ -21,7 +21,7 @@ class ShopStaff implements Countable
     private $freeWorkers = [];
 
     /**
-     * @param boolean $delay
+     * @param bool $delay
      *
      * @return Worker
      */

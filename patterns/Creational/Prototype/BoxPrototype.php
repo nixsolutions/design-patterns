@@ -45,6 +45,8 @@ class BoxPrototype
 
     /**
      * @param string $title
+     *
+     * @return void
      */
     public function setTitle(string $title)
     {

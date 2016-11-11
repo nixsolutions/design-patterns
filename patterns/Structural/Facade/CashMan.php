@@ -85,6 +85,8 @@ class CashMan
     /**
      * @param WaterWorker|BurgerWorker $worker
      * @param array|string $products
+     *
+     * @return void
      */
     protected function setProductsToOrderWithPrice($worker, $products)
     {
@@ -100,6 +102,8 @@ class CashMan
     /**
      * @param WaterWorker|BurgerWorker $worker
      * @param string $product
+     *
+     * @return void
      */
     protected function setProductAndPrice($worker, $product)
     {

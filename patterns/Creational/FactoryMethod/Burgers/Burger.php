@@ -19,7 +19,7 @@ abstract class Burger
     protected $sauce;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $withCheese;
 
@@ -60,7 +60,7 @@ abstract class Burger
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getWithCheese(): bool
     {
@@ -68,7 +68,7 @@ abstract class Burger
     }
 
     /**
-     * @param boolean $withCheese
+     * @param bool $withCheese
      *
      * @return void
      */

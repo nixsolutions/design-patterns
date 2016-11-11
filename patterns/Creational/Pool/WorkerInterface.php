@@ -12,7 +12,7 @@ interface WorkerInterface
      * WorkerInterface constructor.
      *
      * @param int $workerNumber
-     * @param boolean $performance
+     * @param bool $performance
      */
     public function __construct(int $workerNumber, $performance = false);
 

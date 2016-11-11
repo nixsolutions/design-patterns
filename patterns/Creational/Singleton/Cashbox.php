@@ -29,6 +29,8 @@ class Cashbox implements SingletonInterface
      * Set new cash operation
      *
      * @param float $cash
+     *
+     * @return void
      */
     public function setCash(float $cash)
     {
