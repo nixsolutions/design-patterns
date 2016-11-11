@@ -14,10 +14,12 @@ class CashMan
      * @var BurgerWorker
      */
     protected $burgerWorker;
+
     /**
      * @var WaterWorker
      */
     protected $waterWorker;
+
     /**
      * @var CashBox
      */
@@ -27,6 +29,7 @@ class CashMan
      * @var array
      */
     protected $order = [];
+
     /**
      * @var float
      */
@@ -104,6 +107,9 @@ class CashMan
         $this->orderPrice += $worker->getPrice($product);
     }
 
+    /**
+     * @return void
+     */
     protected function resetResult()
     {
         $this->orderPrice = 0;
