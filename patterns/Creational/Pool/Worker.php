@@ -1,4 +1,5 @@
 <?php
+
 namespace DesignPatterns\Creational\Pool;
 
 /**
@@ -16,7 +17,7 @@ class Worker implements WorkerInterface
      * Worker constructor.
      *
      * @param int $workerNumber
-     * @param bool $performance
+     * @param boolean $performance
      */
     public function __construct(int $workerNumber, $performance = false)
     {
@@ -30,7 +31,7 @@ class Worker implements WorkerInterface
     /**
      * @return string
      */
-    public function run()
+    public function run(): string
     {
         return 'Hello. My number is ' . $this->getNumberWorker() . '!';
     }
@@ -45,6 +46,8 @@ class Worker implements WorkerInterface
 
     /**
      * @param int $workerNumber
+     *
+     * @return void
      */
     private function setNumberWorker(int $workerNumber)
     {

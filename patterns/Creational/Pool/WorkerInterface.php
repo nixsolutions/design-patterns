@@ -1,4 +1,5 @@
 <?php
+
 namespace DesignPatterns\Creational\Pool;
 
 /**
@@ -7,7 +8,16 @@ namespace DesignPatterns\Creational\Pool;
  */
 interface WorkerInterface
 {
-    public function __construct(int $workerNumber, $performance = null);
+    /**
+     * WorkerInterface constructor.
+     *
+     * @param int $workerNumber
+     * @param boolean $performance
+     */
+    public function __construct(int $workerNumber, $performance = false);
 
-    public function run();
+    /**
+     * @return string
+     */
+    public function run(): string;
 }

@@ -1,9 +1,11 @@
 <?php
+
 namespace DesignPatterns\Tests\Creational\Pool;
 
 use DesignPatterns\Creational\Pool\ShopStaff;
+use PHPUnit_Framework_TestCase;
 
-class PoolTest extends \PHPUnit_Framework_TestCase
+class PoolTest extends PHPUnit_Framework_TestCase
 {
     public function testCanShopStaffCreateNewWorkers()
     {
