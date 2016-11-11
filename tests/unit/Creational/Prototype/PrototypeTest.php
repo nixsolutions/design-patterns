@@ -1,9 +1,11 @@
 <?php
+
 namespace DesignPatterns\Tests\Creational\Prototype;
 
 use DesignPatterns\Creational\Prototype\BoxPrototype;
+use PHPUnit_Framework_TestCase;
 
-class PrototypeTest extends \PHPUnit_Framework_TestCase
+class PrototypeTest extends PHPUnit_Framework_TestCase
 {
     public function testPerformanceGetBoxWithDelay()
     {
