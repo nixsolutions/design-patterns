@@ -2,10 +2,25 @@
 
 namespace DesignPatterns\Creational\FactoryMethod\Burgers;
 
+/**
+ * Class Burger
+ * @package DesignPatterns\Creational\FactoryMethod\Burgers
+ */
 abstract class Burger
 {
+    /**
+     * @var string
+     */
     protected $meat;
+
+    /**
+     * @var string
+     */
     protected $sauce;
+
+    /**
+     * @var boolean
+     */
     protected $withCheese;
 
     /**
@@ -18,6 +33,8 @@ abstract class Burger
 
     /**
      * @param string $meat
+     *
+     * @return void
      */
     public function setMeat(string $meat)
     {
@@ -34,6 +51,8 @@ abstract class Burger
 
     /**
      * @param string $sauce
+     *
+     * @return void
      */
     public function setSauce(string $sauce)
     {
@@ -50,6 +69,8 @@ abstract class Burger
 
     /**
      * @param boolean $withCheese
+     *
+     * @return void
      */
     public function setWithCheese(bool $withCheese)
     {
