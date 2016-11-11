@@ -2,6 +2,10 @@
 
 namespace DesignPatterns\Structural\Registry;
 
+/**
+ * Class WorkerData
+ * @package DesignPatterns\Structural\Registry
+ */
 class WorkerData
 {
     /**
@@ -20,7 +24,7 @@ class WorkerData
     protected $fullName;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $age;
 
@@ -56,6 +60,8 @@ class WorkerData
 
     /**
      * @param string $firstName
+     *
+     * @return void
      */
     public function setFirstName(string $firstName)
     {
@@ -72,6 +78,8 @@ class WorkerData
 
     /**
      * @param string $lastName
+     *
+     * @return void
      */
     public function setLastName(string $lastName)
     {
@@ -104,6 +112,8 @@ class WorkerData
 
     /**
      * @param int $age
+     *
+     * @return void
      */
     public function setAge(int $age)
     {
@@ -120,12 +130,19 @@ class WorkerData
 
     /**
      * @param string $phone
+     *
+     * @return void
      */
     public function setPhone(string $phone)
     {
         $this->phone = $phone;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
     private function prepareName(string $name)
     {
         return ucfirst(strtolower($name));

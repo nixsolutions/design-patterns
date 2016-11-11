@@ -2,6 +2,12 @@
 
 namespace DesignPatterns\Structural\Registry;
 
+use InvalidArgumentException;
+
+/**
+ * Class Registry
+ * @package DesignPatterns\Structural\Registry
+ */
 class Registry
 {
 
@@ -10,6 +16,13 @@ class Registry
      */
     protected $workerDataRegistry = [];
 
+    /**
+     * @param string $key
+     * @param WorkerData $workerData
+     *
+     * @return void
+     * @throws InvalidArgumentException
+     */
     public function addWorker(string $key, WorkerData $workerData)
     {
         $key = $this->prepareKey($key);
@@ -17,10 +30,15 @@ class Registry
         if (!key_exists($key, $this->workerDataRegistry)) {
             $this->workerDataRegistry[$key] = $workerData;
         } else {
-            throw new \InvalidArgumentException('Worker with key: #' . $key . ' exists.');
+            throw new InvalidArgumentException('Worker with key: #' . $key . ' exists.');
         }
     }
 
+    /**
+     * @param string $key
+     *
+     * @return WorkerData
+     */
     public function getWorker(string $key)
     {
         $key = $this->prepareKey($key);
@@ -32,6 +50,11 @@ class Registry
         }
     }
 
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
     private function prepareKey(string $key)
     {
         return trim(strtolower($key));
