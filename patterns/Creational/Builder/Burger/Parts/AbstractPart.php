@@ -2,6 +2,10 @@
 
 namespace DesignPatterns\Creational\Builder\Burger\Parts;
 
+/**
+ * Class AbstractPart
+ * @package DesignPatterns\Creational\Builder\Burger\Parts
+ */
 abstract class AbstractPart
 {
     /**
@@ -9,6 +13,11 @@ abstract class AbstractPart
      */
     protected $title;
 
+    /**
+     * AbstractPart constructor.
+     *
+     * @param string $title
+     */
     public function __construct(string $title)
     {
         $this->title = $title;

@@ -1,9 +1,14 @@
 <?php
+
 namespace DesignPatterns\Creational\Multiton;
 
 use DesignPatterns\Creational\Singleton\Cashbox;
 use DesignPatterns\Creational\Singleton\SingletonInterface;
 
+/**
+ * Class ShopCashSystem
+ * @package DesignPatterns\Creational\Multiton
+ */
 class ShopCashSystem implements MultitonInterface
 {
     /**
@@ -13,7 +18,9 @@ class ShopCashSystem implements MultitonInterface
 
     /**
      * Return Singleton instance
+     *
      * @param string $instanceName
+     *
      * @return SingletonInterface
      */
     public static function getInstance(string $instanceName): SingletonInterface

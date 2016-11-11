@@ -1,14 +1,20 @@
 <?php
+
 namespace DesignPatterns\Tests\Creational\Singleton;
 
 use DesignPatterns\Creational\Singleton\Cashbox;
+use PHPUnit_Framework_TestCase;
 
-class SingletonTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class SingletonTest
+ * @package DesignPatterns\Tests\Creational\Singleton
+ */
+class SingletonTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Cashbox
      */
-    private $shopCashbox;
+    protected $shopCashbox;
 
     protected function setUp()
     {
@@ -20,24 +26,45 @@ class SingletonTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('DesignPatterns\Creational\Singleton\Cashbox', $this->shopCashbox);
     }
 
-    public function testUniqueProperty()
+    public function testUniquePropertyFirstPurchase(): int
     {
-        /**
-         *First purchase
-         */
-        $this->shopCashbox->setCash(2);
-        $this->assertEquals(2, $this->shopCashbox->getAllCash());
+        $sumPurchases = 2;
+        $this->shopCashbox->setCash($sumPurchases);
 
-        /**
-         * Second purchase
-         */
-        $this->shopCashbox->setCash(4);
-        $this->assertEquals(2 + 4, $this->shopCashbox->getAllCash());
+        $this->assertEquals($sumPurchases, $this->shopCashbox->getAllCash());
 
-        /**
-         * Seller have mistake
-         */
-        $this->shopCashbox->setCash(-3);
-        $this->assertEquals(2 + 4 - 3, $this->shopCashbox->getAllCash());
+        return $sumPurchases;
+    }
+
+    /**
+     * @depends testUniquePropertyFirstPurchase
+     *
+     * @param int $sumPurchases
+     *
+     * @return int
+     */
+    public function testUniquePropertySecondPurchase(int $sumPurchases): int
+    {
+        $secondPurchase = 4;
+        $this->shopCashbox->setCash($secondPurchase);
+        $sumPurchases += $secondPurchase;
+
+        $this->assertEquals($sumPurchases, $this->shopCashbox->getAllCash());
+
+        return $sumPurchases;
+    }
+
+    /**
+     * @depends testUniquePropertySecondPurchase
+     *
+     * @param int $sumPurchases
+     */
+    public function testUniquePropertySellerHaveMistake(int $sumPurchases)
+    {
+        $sellerMistake = -3;
+        $this->shopCashbox->setCash($sellerMistake);
+        $sumPurchases += $sellerMistake;
+
+        $this->assertEquals($sumPurchases, $this->shopCashbox->getAllCash());
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace DesignPatterns\Tests\Creational\SimpleFactory;
 
 use DesignPatterns\Creational\SimpleFactory\Chef;

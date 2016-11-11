@@ -14,10 +14,12 @@ class CashMan
      * @var BurgerWorker
      */
     protected $burgerWorker;
+
     /**
      * @var WaterWorker
      */
     protected $waterWorker;
+
     /**
      * @var CashBox
      */
@@ -27,6 +29,7 @@ class CashMan
      * @var array
      */
     protected $order = [];
+
     /**
      * @var float
      */
@@ -82,6 +85,8 @@ class CashMan
     /**
      * @param WaterWorker|BurgerWorker $worker
      * @param array|string $products
+     *
+     * @return void
      */
     protected function setProductsToOrderWithPrice($worker, $products)
     {
@@ -97,6 +102,8 @@ class CashMan
     /**
      * @param WaterWorker|BurgerWorker $worker
      * @param string $product
+     *
+     * @return void
      */
     protected function setProductAndPrice($worker, $product)
     {
@@ -104,6 +111,9 @@ class CashMan
         $this->orderPrice += $worker->getPrice($product);
     }
 
+    /**
+     * @return void
+     */
     protected function resetResult()
     {
         $this->orderPrice = 0;

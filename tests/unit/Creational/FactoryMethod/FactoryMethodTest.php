@@ -4,8 +4,9 @@ namespace DesignPatterns\Tests\Creational\FactoryMethod;
 
 use DesignPatterns\Creational\FactoryMethod\Chef;
 use InvalidArgumentException;
+use PHPUnit_Framework_TestCase;
 
-class FactoryMethodTest extends \PHPUnit_Framework_TestCase
+class FactoryMethodTest extends PHPUnit_Framework_TestCase
 {
     public function testWorkerInstanceOfFactoryMethodInterface()
     {

@@ -1,11 +1,14 @@
 <?php
+
 namespace DesignPatterns\Creational\Pool;
+
+use Countable;
 
 /**
  * Class ShopStaff
  * @package DesignPatterns\Creational\Pool
  */
-class ShopStaff implements \Countable
+class ShopStaff implements Countable
 {
     /**
      * @var Worker[]
@@ -26,7 +29,7 @@ class ShopStaff implements \Countable
     {
         $workerNumber = $this->count() + 1;
 
-        if (0 === $this->getCountFreeWorkers()) {
+        if (!$this->getCountFreeWorkers()) {
             $worker = new Worker($workerNumber, $delay);
         } else {
             $worker = array_pop($this->freeWorkers);

@@ -1,4 +1,5 @@
 <?php
+
 namespace DesignPatterns\Creational\Singleton;
 
 /**
@@ -16,6 +17,7 @@ class Cashbox implements SingletonInterface
 
     /**
      * Return sum for all cash operation on cashbox
+     *
      * @return float
      */
     public function getAllCash(): float
@@ -25,22 +27,13 @@ class Cashbox implements SingletonInterface
 
     /**
      * Set new cash operation
+     *
      * @param float $cash
+     *
+     * @return void
      */
     public function setCash(float $cash)
     {
         $this->cash[uniqid()] = $cash;
-    }
-
-    final public function __construct()
-    {
-    }
-
-    final public function __clone()
-    {
-    }
-
-    final public function __wakeup()
-    {
     }
 }

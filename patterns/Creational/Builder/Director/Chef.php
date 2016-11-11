@@ -5,6 +5,10 @@ namespace DesignPatterns\Creational\Builder\Director;
 use DesignPatterns\Creational\Builder\Builders\BurgerBuilderInterface;
 use DesignPatterns\Creational\Builder\Burger\AbstractBurger;
 
+/**
+ * Class Chef
+ * @package DesignPatterns\Creational\Builder\Director
+ */
 class Chef implements DirectorInterface
 {
     /**

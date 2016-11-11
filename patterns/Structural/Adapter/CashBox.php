@@ -25,6 +25,8 @@ class CashBox
 
     /**
      * @param DollarInterface $dollarCash
+     *
+     * @return void
      */
     public function setCash(DollarInterface $dollarCash)
     {

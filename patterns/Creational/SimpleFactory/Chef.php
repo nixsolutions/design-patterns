@@ -6,8 +6,17 @@ use DesignPatterns\Creational\SimpleFactory\Burgers\Burger;
 use DesignPatterns\Creational\SimpleFactory\Burgers\Hamburger;
 use DesignPatterns\Creational\SimpleFactory\Burgers\Cheeseburger;
 
+/**
+ * Class Chef
+ * @package DesignPatterns\Creational\SimpleFactory
+ */
 class Chef
 {
+    /**
+     * @param string $typeBurger
+     *
+     * @return Burger
+     */
     public function makeBurger(string $typeBurger): Burger
     {
         $typeBurger = strtolower($typeBurger);
