@@ -14,4 +14,5 @@ Structural:
 * ~~Adapter~~
 * ~~Dependency Injection~~
 * ~~Registry~~
-* Decorator (Need description)
+* ~~Decorator~~
+* Proxy
