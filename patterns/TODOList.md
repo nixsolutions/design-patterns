@@ -15,4 +15,4 @@ Structural:
 * ~~Dependency Injection~~
 * ~~Registry~~
 * ~~Decorator~~
-* Proxy
+* ~~Proxy~~
