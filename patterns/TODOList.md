@@ -16,3 +16,4 @@ Structural:
 * ~~Registry~~
 * ~~Decorator~~
 * ~~Proxy~~
+* Bridge
