@@ -2,21 +2,31 @@
 
 namespace DesignPatterns\Structural\Bridge\Abstraction;
 
+use DesignPatterns\Structural\Bridge\Implementation\CurrencyInterface;
 
 /**
- * Class CashBox
+ * Class EuropeCashBox
  * @package DesignPatterns\Structural\Bridge\Abstraction
  */
-class CashBox extends AbstractCashBox
+class EuropeCashBox extends AbstractCashBox
 {
-
-    public function getSumCashInCashBox(): float
+    /**
+     * @return float
+     */
+    public function getCashInCashBox(): float
     {
-
+        return array_sum($this->cash);
     }
 
-    public function setCash()
+    /**
+     * @param CurrencyInterface $currency
+     *
+     * @return void
+     */
+    public function setCash(CurrencyInterface $currency)
     {
-        // TODO: Implement setCash() method.
+        $defaultCurrencyRate = $this->defaultCurrency->getCurrencyRate();
+
+        array_push($this->cash, ($currency->getSum() * $defaultCurrencyRate) / $currency->getCurrencyRate());
     }
 }
