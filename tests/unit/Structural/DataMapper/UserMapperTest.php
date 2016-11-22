@@ -5,16 +5,17 @@ namespace DesignPatterns\Tests\Structural\DataMapper;
 use DesignPatterns\Structural\DataMapper\Storage;
 use DesignPatterns\Structural\DataMapper\UserMapper;
 use InvalidArgumentException;
+use PHPUnit_Framework_TestCase;
 
-class DataMapperTest extends \PHPUnit_Framework_TestCase
+class DataMapperTest extends PHPUnit_Framework_TestCase
 {
     public function testCanMapUserFromStorage()
     {
         $storage = new Storage(
             [
                 1 => [
-                    'username' => 'domnikl',
-                    'email'    => 'liebler.dominik@gmail.com',
+                    'username' => 'zyuzka',
+                    'email'    => 'zyuzka@mail.com',
                 ],
             ]
         );
