@@ -11,3 +11,5 @@ gen
 tests/_output/*
 TODO/
 /.project
+
+tests/_output/*
