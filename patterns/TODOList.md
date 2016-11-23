@@ -16,4 +16,12 @@ Structural:
 * ~~Registry~~
 * ~~Decorator~~
 * ~~Proxy~~
-* Bridge
+* ~~Bridge~~
+* ~~Composite~~
+* ~~DataMapper~~
+* ~~FluentInterface~~
+* ~~Flyweight~~
+
+Behavioral:
+* ~~ChainOfResponsibilities~~
+* Command(need to Review)
