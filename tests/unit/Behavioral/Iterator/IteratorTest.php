@@ -1,6 +1,9 @@
 <?php
 
-namespace DesignPatterns\Behavioral\Iterator;
+namespace DesignPatterns\Tests\Behavioral\Iterator;
+
+use DesignPatterns\Behavioral\Iterator\Worker;
+use DesignPatterns\Behavioral\Iterator\WorkersList;
 
 class IteratorTest extends \PHPUnit_Framework_TestCase
 {

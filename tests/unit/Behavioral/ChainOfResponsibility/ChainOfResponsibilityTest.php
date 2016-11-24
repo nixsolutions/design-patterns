@@ -1,7 +1,9 @@
 <?php
 
-namespace DesignPatterns\Behavioral\ChainOfResponsibility;
+namespace DesignPatterns\Tests\Behavioral\ChainOfResponsibility;
 
+use DesignPatterns\Behavioral\ChainOfResponsibility\Contract;
+use DesignPatterns\Behavioral\ChainOfResponsibility\Department;
 use PHPUnit_Framework_TestCase;
 
 class ChainOfResponsibilityTest extends PHPUnit_Framework_TestCase

@@ -1,7 +1,11 @@
 <?php
 
-namespace DesignPatterns\Behavioral\Command;
+namespace DesignPatterns\Tests\Behavioral\Command;
 
+use DesignPatterns\Behavioral\Command\CommandRegistry;
+use DesignPatterns\Behavioral\Command\Lamp;
+use DesignPatterns\Behavioral\Command\TurnOffCommand;
+use DesignPatterns\Behavioral\Command\TurnOnCommand;
 use PHPUnit_Framework_TestCase;
 
 class CommandTest extends PHPUnit_Framework_TestCase
