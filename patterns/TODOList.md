@@ -23,5 +23,6 @@ Structural:
 * ~~Flyweight~~
 
 Behavioral:
-* ~~ChainOfResponsibilities~~
+* ~~Chain Of Responsibilities~~
 * Command(need to Review)
+* ~~Iterator~~
