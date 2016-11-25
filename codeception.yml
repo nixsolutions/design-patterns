@@ -16,6 +16,9 @@ coverage:
     enabled: true
     include:
         - patterns/*
+    exclude:
+        - patterns/*.md
+
 modules:
     config:
         Db:
