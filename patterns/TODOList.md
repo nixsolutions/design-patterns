@@ -26,3 +26,7 @@ Behavioral:
 * ~~Chain Of Responsibilities~~
 * Command(need to Review)
 * ~~Iterator~~
+* ~~Mediator~~
+* ~~Memento~~
+* ~~NullObject~~
+* Observer
