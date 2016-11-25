@@ -24,9 +24,10 @@ Structural:
 
 Behavioral:
 * ~~Chain Of Responsibilities~~
-* Command(need to Review)
+* ~~Command~~
 * ~~Iterator~~
 * ~~Mediator~~
 * ~~Memento~~
 * ~~NullObject~~
-* Observer
+* ~~Observer~~
+* Specification
