@@ -33,5 +33,5 @@ Behavioral:
 * ~~Specification~~
 * ~~State~~
 * ~~Strategy~~
-* TemplateMethod
-* Visitor
+* ~~TemplateMethod~~
+* ~~Visitor~~
