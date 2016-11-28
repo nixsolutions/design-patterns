@@ -31,7 +31,7 @@ Behavioral:
 * ~~NullObject~~
 * ~~Observer~~
 * ~~Specification~~
-* State
-* Strategy
+* ~~State~~
+* ~~Strategy
 * TemplateMethod
 * Visitor
