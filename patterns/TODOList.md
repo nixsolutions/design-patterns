@@ -30,4 +30,8 @@ Behavioral:
 * ~~Memento~~
 * ~~NullObject~~
 * ~~Observer~~
-* Specification
+* ~~Specification~~
+* State
+* Strategy
+* TemplateMethod
+* Visitor
