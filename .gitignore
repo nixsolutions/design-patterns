@@ -11,5 +11,4 @@ gen
 tests/_output/*
 TODO/
 /.project
-
-tests/_output/*
+/tests/_support/_generated/
