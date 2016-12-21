@@ -1,13 +1,35 @@
-* php 7.0
-* composer
-* xdebug
+# Design Patterns
 
- Install and run project
+**Шаблон проектирования** или **паттерн** (англ. **design pattern**) — повторяемая
+архитектурная конструкция, представляющая собой решение проблемы проектирования, в рамках некоторого часто возникающего
+контекста.
+
+Обычно шаблон не является законченным образцом. Это лишь пример решения задачи, который можно использовать
+в различных ситуациях. Паттерны показывают отношения и взаимодействия между классами или объектами,
+без определения того, какие конечные классы или объекты приложения будут использоваться.
+
+Требуется:
 --
-1. `composer install`
-2. Create PHP Script for run Codeception tests in PHPStorm:
-- **Run->Edit Configurations...** ;
-- Add **PHP Script**;
-- File path: `../vendor/bin/codecept`;
-- Arguments: `run unit --coverage --xml --html -vvv`;
-- Custom working directory: *root path project*.
+* **Composer**
+
+ Установка и запуск тестов:
+--
+1. `$ composer install`
+2. `$ php vendor/bin/codecept run`
+
+Ресурсы, которые использовались:
+--
+1. Книги:
+    + Зандстра М. - PHP. Объекты, шаблоны и методики программирования, 4-е издание;
+    + Эрик Фримен, Элизабет Фримен - Паттерны проектирования;
+    + Гамма Э., Хелм Р., Джонсон Р., Влиссидес Дж. - Приемы объектно-ориентированного проектирования.
+    Паттерны проектирования;
+2. Статьи и ресурсы:
+    + [Шаблон проектирования WIKI](https://ru.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
+    + [Паттерны ООП в метафорах](https://habrahabr.ru/post/136766/)
+    + [Шаблоны проектирования PHP. Часть 1. Порождающие](https://habrahabr.ru/post/214285/)
+    + [Паттерны (шаблоны) проектирования](http://makedev.org/patterns/index.html)
+    + [Design Patterns](https://sourcemaking.com/design_patterns)
+    + [Design Patterns PHP](https://github.com/domnikl/DesignPatternsPHP)
+    + [Паттерны (шаблоны) проектирование в PHP.](http://dron.by/post/patterny-shablony-proektirovanie-v-php-vvedenie.html)
+    + [PHP Правильный путь. Шаблоны проектирования](http://getjump.me/ru-php-the-right-way/pages/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F.html)
