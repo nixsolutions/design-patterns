@@ -9,7 +9,5 @@ gen
 /vendor/
 
 tests/_output/*
-TODO/
-/.project
-
-tests/_output/*
+.project
+/tests/_support/_generated/

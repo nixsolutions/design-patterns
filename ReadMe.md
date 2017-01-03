@@ -1,13 +1,14 @@
-* php 7.0
-* composer
-* xdebug
+# Design Patterns
 
- Install and run project
+В данном репозитории описаны и реализованы самые популярные паттерны проектирования.
+Автор пытался привести более понятные метафоры из реальной жизни.
+Некоторые примеры были взяты из ресурсов, которые были использованы при изучении данной темы.
+
+Требуется:
 --
-1. `composer install`
-2. Create PHP Script for run Codeception tests in PHPStorm:
-- **Run->Edit Configurations...** ;
-- Add **PHP Script**;
-- File path: `../vendor/bin/codecept`;
-- Arguments: `run unit --coverage --xml --html -vvv`;
-- Custom working directory: *root path project*.
+* **Composer**
+
+ Установка и запуск тестов:
+--
+1. `$ composer install`
+2. `$ php vendor/bin/codecept run`
