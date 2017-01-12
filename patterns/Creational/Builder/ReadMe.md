@@ -12,6 +12,5 @@
 
 
 **Примеры:**
-
-    PHPUnit: Mock Builder
+* PHPUnit: Mock Builder
 
