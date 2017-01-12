@@ -1,0 +1,145 @@
+main:
+  path: patterns/ReadMe.md
+creational:
+  title: Порождающие шаблоны
+  permalink: /creational/
+  path: patterns/Creational/ReadMe.md
+  patterns:
+    abstract-factory:
+      title: Абстрактная Фабрика
+      permalink: /creational/builder/
+      path: patterns/Creational/AbstractFactory/ReadMe.md
+    builder:
+      title: Строитель
+      permalink: /creational/builder/
+      path: patterns/Creational/Builder/ReadMe.md
+    factory-method:
+      title: Фабричный метод
+      permalink: /creational/factory-method/
+      path: patterns/Creational/FactoryMethod/ReadMe.md
+    multiton:
+      title: Пулл Одиночек
+      permalink: /creational/multiton/
+      path: patterns/Creational/Multiton/ReadMe.md
+    pool:
+      title: Пулл
+      permalink: /creational/pool/
+      path: patterns/Creational/Pool/ReadMe.md
+    prototype:
+      title: Прототип
+      permalink: /creational/prototype/
+      path: patterns/Creational/Prototype/ReadMe.md
+    simple-factory:
+      title: Простая Фабрика
+      permalink: /creational/simple-factory/
+      path: patterns/Creational/AbstractFactory/ReadMe.md
+    singleton:
+      title: Одиночка
+      permalink: /creational/singleton/
+      path: patterns/Creational/Singleton/ReadMe.md
+    static-factory:
+      title: Статическая Фабрика
+      permalink: /creational/static-factory/
+      path: patterns/Creational/StaticFactory/ReadMe.md
+behavioral:
+  title: Шаблоны Проектирования
+  permalink: /behavioral/
+  path: patterns/Behavioral/ReadMe.md
+  patterns:
+    chain-of-responsibility:
+      title: Цепочка обязанностей
+      permalink: /behavioral/chain-of-responsibility/
+      path: patterns/Behavioral/ChainOfResponsibility/ReadMe.md
+    command:
+      title: Команда
+      permalink: /behavioral/command/
+      path: patterns/Behavioral/Command/ReadMe.md
+    iterator:
+      title: Итератор
+      permalink: /behavioral/iterator/
+      path: patterns/Behavioral/Iterator/ReadMe.md
+    mediator:
+      title: Посредник
+      permalink: /behavioral/mediator/
+      path: patterns/Behavioral/Mediator/ReadMe.md
+    memento:
+      title: Хранитель
+      permalink: /behavioral/memento/
+      path: patterns/Behavioral/Memento/ReadMe.md
+    null-object:
+      title: Объект Null
+      permalink: /behavioral/null-object/
+      path: patterns/Behavioral/NullObject/ReadMe.md
+    observer:
+      title: Наблюдатель
+      permalink: /behavioral/observer/
+      path: patterns/Behavioral/Observer/ReadMe.md
+    specification:
+      title: Спецификация
+      permalink: /behavioral/specification/
+      path: patterns/Behavioral/Specification/ReadMe.md
+    state:
+      title: Состояние
+      permalink: /behavioral/state/
+      path: patterns/Behavioral/State/ReadMe.md
+    strategy:
+      title: Стратегия
+      permalink: /behavioral/strategy/
+      path: patterns/Behavioral/Strategy/ReadMe.md
+    template-method:
+      title: Шаблонный метод
+      permalink: /behavioral/template-method/
+      path: patterns/Behavioral/TemplateMethod/ReadMe.md
+    visitor:
+      title: Посетитель
+      permalink: /behavioral/visitor/
+      path: patterns/Behavioral/Visitor/ReadMe.md
+structural:
+  title: Шаблоны Проектирования
+  permalink: /structural/
+  path: patterns/Structural/ReadMe.md
+  patterns:
+    adapter:
+      title: Адаптер
+      permalink: /structural/adapter/
+      path: patterns/Structural/Adapter/ReadMe.md
+    bridge:
+      title: Мост
+      permalink: /structural/bridge/
+      path: patterns/Structural/Bridge/ReadMe.md
+    composite:
+      title: Компоновщик
+      permalink: /structural/composite/
+      path: patterns/Structural/Composite/ReadMe.md
+    data-mapper:
+      title: Преобразователь Данных
+      permalink: /structural/data-mapper/
+      path: patterns/Structural/DataMapper/ReadMe.md
+    decorator:
+      title: Декоратор
+      permalink: /structural/decorator/
+      path: patterns/Structural/Decorator/ReadMe.md
+    dependency-injection:
+      title: Внедрение зависимостей
+      permalink: /structural/dependency-injection/
+      path: patterns/Structural/DependencyInjection/ReadMe.md
+    facade:
+      title: Фасад
+      permalink: /structural/facade/
+      path: patterns/Structural/Facade/ReadMe.md
+    fluent-interface:
+      title: Текучий интерфейс
+      permalink: /structural/fluent-interface/
+      path: patterns/Structural/FluentInterface/ReadMe.md
+    flyweight:
+      title: Приспособленец
+      permalink: /structural/flyweight/
+      path: patterns/Structural/Flyweight/ReadMe.md
+    proxy:
+      title: Заместитель
+      permalink: /structural/proxy/
+      path: patterns/Structural/Proxy/ReadMe.md
+    registry:
+      title: Реестр
+      permalink: /structural/registry/
+      path: patterns/Structural/Registry/ReadMe.md
