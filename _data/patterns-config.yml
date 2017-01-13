@@ -1,46 +1,5 @@
 main:
   path: patterns/ReadMe.md
-creational:
-  title: Порождающие шаблоны
-  permalink: /creational/
-  path: patterns/Creational/ReadMe.md
-  patterns:
-    abstract-factory:
-      title: Абстрактная Фабрика
-      permalink: /creational/builder/
-      path: patterns/Creational/AbstractFactory/ReadMe.md
-    builder:
-      title: Строитель
-      permalink: /creational/builder/
-      path: patterns/Creational/Builder/ReadMe.md
-    factory-method:
-      title: Фабричный метод
-      permalink: /creational/factory-method/
-      path: patterns/Creational/FactoryMethod/ReadMe.md
-    multiton:
-      title: Пулл Одиночек
-      permalink: /creational/multiton/
-      path: patterns/Creational/Multiton/ReadMe.md
-    pool:
-      title: Пулл
-      permalink: /creational/pool/
-      path: patterns/Creational/Pool/ReadMe.md
-    prototype:
-      title: Прототип
-      permalink: /creational/prototype/
-      path: patterns/Creational/Prototype/ReadMe.md
-    simple-factory:
-      title: Простая Фабрика
-      permalink: /creational/simple-factory/
-      path: patterns/Creational/AbstractFactory/ReadMe.md
-    singleton:
-      title: Одиночка
-      permalink: /creational/singleton/
-      path: patterns/Creational/Singleton/ReadMe.md
-    static-factory:
-      title: Статическая Фабрика
-      permalink: /creational/static-factory/
-      path: patterns/Creational/StaticFactory/ReadMe.md
 behavioral:
   title: Шаблоны Проектирования
   permalink: /behavioral/
