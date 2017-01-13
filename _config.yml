@@ -70,5 +70,5 @@ exclude:
   - README.md
   - CNAME
   - tests/
-  - patterns/
   - vendor/
+  - _pages/*/*/list.html
