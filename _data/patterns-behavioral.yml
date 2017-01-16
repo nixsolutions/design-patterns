@@ -6,6 +6,7 @@ patterns:
     title: Цепочка обязанностей
     permalink: /behavioral/chain-of-responsibility/
     path: patterns/Behavioral/ChainOfResponsibility/ReadMe.md
+    img: /patterns/Behavioral/ChainOfResponsibility/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -20,6 +21,7 @@ patterns:
     title: Команда
     permalink: /behavioral/command/
     path: patterns/Behavioral/Command/ReadMe.md
+    img: /patterns/Behavioral/Command/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -38,6 +40,7 @@ patterns:
     title: Итератор
     permalink: /behavioral/iterator/
     path: patterns/Behavioral/Iterator/ReadMe.md
+    img: /patterns/Behavioral/Iterator/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -50,6 +53,7 @@ patterns:
     title: Посредник
     permalink: /behavioral/mediator/
     path: patterns/Behavioral/Mediator/ReadMe.md
+    img: /patterns/Behavioral/Mediator/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -68,6 +72,7 @@ patterns:
     title: Хранитель
     permalink: /behavioral/memento/
     path: patterns/Behavioral/Memento/ReadMe.md
+    img: /patterns/Behavioral/Memento/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -82,6 +87,7 @@ patterns:
     title: Объект Null
     permalink: /behavioral/null-object/
     path: patterns/Behavioral/NullObject/ReadMe.md
+    img: /patterns/Behavioral/NullObject/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -98,6 +104,7 @@ patterns:
     title: Наблюдатель
     permalink: /behavioral/observer/
     path: patterns/Behavioral/Observer/ReadMe.md
+    img: /patterns/Behavioral/Observer/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -110,6 +117,7 @@ patterns:
     title: Спецификация
     permalink: /behavioral/specification/
     path: patterns/Behavioral/Specification/ReadMe.md
+    img: /patterns/Behavioral/Specification/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -130,6 +138,7 @@ patterns:
     title: Состояние
     permalink: /behavioral/state/
     path: patterns/Behavioral/State/ReadMe.md
+    img: /patterns/Behavioral/State/diagram.png
     structure:
       folders: ["States", "main"]
       files:
@@ -149,6 +158,7 @@ patterns:
     title: Стратегия
     permalink: /behavioral/strategy/
     path: patterns/Behavioral/Strategy/ReadMe.md
+    img: /patterns/Behavioral/Strategy/diagram.png
     structure:
       folders: ["Strategies", "main"]
       files:
@@ -168,6 +178,7 @@ patterns:
     title: Шаблонный метод
     permalink: /behavioral/template-method/
     path: patterns/Behavioral/TemplateMethod/ReadMe.md
+    img: /patterns/Behavioral/TemplateMethod/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -182,6 +193,7 @@ patterns:
     title: Посетитель
     permalink: /behavioral/visitor/
     path: patterns/Behavioral/Visitor/ReadMe.md
+    img: /patterns/Behavioral/Visitor/diagram.png
     structure:
       folders: ["main"]
       files:
