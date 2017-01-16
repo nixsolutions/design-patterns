@@ -6,6 +6,7 @@ patterns:
     title: Адаптер
     permalink: /structural/adapter/
     path: patterns/Structural/Adapter/ReadMe.md
+    img: /patterns/Structural/Adapter/diagram.png
     structure:
       folders: ["Dollar", "Euro", "main"]
       files:
@@ -28,6 +29,7 @@ patterns:
     title: Мост
     permalink: /structural/bridge/
     path: patterns/Structural/Bridge/ReadMe.md
+    img: /patterns/Structural/Bridge/diagram.png
     structure:
       folders: ["Abstraction", "Implementation"]
       files:
@@ -51,6 +53,7 @@ patterns:
     title: Компоновщик
     permalink: /structural/composite/
     path: patterns/Structural/Composite/ReadMe.md
+    img: /patterns/Structural/Composite/diagram.png
     structure:
       folders: ["Abstraction", "Helper", "Html"]
       files:
@@ -83,6 +86,7 @@ patterns:
     title: Преобразователь Данных
     permalink: /structural/data-mapper/
     path: patterns/Structural/DataMapper/ReadMe.md
+    img: /patterns/Structural/DataMapper/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -97,6 +101,7 @@ patterns:
     title: Декоратор
     permalink: /structural/decorator/
     path: patterns/Structural/Decorator/ReadMe.md
+    img: /patterns/Structural/Decorator/diagram.png
     structure:
       folders: ["Burgers", "main"]
       files:
@@ -116,6 +121,7 @@ patterns:
     title: Внедрение зависимостей
     permalink: /structural/dependency-injection/
     path: patterns/Structural/DependencyInjection/ReadMe.md
+    img: /patterns/Structural/DependencyInjection/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -128,6 +134,7 @@ patterns:
     title: Фасад
     permalink: /structural/facade/
     path: patterns/Structural/Facade/ReadMe.md
+    img: /patterns/Structural/Facade/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -144,6 +151,7 @@ patterns:
     title: Текучий интерфейс
     permalink: /structural/fluent-interface/
     path: patterns/Structural/FluentInterface/ReadMe.md
+    img: /patterns/Structural/FluentInterface/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -154,6 +162,7 @@ patterns:
     title: Приспособленец
     permalink: /structural/flyweight/
     path: patterns/Structural/Flyweight/ReadMe.md
+    img: /patterns/Structural/Flyweight/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -168,6 +177,7 @@ patterns:
     title: Заместитель
     permalink: /structural/proxy/
     path: patterns/Structural/Proxy/ReadMe.md
+    img: /patterns/Structural/Proxy/diagram.png
     structure:
       folders: ["Factory", "Forwarder", "Kitchen", "main"]
       sub-folders:
@@ -194,6 +204,7 @@ patterns:
     title: Реестр
     permalink: /structural/registry/
     path: patterns/Structural/Registry/ReadMe.md
+    img: /patterns/Structural/Adapter/diagram.png
     structure:
       folders: ["main"]
       files:
