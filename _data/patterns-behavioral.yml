@@ -1,0 +1,198 @@
+title: Шаблоны Проектирования
+permalink: /behavioral/
+path: patterns/Behavioral/ReadMe.md
+patterns:
+  chain-of-responsibility:
+    title: Цепочка обязанностей
+    permalink: /behavioral/chain-of-responsibility/
+    path: patterns/Behavioral/ChainOfResponsibility/ReadMe.md
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          AbstractDepartment.php:
+            path: patterns/Behavioral/ChainOfResponsibility/AbstractDepartment.php
+          Contract.php:
+            path: patterns/Behavioral/ChainOfResponsibility/Contract.php
+          Department.php:
+            path: patterns/Behavioral/ChainOfResponsibility/Department.php
+  command:
+    title: Команда
+    permalink: /behavioral/command/
+    path: patterns/Behavioral/Command/ReadMe.md
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          CommandInterface.php:
+            path: patterns/Behavioral/Command/CommandInterface.php
+          CommandRegistry.php:
+            path: patterns/Behavioral/Command/CommandRegistry.php
+          Lamp.php:
+            path: patterns/Behavioral/Command/Lamp.php
+          TurnOffCommand.php:
+            path: patterns/Behavioral/Command/TurnOffCommand.php
+          TurnOnCommand.php:
+            path: patterns/Behavioral/Command/TurnOnCommand.php
+  iterator:
+    title: Итератор
+    permalink: /behavioral/iterator/
+    path: patterns/Behavioral/Iterator/ReadMe.md
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Worker.php:
+            path: patterns/Behavioral/Iterator/Worker.php
+          WorkersList.php:
+            path: patterns/Behavioral/Iterator/WorkersList.php
+  mediator:
+    title: Посредник
+    permalink: /behavioral/mediator/
+    path: patterns/Behavioral/Mediator/ReadMe.md
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Client.php:
+            path: patterns/Behavioral/Mediator/Client.php
+          Colleague.php:
+            path: patterns/Behavioral/Mediator/Colleague.php
+          Database.php:
+            path: patterns/Behavioral/Mediator/Database.php
+          Mediator.php:
+            path: patterns/Behavioral/Mediator/Mediator.php
+          Server.php:
+            path: patterns/Behavioral/Mediator/Server.php
+  memento:
+    title: Хранитель
+    permalink: /behavioral/memento/
+    path: patterns/Behavioral/Memento/ReadMe.md
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Game.php:
+            path: patterns/Behavioral/Memento/Game.php
+          Player.php:
+            path: patterns/Behavioral/Memento/Player.php
+          Save.php:
+            path: patterns/Behavioral/Memento/Save.php
+  null-object:
+    title: Объект Null
+    permalink: /behavioral/null-object/
+    path: patterns/Behavioral/NullObject/ReadMe.md
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          NullWorker.php:
+            path: patterns/Behavioral/NullObject/NullWorker.php
+          Worker.php:
+            path: patterns/Behavioral/NullObject/Worker.php
+          WorkerInterface.php:
+            path: patterns/Behavioral/NullObject/WorkerInterface.php
+          WorkerPool.php:
+            path: patterns/Behavioral/NullObject/WorkerPool.php
+  observer:
+    title: Наблюдатель
+    permalink: /behavioral/observer/
+    path: patterns/Behavioral/Observer/ReadMe.md
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Newspaper.php:
+            path: patterns/Behavioral/Observer/Newspaper.php
+          Reader.php:
+            path: patterns/Behavioral/Observer/Reader.php
+  specification:
+    title: Спецификация
+    permalink: /behavioral/specification/
+    path: patterns/Behavioral/Specification/ReadMe.md
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          AndSpecification.php:
+            path: patterns/Behavioral/Specification/AndSpecification.php
+          Item.php:
+            path: patterns/Behavioral/Specification/Item.php
+          NotSpecification.php:
+            path: patterns/Behavioral/Specification/NotSpecification.php
+          OrSpecification.php:
+            path: patterns/Behavioral/Specification/OrSpecification.php
+          PriceSpecification.php:
+            path: patterns/Behavioral/Specification/PriceSpecification.php
+          SpecificationInterface.php:
+            path: patterns/Behavioral/Specification/SpecificationInterface.php
+  state:
+    title: Состояние
+    permalink: /behavioral/state/
+    path: patterns/Behavioral/State/ReadMe.md
+    structure:
+      folders: ["States", "main"]
+      files:
+        main:
+          Glass.php:
+            path: patterns/Behavioral/State/Glass.php
+        States:
+          AbstractState.php:
+            path: patterns/Behavioral/State/States/AbstractState.php
+          EmptyState.php:
+            path: patterns/Behavioral/State/States/EmptyState.php
+          FillState.php:
+            path: patterns/Behavioral/State/States/FillState.php
+          StateInterface.php:
+            path: patterns/Behavioral/State/States/StateInterface.php
+  strategy:
+    title: Стратегия
+    permalink: /behavioral/strategy/
+    path: patterns/Behavioral/Strategy/ReadMe.md
+    structure:
+      folders: ["Strategies", "main"]
+      files:
+        main:
+          SimpleCalculator.php:
+            path: patterns/Behavioral/Strategy/SimpleCalculator.php
+        Strategies:
+          AddStrategy.php:
+            path: patterns/Behavioral/Strategy/Strategies/AddStrategy.php
+          MultiplyStrategy.php:
+            path: patterns/Behavioral/Strategy/Strategies/MultiplyStrategy.php
+          StrategyInterface.php:
+            path: patterns/Behavioral/Strategy/Strategies/StrategyInterface.php
+          SubtractStrategy.php:
+            path: patterns/Behavioral/Strategy/Strategies/SubtractStrategy.php
+  template-method:
+    title: Шаблонный метод
+    permalink: /behavioral/template-method/
+    path: patterns/Behavioral/TemplateMethod/ReadMe.md
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          BeachJourney.php:
+            path: patterns/Behavioral/TemplateMethod/BeachJourney.php
+          CityJourney.php:
+            path: patterns/Behavioral/TemplateMethod/CityJourney.php
+          Journey.php:
+            path: patterns/Behavioral/TemplateMethod/Journey.php
+  visitor:
+    title: Посетитель
+    permalink: /behavioral/visitor/
+    path: patterns/Behavioral/Visitor/ReadMe.md
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Group.php:
+            path: patterns/Behavioral/Visitor/Group.php
+          Role.php:
+            path: patterns/Behavioral/Visitor/Role.php
+          RoleVisitor.php:
+            path: patterns/Behavioral/Visitor/RoleVisitor.php
+          RoleVisitorInterface.php:
+            path: patterns/Behavioral/Visitor/RoleVisitorInterface.php
+          User.php:
+            path: patterns/Behavioral/Visitor/User.php
