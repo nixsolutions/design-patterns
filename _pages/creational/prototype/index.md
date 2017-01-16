@@ -2,6 +2,7 @@
 layout: page
 breadcrumb: Прототип
 pattern-title: prototype
+pattern-category: patterns-creational
 permalink: /creational/prototype/
 ---
 

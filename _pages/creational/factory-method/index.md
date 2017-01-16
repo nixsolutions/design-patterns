@@ -2,6 +2,7 @@
 layout: page
 breadcrumb: Фабричный метод
 pattern-title: factory-method
+pattern-category: patterns-creational
 permalink: /creational/factory-method/
 ---
 

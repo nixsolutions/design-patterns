@@ -2,6 +2,7 @@
 layout: page
 breadcrumb: Одиночка
 pattern-title: singleton
+pattern-category: patterns-creational
 permalink: /creational/singleton/
 ---
 

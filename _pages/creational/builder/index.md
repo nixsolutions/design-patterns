@@ -2,6 +2,7 @@
 layout: page
 breadcrumb: Строитель
 pattern-title: builder
+pattern-category: patterns-creational
 permalink: /creational/builder/
 ---
 

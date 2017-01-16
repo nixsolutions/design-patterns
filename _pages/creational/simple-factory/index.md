@@ -2,6 +2,7 @@
 layout: page
 breadcrumb: Простая Фабрика
 pattern-title: simple-factory
+pattern-category: patterns-creational
 permalink: /creational/simple-factory/
 ---
 

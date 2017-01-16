@@ -2,6 +2,7 @@
 layout: page
 breadcrumb: Пулл Одиночек
 pattern-title: multiton
+pattern-category: patterns-creational
 permalink: /creational/multiton/
 ---
 
