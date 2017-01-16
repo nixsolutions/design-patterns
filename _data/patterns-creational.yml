@@ -6,6 +6,7 @@ patterns:
     title: Абстрактная Фабрика
     permalink: /creational/abstract-factory/
     path: patterns/Creational/AbstractFactory/ReadMe.md
+    img: /patterns/Creational/AbstractFactory/diagram.png
     structure:
       folders: ["Burgers", "Potatoes", "Recipes", "Waters", "main"]
       files:
@@ -44,6 +45,7 @@ patterns:
     title: Строитель
     permalink: /creational/builder/
     path: patterns/Creational/Builder/ReadMe.md
+    img: /patterns/Creational/Builder/diagram.png
     structure:
       folders: ["Builders", "Burger", "Director"]
       sub-folders:
@@ -77,6 +79,7 @@ patterns:
     title: Фабричный метод
     permalink: /creational/factory-method/
     path: patterns/Creational/FactoryMethod/ReadMe.md
+    img: /patterns/Creational/FactoryMethod/diagram.png
     structure:
       folders: ["Burgers", "main"]
       files:
@@ -96,6 +99,7 @@ patterns:
     title: Пулл Одиночек
     permalink: /creational/multiton/
     path: patterns/Creational/Multiton/ReadMe.md
+    img: /patterns/Creational/Multiton/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -108,6 +112,7 @@ patterns:
     title: Пулл
     permalink: /creational/pool/
     path: patterns/Creational/Pool/ReadMe.md
+    img: /patterns/Creational/Pool/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -122,6 +127,7 @@ patterns:
     title: Прототип
     permalink: /creational/prototype/
     path: patterns/Creational/Prototype/ReadMe.md
+    img: /patterns/Creational/Prototype/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -132,6 +138,7 @@ patterns:
     title: Простая Фабрика
     permalink: /creational/simple-factory/
     path: patterns/Creational/SimpleFactory/ReadMe.md
+    img: /patterns/Creational/SimpleFactory/diagram.png
     structure:
       folders: ["Burgers", "main"]
       files:
@@ -149,6 +156,7 @@ patterns:
     title: Одиночка
     permalink: /creational/singleton/
     path: patterns/Creational/Singleton/ReadMe.md
+    img: /patterns/Creational/Singleton/diagram.png
     structure:
       folders: ["main"]
       files:
@@ -163,6 +171,7 @@ patterns:
     title: Статическая Фабрика
     permalink: /creational/static-factory/
     path: patterns/Creational/StaticFactory/ReadMe.md
+    img: /patterns/Creational/StaticFactory/diagram.png
     structure:
       folders: ["Burgers", "main"]
       files:
