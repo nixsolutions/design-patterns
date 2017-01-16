@@ -1,6 +1,7 @@
 ---
 layout: page
 breadcrumb: Структурные Шаблоны
+pattern-category: patterns-structural
 permalink: /structural/
 ---
 

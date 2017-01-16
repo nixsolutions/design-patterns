@@ -1,6 +1,7 @@
 ---
 layout: page
 breadcrumb: Шаблоны поведения
+pattern-category: patterns-behavioral
 permalink: /behavioral/
 ---
 

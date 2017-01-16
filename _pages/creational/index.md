@@ -1,6 +1,7 @@
 ---
 layout: page
 breadcrumb: Порождающие Шаблоны
+pattern-category: patterns-creational
 permalink: /creational/
 ---
 

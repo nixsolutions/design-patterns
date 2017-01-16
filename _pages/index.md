@@ -4,4 +4,4 @@ title: Шаблоны Проектирования
 permalink: /
 ---
 
-{% include_absolute {{ site.data.patterns-config.main.path }} %}
+{% include_absolute {{ site.data.patterns-main.path }} %}

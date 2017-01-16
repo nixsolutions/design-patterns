@@ -26,10 +26,11 @@
         <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
       </div>
 
-      <nav>
-        <a href="{{ site.baseurl }}/creational/">Порождающие шаблоны</a>
-        <a href="{{ site.baseurl }}/behavioral/">Шаблоны поведения</a>
-        <a href="{{ site.baseurl }}/structural/">Структурные шаблоны</a>
+      <nav id="main">
+        <a href="{{ site.baseurl }}/" {% if page.url == '/' %} class="active"{% endif %}>Главная</a>
+        <a href="{{ site.baseurl }}/creational/" {% if page.pattern-category == 'patterns-creational' %} class="active"{% endif %}>Порождающие шаблоны</a>
+        <a href="{{ site.baseurl }}/behavioral/" {% if page.pattern-category == 'patterns-behavioral' %} class="active"{% endif %}>Шаблоны поведения</a>
+        <a href="{{ site.baseurl }}/structural/" {% if page.pattern-category == 'patterns-structural' %} class="active"{% endif %}>Структурные шаблоны</a>
       </nav>
     </header>
   </div>
