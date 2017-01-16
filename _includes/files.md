@@ -1,15 +1,15 @@
 <ul class="spoiler-list">
 
-{% for folder in site.data.patterns-creational.patterns[page.pattern-title].structure.folders %}
+{% for folder in site.data[page.pattern-category].patterns[page.pattern-title].structure.folders %}
   <li>
   {% if folder != "main" %}
       <b><i>{{ folder }}</i></b>
       <ul class="spoiler-list">
   {% endif %}
     
-  {% for file in site.data.patterns-creational.patterns[page.pattern-title].structure.files[folder] %}
-    {% if site.data.patterns-creational.patterns[page.pattern-title].structure.sub-folders %}
-        {% if site.data.patterns-creational.patterns[page.pattern-title].structure.sub-folders contains file[0] %}
+  {% for file in site.data[page.pattern-category].patterns[page.pattern-title].structure.files[folder] %}
+    {% if site.data[page.pattern-category].patterns[page.pattern-title].structure.sub-folders %}
+        {% if site.data[page.pattern-category].patterns[page.pattern-title].structure.sub-folders contains file[0] %}
             <b><i>{{ file[0] }}</i></b>
             <ul class="spoiler-list">
                 {% for sub-file in file[1] %}
