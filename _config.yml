@@ -14,7 +14,7 @@ logo: "logo.png"
 
 # Includes an icon in the footer for each username you enter
 footer-links:
-  github: barryclark/jekyll-now
+  github: nixsolutions/design-patterns
 
 # Enter your Disqus shortname (not your username) to enable commenting on posts
 # You can find your shortname on the Settings page of your Disqus account
@@ -25,7 +25,7 @@ google_analytics:
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url:
+url: http://nixsolutions.github.io
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
@@ -60,15 +60,18 @@ gems:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
 
-include: ["_pages"]
+include: ["_pages", ".nojekyll"]
 
 # Exclude these files from your production _site
 exclude:
   - Gemfile
   - Gemfile.lock
   - LICENSE
-  - README.md
+  - ReadMe.md
   - CNAME
   - tests/
   - vendor/
+  - codeception.yml
+  - composer.json
+  - composer.lock
   - _pages/*/*/list.html
