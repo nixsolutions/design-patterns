@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Шаблоны проектирования" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Шаблоны проектирования - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Главная</a>
+        <a href="/design-patterns/creational/" >Порождающие шаблоны</a>
+        <a href="/design-patterns/behavioral/" >Шаблоны поведения</a>
+        <a href="/design-patterns/structural/"  class="active">Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+  <nav class="breadcrumbs hidden-sm-down">
+
+    <a class="breadcrumb-item" href=http://nixsolutions.github.io/design-patterns/>Шаблоны проектирования</a>
+
+    <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+      <!-- Skip if root -->
+      
+        
+
+      <!-- Skip if root -->
+      
+
+      <!-- Skip if language directory -->
+      
+
+      <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+      
+
+      <!-- SEO data -->
+      
+
+      <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+        <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/structural/">
+        <span property="name">Структурные Шаблоны</span>
+        </a>
+        <meta property="position" content="1" />
+      </li>
+
+    
+
+      <!-- Skip if root -->
+      
+
+      <!-- Skip if language directory -->
+      
+
+      <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+      
+
+      <!-- SEO data -->
+      
+
+      <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+        
+        <span property="name">Декоратор</span>
+        
+        <meta property="position" content="2" />
+      </li>
+
+    
+
+    </ol>
+
+  </nav>
+
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/patterns/Structural/Decorator/diagram.png" alt="image-title-here" class="img-responsive" /></p>
+
+<p><strong>Декоратор</strong> (англ. <strong>Decorator</strong>) относиться к классу структурных шаблонов. Он используется для динамического расширения
+функциональности объекта. Является гибкой альтернативой наследованию.</p>
+
+<p>Смысл заключается в том, чтобы можно было безболезненно комбинировать различные декораторы в произвольном порядке,
+навешивая их на различные объекты. В некотором роде, это похоже на технологию <strong>traits</strong>, за исключением того,
+что декораторы динамически навешиваются на объект, а <strong>traits</strong> статически на класс.</p>
+
+<p>На примере мы имеем класс <strong><code class="highlighter-rouge">Cheeseburger</code></strong>, который реализует интерфейс <strong><code class="highlighter-rouge">BurgerInterface</code></strong>.
+Тут мы замечаем, что в классе <strong><code class="highlighter-rouge">Cheeseburger</code></strong> не хватает сыра. Это основной ингредиент чизбургера и хорошо бы нам дописать
+его в класс. Но давайте представим, что переписывать класс мы не можем. “Давайте наследуем <strong><code class="highlighter-rouge">Cheeseburger</code></strong> и расширим его”, скажете вы.
+А если нам нужно ещё что-то добавить к <strong><code class="highlighter-rouge">Cheeseburger</code></strong>? Опять наследование.
+А если нужно это всё объединить и ещё что-то добавить? Опять наследование. Потом опять и опять…</p>
+
+<p>Декоратор помогает нам сделать это всё более гибко.</p>
+
+<p>Так как наш абстрактный декоратор <strong><code class="highlighter-rouge">AbstractDecorator</code></strong> реализует интерфейс <strong><code class="highlighter-rouge">BurgerInterface</code></strong>,
+мы можем расширять его на уровне абстракции.</p>
+
+<p>Добавим сыр средствами <strong><code class="highlighter-rouge">CheeseburgerCheeseDecorator</code></strong>.</p>
+
+<p>Наш декоратор (наследник <strong><code class="highlighter-rouge">AbstractDecorator</code></strong>), в конструктор ждёт объект типа <strong><code class="highlighter-rouge">BurgerInterface</code></strong>.
+Как упоминалось выше, <strong><code class="highlighter-rouge">AbstractDecorator</code></strong> реализует интерфейс <strong><code class="highlighter-rouge">BurgerInterface</code></strong>. Но метод <strong><code class="highlighter-rouge">BurgerInterface-&gt;makeBurger()</code></strong>
+он не реализует, а помечает как абстрактный. Это значит что наследники должны реализовать его.
+Вот в нём мы будем декорировать наш чизбургер.</p>
+
+<p>А теперь давайте поменяем соус в чизбургере.</p>
+
+<p>Создаем новый декоратор <strong><code class="highlighter-rouge">CheeseburgerSauceDecorator</code></strong> (наследник <strong><code class="highlighter-rouge">AbstractDecorator</code></strong>).
+Теперь мы можем расширять любой объект типа <strong><code class="highlighter-rouge">BurgerInterface</code></strong>.
+Это может быть как исходный чизбургер без сыра(объект <strong><code class="highlighter-rouge">Cheeseburger-&gt;makeBurger()</code></strong>), так и уже декорированный с сыром (<strong><code class="highlighter-rouge">CheeseburgerCheeseDecorator-&gt;makeBurger()</code></strong>).</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+      <b><i>Burgers</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>BurgerInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Structural\Decorator\Burgers</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Interface BurgerInterface
+ * @package DesignPatterns\Structural\Decorator\Burgers
+ */</span>
+<span class="k">interface</span> <span class="nx">BurgerInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @return array
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">makeBurger</span><span class="p">()</span><span class="o">:</span> <span class="k">array</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Cheeseburger.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Structural\Decorator\Burgers</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class Cheeseburger
+ * @package DesignPatterns\Structural\Decorator\Burgers
+ */</span>
+<span class="k">class</span> <span class="nc">Cheeseburger</span> <span class="k">implements</span> <span class="nx">BurgerInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$meat</span> <span class="o">=</span> <span class="s1">'chicken'</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$sauce</span> <span class="o">=</span> <span class="s1">'mayonnaise'</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$muffin</span> <span class="o">=</span> <span class="s1">'muffin'</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * @return array
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">makeBurger</span><span class="p">()</span><span class="o">:</span> <span class="k">array</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s1">'muffin'</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">muffin</span><span class="p">,</span>
+            <span class="s1">'sauce'</span>  <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sauce</span><span class="p">,</span>
+            <span class="s1">'meat'</span>   <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">meat</span><span class="p">,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>AbstractDecorator.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Structural\Decorator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">DesignPatterns\Structural\Decorator\Burgers\BurgerInterface</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class AbstractDecorator
+ * @package DesignPatterns\Structural\Decorator
+ */</span>
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">AbstractDecorator</span> <span class="k">implements</span> <span class="nx">BurgerInterface</span>
+<span class="p">{</span>
+
+    <span class="sd">/**
+     * @var BurgerInterface
+     */</span>
+    <span class="k">protected</span> <span class="nv">$burger</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * AbstractDecorator constructor.
+     *
+     * @param BurgerInterface $burger
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">BurgerInterface</span> <span class="nv">$burger</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">burger</span> <span class="o">=</span> <span class="nv">$burger</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * @return array
+     */</span>
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">makeBurger</span><span class="p">()</span><span class="o">:</span> <span class="k">array</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>CheeseburgerCheeseDecorator.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Structural\Decorator</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class CheeseburgerCheeseDecorator
+ * @package DesignPatterns\Structural\Decorator
+ */</span>
+<span class="k">class</span> <span class="nc">CheeseburgerCheeseDecorator</span> <span class="k">extends</span> <span class="nx">AbstractDecorator</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">BEST_CHEESE_FOR_BURGER</span> <span class="o">=</span> <span class="s1">'Cheddar'</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * @return array
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">makeBurger</span><span class="p">()</span><span class="o">:</span> <span class="k">array</span>
+    <span class="p">{</span>
+        <span class="nv">$burger</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">burger</span><span class="o">-&gt;</span><span class="na">makeBurger</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nb">array_replace</span><span class="p">(</span>
+            <span class="nv">$burger</span><span class="p">,</span>
+            <span class="p">[</span>
+                <span class="s1">'cheese'</span> <span class="o">=&gt;</span> <span class="nx">self</span><span class="o">::</span><span class="na">BEST_CHEESE_FOR_BURGER</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>CheeseburgerSauceDecorator.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Structural\Decorator</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class CheeseburgerSauceDecorator
+ * @package DesignPatterns\Structural\Decorator
+ */</span>
+<span class="k">class</span> <span class="nc">CheeseburgerSauceDecorator</span> <span class="k">extends</span> <span class="nx">AbstractDecorator</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">NEW_SAUCE</span> <span class="o">=</span> <span class="s1">'Ukrainian sauce'</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * @return array
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">makeBurger</span><span class="p">()</span><span class="o">:</span> <span class="k">array</span>
+    <span class="p">{</span>
+        <span class="nv">$burger</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">burger</span><span class="o">-&gt;</span><span class="na">makeBurger</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nb">array_replace</span><span class="p">(</span>
+            <span class="nv">$burger</span><span class="p">,</span>
+            <span class="p">[</span>
+                <span class="s1">'sauce'</span> <span class="o">=&gt;</span> <span class="nx">self</span><span class="o">::</span><span class="na">NEW_SAUCE</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Тест-пример: </h2>
+<details>
+<summary> <b> DecoratorTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Tests\Structural\Decorator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">DesignPatterns\Structural\Decorator\Burgers\Cheeseburger</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">DesignPatterns\Structural\Decorator\CheeseburgerCheeseDecorator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">DesignPatterns\Structural\Decorator\CheeseburgerSauceDecorator</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DecoratorTest</span> <span class="k">extends</span> <span class="nx">\PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testAddCheeseDecorator</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$cheeseburger</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cheeseburger</span><span class="p">();</span>
+        <span class="nv">$cheeseDecorator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CheeseburgerCheeseDecorator</span><span class="p">(</span><span class="nv">$cheeseburger</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertArrayNotHasKey</span><span class="p">(</span><span class="s1">'cheese'</span><span class="p">,</span> <span class="nv">$cheeseburger</span><span class="o">-&gt;</span><span class="na">makeBurger</span><span class="p">());</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertArrayHasKey</span><span class="p">(</span><span class="s1">'cheese'</span><span class="p">,</span> <span class="nv">$cheeseDecorator</span><span class="o">-&gt;</span><span class="na">makeBurger</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testAddSauceDecorator</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$cheeseburger</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cheeseburger</span><span class="p">();</span>
+        <span class="nv">$sauceDecorator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CheeseburgerSauceDecorator</span><span class="p">(</span><span class="nv">$cheeseburger</span><span class="p">);</span>
+
+        <span class="nv">$cheeseburger</span> <span class="o">=</span> <span class="nv">$cheeseburger</span><span class="o">-&gt;</span><span class="na">makeBurger</span><span class="p">();</span>
+        <span class="nv">$decorateCheeseburger</span> <span class="o">=</span> <span class="nv">$sauceDecorator</span><span class="o">-&gt;</span><span class="na">makeBurger</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertArrayHasKey</span><span class="p">(</span><span class="s1">'sauce'</span><span class="p">,</span> <span class="nv">$cheeseburger</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertArrayHasKey</span><span class="p">(</span><span class="s1">'sauce'</span><span class="p">,</span> <span class="nv">$decorateCheeseburger</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="s1">'mayonnaise'</span><span class="p">,</span> <span class="nv">$cheeseburger</span><span class="p">[</span><span class="s1">'sauce'</span><span class="p">]);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertNotEquals</span><span class="p">(</span><span class="s1">'mayonnaise'</span><span class="p">,</span> <span class="nv">$decorateCheeseburger</span><span class="p">[</span><span class="s1">'sauce'</span><span class="p">]);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$sauceDecorator</span><span class="o">::</span><span class="na">NEW_SAUCE</span><span class="p">,</span> <span class="nv">$decorateCheeseburger</span><span class="p">[</span><span class="s1">'sauce'</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testAddSauceAndCheeseDecorator</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$cheeseburger</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cheeseburger</span><span class="p">();</span>
+        <span class="nv">$cheeseDecorator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CheeseburgerCheeseDecorator</span><span class="p">(</span><span class="nv">$cheeseburger</span><span class="p">);</span>
+        <span class="nv">$sauceDecorator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CheeseburgerSauceDecorator</span><span class="p">(</span><span class="nv">$cheeseDecorator</span><span class="p">);</span>
+
+        <span class="nv">$decorateCheeseburger</span> <span class="o">=</span> <span class="nv">$sauceDecorator</span><span class="o">-&gt;</span><span class="na">makeBurger</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertArrayHasKey</span><span class="p">(</span><span class="s1">'cheese'</span><span class="p">,</span> <span class="nv">$decorateCheeseburger</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertArrayHasKey</span><span class="p">(</span><span class="s1">'cheese'</span><span class="p">,</span> <span class="nv">$decorateCheeseburger</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$sauceDecorator</span><span class="o">::</span><span class="na">NEW_SAUCE</span><span class="p">,</span> <span class="nv">$decorateCheeseburger</span><span class="p">[</span><span class="s1">'sauce'</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Шаблоны проектирования" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Шаблоны проектирования - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Главная</a>
+        <a href="/design-patterns/creational/" >Порождающие шаблоны</a>
+        <a href="/design-patterns/behavioral/" >Шаблоны поведения</a>
+        <a href="/design-patterns/structural/"  class="active">Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+  <nav class="breadcrumbs hidden-sm-down">
+
+    <a class="breadcrumb-item" href=http://nixsolutions.github.io/design-patterns/>Шаблоны проектирования</a>
+
+    <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+      <!-- Skip if root -->
+      
+        
+
+      <!-- Skip if root -->
+      
+
+      <!-- Skip if language directory -->
+      
+
+      <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+      
+
+      <!-- SEO data -->
+      
+
+      <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+        <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/structural/">
+        <span property="name">Структурные Шаблоны</span>
+        </a>
+        <meta property="position" content="1" />
+      </li>
+
+    
+
+      <!-- Skip if root -->
+      
+
+      <!-- Skip if language directory -->
+      
+
+      <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+      
+
+      <!-- SEO data -->
+      
+
+      <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+        
+        <span property="name">Приспособленец</span>
+        
+        <meta property="position" content="2" />
+      </li>
+
+    
+
+    </ol>
+
+  </nav>
+
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/patterns/Structural/Flyweight/diagram.png" alt="image-title-here" class="img-responsive" /></p>
+
+<p><strong>Приспособленец</strong> (англ. <strong>Flyweight</strong>, “легковесный (элемент)”) — структурный шаблон проектирования, при котором объект,
+представляющий себя как уникальный экземпляр в разных местах программы, по факту не является таковым.</p>
+
+<p>Сам шаблон очень прост. В прошлом примере, мы генерировали отчет. Как и любой документ, наш отчёт мы можем разбить на компоненты.
+Название, контент, подпись, печать и т.д. Как мы видим многие компоненты могут повторяться, а отличие их будет только в состоянии.
+Каждая инициализация нового объекта использует <em>n</em> ресурса. И рано или поздно мы можем достичь придела. 
+Данный шаблон даёт нам возможность использовать повторно один и тот же компонент системы, только менять в нём состояние.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Factory.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Structural\Flyweight</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Countable</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class Factory
+ * @package DesignPatterns\Structural\Flyweight
+ */</span>
+<span class="k">class</span> <span class="nc">Factory</span> <span class="k">implements</span> <span class="nx">Countable</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @var array
+     */</span>
+    <span class="k">protected</span> <span class="nv">$pool</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="sd">/**
+     * @param string $name
+     *
+     * @return TitleFlyweightInterface
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$name</span><span class="p">)</span><span class="o">:</span> <span class="nx">TitleFlyweightInterface</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pool</span><span class="p">[</span><span class="nv">$name</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pool</span><span class="p">[</span><span class="nv">$name</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Title</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pool</span><span class="p">[</span><span class="nv">$name</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">count</span><span class="p">()</span><span class="o">:</span> <span class="nx">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pool</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Title.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Structural\Flyweight</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class Title
+ * @package DesignPatterns\Structural\Flyweight
+ */</span>
+<span class="k">class</span> <span class="nc">Title</span> <span class="k">implements</span> <span class="nx">TitleFlyweightInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * Contract constructor.
+     *
+     * @param string $name
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * @param string $color
+     *
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">print</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$color</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">'This is %s title with color %s.'</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span> <span class="nv">$color</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>TitleFlyweightInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Structural\Flyweight</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Interface TitleFlyweightInterface
+ * @package DesignPatterns\Structural\Flyweight
+ */</span>
+<span class="k">interface</span> <span class="nx">TitleFlyweightInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @param string $color
+     *
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">print</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$color</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Тест-пример: </h2>
+<details>
+<summary> <b> FactoryTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Tests\Structural\Flyweight</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">DesignPatterns\Structural\Flyweight\Factory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">FlyweightTest</span> <span class="k">extends</span> <span class="nx">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @var Factory
+     */</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$factory</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">setUpBeforeClass</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">self</span><span class="o">::</span><span class="nv">$factory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Factory</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testCreateFirstTitle</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$firstTitle</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'first'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Structural\Flyweight\TitleFlyweightInterface'</span><span class="p">,</span> <span class="nv">$firstTitle</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testCreateSecondTitle</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$secondTitle</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'second'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Structural\Flyweight\TitleFlyweightInterface'</span><span class="p">,</span> <span class="nv">$secondTitle</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSameFirstTitleObjects</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$firstTitle</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'first'</span><span class="p">);</span>
+        <span class="nv">$sameFirstTitle</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'first'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="nv">$firstTitle</span><span class="p">,</span> <span class="nv">$sameFirstTitle</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSameSecondTitleObjects</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$secondTitle</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'second'</span><span class="p">);</span>
+        <span class="nv">$sameSecondTitle</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'second'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="nv">$secondTitle</span><span class="p">,</span> <span class="nv">$sameSecondTitle</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testPrint</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$firstTitle</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'first'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="s1">'This is first title with color black.'</span><span class="p">,</span> <span class="nv">$firstTitle</span><span class="o">-&gt;</span><span class="na">print</span><span class="p">(</span><span class="s1">'black'</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testFactoryCount</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">count</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+
+</body>
+</html>

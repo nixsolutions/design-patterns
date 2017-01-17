@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Шаблоны проектирования" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Шаблоны проектирования - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Главная</a>
+        <a href="/design-patterns/creational/"  class="active">Порождающие шаблоны</a>
+        <a href="/design-patterns/behavioral/" >Шаблоны поведения</a>
+        <a href="/design-patterns/structural/" >Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+  <nav class="breadcrumbs hidden-sm-down">
+
+    <a class="breadcrumb-item" href=http://nixsolutions.github.io/design-patterns/>Шаблоны проектирования</a>
+
+    <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+      <!-- Skip if root -->
+      
+        
+
+      <!-- Skip if root -->
+      
+
+      <!-- Skip if language directory -->
+      
+
+      <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+      
+
+      <!-- SEO data -->
+      
+
+      <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+        <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/creational/">
+        <span property="name">Порождающие Шаблоны</span>
+        </a>
+        <meta property="position" content="1" />
+      </li>
+
+    
+
+      <!-- Skip if root -->
+      
+
+      <!-- Skip if language directory -->
+      
+
+      <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+      
+
+      <!-- SEO data -->
+      
+
+      <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+        
+        <span property="name">Одиночка</span>
+        
+        <meta property="position" content="2" />
+      </li>
+
+    
+
+    </ol>
+
+  </nav>
+
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/patterns/Creational/Singleton/diagram.png" alt="image-title-here" class="img-responsive" /></p>
+
+<p><strong>Одиночка</strong> (англ. <strong>Singleton</strong>) — порождающий шаблон проектирования, позволяет 
+содержать только один экземпляр объекта в приложении, которое будет обрабатывать 
+все обращения, запрещая создавать новый экземпляр. Один из самых известных и, пожалуй, самых спорных шаблонов.</p>
+
+<p><strong>Применение:</strong>
+Для некоторых классов важно, чтобы существовал только один экземпляр.</p>
+<ul>
+  <li>В системе может быть много принтеров, но возможен лишь один спулер.</li>
+  <li>Должны быть только одна файловая система и единственный оконный менеджер.</li>
+  <li>В цифровом фильтре может находиться только один аналого-цифровой преобразователь (АЦП). 
+Бухгалтерская система обслуживает только одну компанию</li>
+  <li>Одно подключение к БД.</li>
+</ul>
+
+<p>У нас есть небольшая закусочная, в которой есть один кассовый аппарат.
+Для отчётности в налоговую используется чековая лента, на которой будут сохраняться
+все денежные операции. Для реализации кассового аппарата мы используем 
+шаблон <strong>Singleton</strong>.
+Принцип <strong>Singleton</strong> прост, как пять копеек. Для того, чтобы обеспечить существование только 
+одного экземпляра класса <strong><code class="highlighter-rouge">Cashbox</code></strong>, мы закрыли все магические методы для создания экземпляра 
+класса, клонирования и сериализации. Единственный возможный способ получить объект – воспользоваться 
+статическим методом <strong><code class="highlighter-rouge">Cashbox::getInstance()</code></strong>.</p>
+
+<p><strong>Примечание:</strong>
+Несмотря на удобство применения данного шаблона, он является одним из самых спорных 
+при разработке и рекомендуется его применять только если нет никакого другого способа 
+решения, потому как это создает значительные сложности при тестировании кода.
+Есть такой антипаттерн, <strong>Одиночество</strong> (<strong>Singletonitis</strong>),
+который как раз заключается в неуместном использовании синглтонов.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Cashbox.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Creational\Singleton</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class Сashbox
+ * @package DesignPatterns\Creational\Singleton
+ */</span>
+<span class="k">class</span> <span class="nc">Cashbox</span> <span class="k">implements</span> <span class="nx">SingletonInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @var array
+     */</span>
+    <span class="k">private</span> <span class="nv">$cash</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">use</span> <span class="nx">SingletonTrait</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * Return sum for all cash operation on cashbox
+     *
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAllCash</span><span class="p">()</span><span class="o">:</span> <span class="nx">float</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">array_sum</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cash</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * Set new cash operation
+     *
+     * @param float $cash
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setCash</span><span class="p">(</span><span class="nx">float</span> <span class="nv">$cash</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cash</span><span class="p">[</span><span class="nb">uniqid</span><span class="p">()]</span> <span class="o">=</span> <span class="nv">$cash</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>SingletonInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Creational\Singleton</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Interface SingletonInterface
+ * @package DesignPatterns\Creational\Singleton
+ */</span>
+<span class="k">interface</span> <span class="nx">SingletonInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @return SingletonInterface
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getInstance</span><span class="p">()</span><span class="o">:</span> <span class="nx">SingletonInterface</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">();</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__clone</span><span class="p">();</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__wakeup</span><span class="p">();</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>SingletonTrait.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Creational\Singleton</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Trait SingletonTrait
+ * @package DesignPatterns\Creational\Singleton
+ */</span>
+<span class="nx">trait</span> <span class="nx">SingletonTrait</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @var SingletonInterface
+     */</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$instance</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * @return SingletonInterface
+     */</span>
+    <span class="k">final</span> <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getInstance</span><span class="p">()</span><span class="o">:</span> <span class="nx">SingletonInterface</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">static</span><span class="o">::</span><span class="nv">$instance</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">static</span><span class="o">::</span><span class="nv">$instance</span> <span class="o">=</span> <span class="k">new</span> <span class="k">static</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="nv">$instance</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">final</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="k">final</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">__clone</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="k">final</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">__wakeup</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Тест-пример: </h2>
+<details>
+<summary> <b> SingletonTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Tests\Creational\Singleton</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">DesignPatterns\Creational\Singleton\Cashbox</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class SingletonTest
+ * @package DesignPatterns\Tests\Creational\Singleton
+ */</span>
+<span class="k">class</span> <span class="nc">SingletonTest</span> <span class="k">extends</span> <span class="nx">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @var Cashbox
+     */</span>
+    <span class="k">protected</span> <span class="nv">$shopCashbox</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shopCashbox</span> <span class="o">=</span> <span class="nx">Cashbox</span><span class="o">::</span><span class="na">getInstance</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testInstanceOfSingleton</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\Singleton\Cashbox'</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shopCashbox</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testUniquePropertyFirstPurchase</span><span class="p">()</span><span class="o">:</span> <span class="nx">int</span>
+    <span class="p">{</span>
+        <span class="nv">$sumPurchases</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shopCashbox</span><span class="o">-&gt;</span><span class="na">setCash</span><span class="p">(</span><span class="nv">$sumPurchases</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$sumPurchases</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shopCashbox</span><span class="o">-&gt;</span><span class="na">getAllCash</span><span class="p">());</span>
+
+        <span class="k">return</span> <span class="nv">$sumPurchases</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * @depends testUniquePropertyFirstPurchase
+     *
+     * @param int $sumPurchases
+     *
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testUniquePropertySecondPurchase</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$sumPurchases</span><span class="p">)</span><span class="o">:</span> <span class="nx">int</span>
+    <span class="p">{</span>
+        <span class="nv">$secondPurchase</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shopCashbox</span><span class="o">-&gt;</span><span class="na">setCash</span><span class="p">(</span><span class="nv">$secondPurchase</span><span class="p">);</span>
+        <span class="nv">$sumPurchases</span> <span class="o">+=</span> <span class="nv">$secondPurchase</span><span class="p">;</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$sumPurchases</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shopCashbox</span><span class="o">-&gt;</span><span class="na">getAllCash</span><span class="p">());</span>
+
+        <span class="k">return</span> <span class="nv">$sumPurchases</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * @depends testUniquePropertySecondPurchase
+     *
+     * @param int $sumPurchases
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testUniquePropertySellerHaveMistake</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$sumPurchases</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$sellerMistake</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shopCashbox</span><span class="o">-&gt;</span><span class="na">setCash</span><span class="p">(</span><span class="nv">$sellerMistake</span><span class="p">);</span>
+        <span class="nv">$sumPurchases</span> <span class="o">+=</span> <span class="nv">$sellerMistake</span><span class="p">;</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$sumPurchases</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">shopCashbox</span><span class="o">-&gt;</span><span class="na">getAllCash</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+
+</body>
+</html>

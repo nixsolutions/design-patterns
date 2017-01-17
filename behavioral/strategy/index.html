@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Шаблоны проектирования" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Шаблоны проектирования - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Главная</a>
+        <a href="/design-patterns/creational/" >Порождающие шаблоны</a>
+        <a href="/design-patterns/behavioral/"  class="active">Шаблоны поведения</a>
+        <a href="/design-patterns/structural/" >Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+  <nav class="breadcrumbs hidden-sm-down">
+
+    <a class="breadcrumb-item" href=http://nixsolutions.github.io/design-patterns/>Шаблоны проектирования</a>
+
+    <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+      <!-- Skip if root -->
+      
+        
+
+      <!-- Skip if root -->
+      
+
+      <!-- Skip if language directory -->
+      
+
+      <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+      
+
+      <!-- SEO data -->
+      
+
+      <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+        <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/behavioral/">
+        <span property="name">Шаблоны поведения</span>
+        </a>
+        <meta property="position" content="1" />
+      </li>
+
+    
+
+      <!-- Skip if root -->
+      
+
+      <!-- Skip if language directory -->
+      
+
+      <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+      
+
+      <!-- SEO data -->
+      
+
+      <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+        
+        <span property="name">Стратегия</span>
+        
+        <meta property="position" content="2" />
+      </li>
+
+    
+
+    </ol>
+
+  </nav>
+
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/patterns/Behavioral/Strategy/diagram.png" alt="image-title-here" class="img-responsive" /></p>
+
+<p><strong>Стратегия</strong> (англ. <strong>Strategy</strong>) — поведенческий шаблон проектирования, предназначенный для определения семейства алгоритмов,
+инкапсуляции каждого из них и обеспечения их взаимозаменяемости. Это позволяет выбирать алгоритм путём определения
+соответствующего класса. Шаблон <strong>Strategy</strong> позволяет менять выбранный алгоритм независимо от объектов-клиентов,
+которые его используют.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+      <b><i>Strategies</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>AddStrategy.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Behavioral\Strategy\Strategies</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class AddStrategy
+ * @package DesignPatterns\Behavioral\Strategy\Strategies
+ */</span>
+<span class="k">class</span> <span class="nc">AddStrategy</span> <span class="k">implements</span> <span class="nx">StrategyInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @param int $x
+     * @param int $y
+     *
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">algorithm</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$x</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$y</span><span class="p">)</span><span class="o">:</span> <span class="nx">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$x</span> <span class="o">+</span> <span class="nv">$y</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>MultiplyStrategy.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Behavioral\Strategy\Strategies</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class MultiplyStrategy
+ * @package DesignPatterns\Behavioral\Strategy\Strategies
+ */</span>
+<span class="k">class</span> <span class="nc">MultiplyStrategy</span> <span class="k">implements</span> <span class="nx">StrategyInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @param int $x
+     * @param int $y
+     *
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">algorithm</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$x</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$y</span><span class="p">)</span><span class="o">:</span> <span class="nx">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$x</span> <span class="o">*</span> <span class="nv">$y</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>StrategyInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Behavioral\Strategy\Strategies</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Interface StrategyInterface
+ * @package DesignPatterns\Behavioral\Strategy\Strategies
+ */</span>
+<span class="k">interface</span> <span class="nx">StrategyInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @param int $x
+     * @param int $y
+     *
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">algorithm</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$x</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$y</span><span class="p">)</span><span class="o">:</span> <span class="nx">int</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>SubtractStrategy.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Behavioral\Strategy\Strategies</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class SubtractStrategy
+ * @package DesignPatterns\Behavioral\Strategy\Strategies
+ */</span>
+<span class="k">class</span> <span class="nc">SubtractStrategy</span> <span class="k">implements</span> <span class="nx">StrategyInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @param int $x
+     * @param int $y
+     *
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">algorithm</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$x</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$y</span><span class="p">)</span><span class="o">:</span> <span class="nx">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$x</span> <span class="o">-</span> <span class="nv">$y</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>SimpleCalculator.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Behavioral\Strategy</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">DesignPatterns\Behavioral\Strategy\Strategies\StrategyInterface</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class SimpleCalculator
+ * @package DesignPatterns\Behavioral\Strategy
+ */</span>
+<span class="k">class</span> <span class="nc">SimpleCalculator</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @var int
+     */</span>
+    <span class="k">private</span> <span class="nv">$x</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * @var int
+     */</span>
+    <span class="k">private</span> <span class="nv">$y</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * @var StrategyInterface
+     */</span>
+    <span class="k">private</span> <span class="nv">$strategy</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * SimpleCalculator constructor.
+     *
+     * @param int $x
+     * @param int $y
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$x</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$y</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">x</span> <span class="o">=</span> <span class="nv">$x</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">y</span> <span class="o">=</span> <span class="nv">$y</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * @param StrategyInterface $strategy
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setStrategy</span><span class="p">(</span><span class="nx">StrategyInterface</span> <span class="nv">$strategy</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">strategy</span> <span class="o">=</span> <span class="nv">$strategy</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">()</span><span class="o">:</span> <span class="nx">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">strategy</span><span class="o">-&gt;</span><span class="na">algorithm</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">x</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">y</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Тест-пример: </h2>
+<details>
+<summary> <b> StrategyTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Tests\Behavioral\Strategy</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">DesignPatterns\Behavioral\Strategy\SimpleCalculator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">DesignPatterns\Behavioral\Strategy\Strategies\AddStrategy</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">DesignPatterns\Behavioral\Strategy\Strategies\MultiplyStrategy</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">DesignPatterns\Behavioral\Strategy\Strategies\SubtractStrategy</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StrategyTest</span> <span class="k">extends</span> <span class="nx">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">provideIntegersForAdd</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mi">42</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">62</span><span class="p">],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">provideIntegersForSub</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">26</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mi">42</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">22</span><span class="p">],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">provideIntegersForMulti</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">24</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">69</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mi">42</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">840</span><span class="p">],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * @dataProvider provideIntegersForAdd
+     *
+     * @param int $x
+     * @param int $y
+     * @param int $expected
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSimpleCalculatorWithAddStrategy</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$x</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$y</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$expected</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$simpleCalculator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SimpleCalculator</span><span class="p">(</span><span class="nv">$x</span><span class="p">,</span> <span class="nv">$y</span><span class="p">);</span>
+        <span class="nv">$simpleCalculator</span><span class="o">-&gt;</span><span class="na">setStrategy</span><span class="p">(</span><span class="k">new</span> <span class="nx">AddStrategy</span><span class="p">());</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$expected</span><span class="p">,</span> <span class="nv">$simpleCalculator</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * @dataProvider provideIntegersForSub
+     *
+     * @param int $x
+     * @param int $y
+     * @param int $expected
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSimpleCalculatorWithSubtractStrategy</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$x</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$y</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$expected</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$simpleCalculator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SimpleCalculator</span><span class="p">(</span><span class="nv">$x</span><span class="p">,</span> <span class="nv">$y</span><span class="p">);</span>
+        <span class="nv">$simpleCalculator</span><span class="o">-&gt;</span><span class="na">setStrategy</span><span class="p">(</span><span class="k">new</span> <span class="nx">SubtractStrategy</span><span class="p">());</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$expected</span><span class="p">,</span> <span class="nv">$simpleCalculator</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * @dataProvider provideIntegersForMulti
+     *
+     * @param int $x
+     * @param int $y
+     * @param int $expected
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSimpleCalculatorWithMultiplyStrategy</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$x</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$y</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$expected</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$simpleCalculator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SimpleCalculator</span><span class="p">(</span><span class="nv">$x</span><span class="p">,</span> <span class="nv">$y</span><span class="p">);</span>
+        <span class="nv">$simpleCalculator</span><span class="o">-&gt;</span><span class="na">setStrategy</span><span class="p">(</span><span class="k">new</span> <span class="nx">MultiplyStrategy</span><span class="p">());</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$expected</span><span class="p">,</span> <span class="nv">$simpleCalculator</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+
+</body>
+</html>

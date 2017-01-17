@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Шаблоны проектирования" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Шаблоны проектирования - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Главная</a>
+        <a href="/design-patterns/creational/" >Порождающие шаблоны</a>
+        <a href="/design-patterns/behavioral/" >Шаблоны поведения</a>
+        <a href="/design-patterns/structural/"  class="active">Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+  <nav class="breadcrumbs hidden-sm-down">
+
+    <a class="breadcrumb-item" href=http://nixsolutions.github.io/design-patterns/>Шаблоны проектирования</a>
+
+    <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+      <!-- Skip if root -->
+      
+        
+
+      <!-- Skip if root -->
+      
+
+      <!-- Skip if language directory -->
+      
+
+      <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+      
+
+      <!-- SEO data -->
+      
+
+      <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+        <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/structural/">
+        <span property="name">Структурные Шаблоны</span>
+        </a>
+        <meta property="position" content="1" />
+      </li>
+
+    
+
+      <!-- Skip if root -->
+      
+
+      <!-- Skip if language directory -->
+      
+
+      <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+      
+
+      <!-- SEO data -->
+      
+
+      <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+        
+        <span property="name">Внедрение зависимостей</span>
+        
+        <meta property="position" content="2" />
+      </li>
+
+    
+
+    </ol>
+
+  </nav>
+
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/patterns/Structural/DependencyInjection/diagram.png" alt="image-title-here" class="img-responsive" /></p>
+
+<p><strong>Внедрение зависимостей</strong> (англ. <strong>Dependency Injection, DI</strong>) - процесс предоставления внешней зависимости программному компоненту.
+Является специфичной формой “инверсии управления” (англ. <strong>Inversion of control, IoC</strong>), когда она применяется к управлению
+зависимостями.</p>
+
+<p>На самом деле этот шаблон мы уже использовали в наших примерах. Мы объявляли зависимость класса,
+через типизирование аргумента конструктора:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class MySuperClass
+{
+    private $myClass;
+    
+    public function __construct(MyClass $class)
+    {
+        $this-&gt;myClass = $class;
+    }
+}
+</code></pre>
+</div>
+
+<p>Если Класс использует некоторый набор параметров настроек, которые могут меняться, и его работа зависит от этих
+параметров, то они должны устанавливаться не в классе, а за его пределами.
+Таким образом каждый раз при изменении параметров настроек, Вы не должны лезть в код класса, чтобы изменить их.</p>
+
+<p>Если посмотреть в тест, мы увидим что мы тестируем только класс <strong><code class="highlighter-rouge">Worker</code></strong>. Он зависит от интерфейса <strong><code class="highlighter-rouge">BurgerInterface</code></strong>.
+Если бы мы за хардкодили зависимость прямо в конструкторе:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public function __construct()
+{
+    $this-&gt;myClass = new MyClass();
+}
+</code></pre>
+</div>
+
+<p>Для тестирования нам нужно:</p>
+<ul>
+  <li>реализовать интерфейс;</li>
+  <li>протестировать класс реализации;</li>
+  <li>протестировать класс Worker.</li>
+</ul>
+
+<p>Так как мы используем <strong>DI</strong> мы можем просто замокать объект типа <strong><code class="highlighter-rouge">BurgerInterface</code></strong>. Это даст нам уверенность
+в работоспособности именно нашего класса <strong><code class="highlighter-rouge">Worker</code></strong>, без каких либо других.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>BurgerInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Structural\DependencyInjection</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Interface BurgerInterface
+ * @package DesignPatterns\Structural\DependencyInjection
+ */</span>
+<span class="k">interface</span> <span class="nx">BurgerInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @return array
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getBurger</span><span class="p">()</span><span class="o">:</span> <span class="k">array</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Worker.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Structural\DependencyInjection</span><span class="p">;</span>
+
+<span class="sd">/**
+ * Class Worker
+ * @package DesignPatterns\Structural\DependencyInjection
+ */</span>
+<span class="k">class</span> <span class="nc">Worker</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @var BurgerInterface
+     */</span>
+    <span class="k">protected</span> <span class="nv">$burger</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * Worker constructor.
+     *
+     * @param BurgerInterface $burger
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">BurgerInterface</span> <span class="nv">$burger</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">burger</span> <span class="o">=</span> <span class="nv">$burger</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * @return array
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getBurger</span><span class="p">()</span><span class="o">:</span> <span class="k">array</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">burger</span><span class="o">-&gt;</span><span class="na">getBurger</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Тест-пример: </h2>
+<details>
+<summary> <b> DependencyInjectionTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">DesignPatterns\Tests\Structural\DependencyInjection</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">DesignPatterns\Structural\DependencyInjection\Worker</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DependencyInjectionTest</span> <span class="k">extends</span> <span class="nx">\PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$cheeseburgerReturnDataFixture</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'muffin'</span>     <span class="o">=&gt;</span> <span class="s1">'muffin'</span><span class="p">,</span>
+        <span class="s1">'meat'</span>       <span class="o">=&gt;</span> <span class="s1">'chicken'</span><span class="p">,</span>
+        <span class="s1">'sauce'</span>      <span class="o">=&gt;</span> <span class="s1">'mayonnaise'</span><span class="p">,</span>
+        <span class="s1">'withCheese'</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">];</span>
+
+    <span class="k">protected</span> <span class="nv">$hamburgerReturnDataFixture</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'muffin'</span>     <span class="o">=&gt;</span> <span class="s1">'muffin'</span><span class="p">,</span>
+        <span class="s1">'meat'</span>       <span class="o">=&gt;</span> <span class="s1">'beef'</span><span class="p">,</span>
+        <span class="s1">'sauce'</span>      <span class="o">=&gt;</span> <span class="s1">'ketchup'</span><span class="p">,</span>
+        <span class="s1">'withCheese'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="p">];</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testWorkerMakeHamburger</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$mockHamburger</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createMock</span><span class="p">(</span>
+            <span class="s1">'DesignPatterns\Structural\DependencyInjection\BurgerInterface'</span>
+        <span class="p">);</span>
+
+        <span class="nv">$mockHamburger</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">any</span><span class="p">())</span>
+            <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'getBurger'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hamburgerReturnDataFixture</span><span class="p">));</span>
+
+        <span class="nv">$worker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Worker</span><span class="p">(</span><span class="nv">$mockHamburger</span><span class="p">);</span>
+        <span class="nv">$burger</span> <span class="o">=</span> <span class="nv">$worker</span><span class="o">-&gt;</span><span class="na">getBurger</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hamburgerReturnDataFixture</span><span class="p">,</span> <span class="nv">$burger</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testWorkerMakeCheeseburger</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$mockCheeseburger</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createMock</span><span class="p">(</span>
+            <span class="s1">'DesignPatterns\Structural\DependencyInjection\BurgerInterface'</span>
+        <span class="p">);</span>
+
+        <span class="nv">$mockCheeseburger</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">any</span><span class="p">())</span>
+            <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'getBurger'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cheeseburgerReturnDataFixture</span><span class="p">));</span>
+
+        <span class="nv">$worker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Worker</span><span class="p">(</span><span class="nv">$mockCheeseburger</span><span class="p">);</span>
+        <span class="nv">$burger</span> <span class="o">=</span> <span class="nv">$worker</span><span class="o">-&gt;</span><span class="na">getBurger</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cheeseburgerReturnDataFixture</span><span class="p">,</span> <span class="nv">$burger</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+
+</body>
+</html>
