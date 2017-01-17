@@ -289,8 +289,13 @@ footer {
   list-style: none;
 }
 
-nav#main .active{
+nav#main .active {
   border-bottom: 2px solid #92A9ED;
+}
+
+.test-example {
+  margin-top: 15px;
+  border-top: 1px solid #eee;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS

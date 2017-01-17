@@ -7,6 +7,9 @@ patterns:
     permalink: /structural/adapter/
     path: patterns/Structural/Adapter/ReadMe.md
     img: /patterns/Structural/Adapter/diagram.png
+    test:
+      name: AdapterTest.php
+      path: tests/unit/Structural/Adapter/AdapterTest.php
     structure:
       folders: ["Dollar", "Euro", "main"]
       files:
@@ -30,6 +33,9 @@ patterns:
     permalink: /structural/bridge/
     path: patterns/Structural/Bridge/ReadMe.md
     img: /patterns/Structural/Bridge/diagram.png
+    test:
+      name: BridgeTest.php
+      path: tests/unit/Structural/Bridge/BridgeTest.php
     structure:
       folders: ["Abstraction", "Implementation"]
       files:
@@ -54,6 +60,9 @@ patterns:
     permalink: /structural/composite/
     path: patterns/Structural/Composite/ReadMe.md
     img: /patterns/Structural/Composite/diagram.png
+    test:
+      name: CompositeTest.php
+      path: tests/unit/Structural/Composite/CompositeTest.php
     structure:
       folders: ["Abstraction", "Helper", "Html"]
       files:
@@ -87,6 +96,9 @@ patterns:
     permalink: /structural/data-mapper/
     path: patterns/Structural/DataMapper/ReadMe.md
     img: /patterns/Structural/DataMapper/diagram.png
+    test:
+      name: UserMapperTest.php
+      path: tests/unit/Structural/DataMapper/UserMapperTest.php
     structure:
       folders: ["main"]
       files:
@@ -102,6 +114,9 @@ patterns:
     permalink: /structural/decorator/
     path: patterns/Structural/Decorator/ReadMe.md
     img: /patterns/Structural/Decorator/diagram.png
+    test:
+      name: DecoratorTest.php
+      path: tests/unit/Structural/Decorator/DecoratorTest.php
     structure:
       folders: ["Burgers", "main"]
       files:
@@ -122,6 +137,9 @@ patterns:
     permalink: /structural/dependency-injection/
     path: patterns/Structural/DependencyInjection/ReadMe.md
     img: /patterns/Structural/DependencyInjection/diagram.png
+    test:
+      name: DependencyInjectionTest.php
+      path: tests/unit/Structural/DependencyInjection/DependencyInjectionTest.php
     structure:
       folders: ["main"]
       files:
@@ -135,6 +153,9 @@ patterns:
     permalink: /structural/facade/
     path: patterns/Structural/Facade/ReadMe.md
     img: /patterns/Structural/Facade/diagram.png
+    test:
+      name: FacadeTest.php
+      path: tests/unit/Structural/Facade/FacadeTest.php
     structure:
       folders: ["main"]
       files:
@@ -152,6 +173,9 @@ patterns:
     permalink: /structural/fluent-interface/
     path: patterns/Structural/FluentInterface/ReadMe.md
     img: /patterns/Structural/FluentInterface/diagram.png
+    test:
+      name: BurgerMakerTest.php
+      path: tests/unit/Structural/FluentInterface/BurgerMakerTest.php
     structure:
       folders: ["main"]
       files:
@@ -163,6 +187,9 @@ patterns:
     permalink: /structural/flyweight/
     path: patterns/Structural/Flyweight/ReadMe.md
     img: /patterns/Structural/Flyweight/diagram.png
+    test:
+      name: FactoryTest.php
+      path: tests/unit/Structural/Flyweight/FactoryTest.php
     structure:
       folders: ["main"]
       files:
@@ -178,6 +205,9 @@ patterns:
     permalink: /structural/proxy/
     path: patterns/Structural/Proxy/ReadMe.md
     img: /patterns/Structural/Proxy/diagram.png
+    test:
+      name: ProxyTest.php
+      path: tests/unit/Structural/Proxy/ProxyTest.php
     structure:
       folders: ["Factory", "Forwarder", "Kitchen", "main"]
       sub-folders:
@@ -204,7 +234,10 @@ patterns:
     title: Реестр
     permalink: /structural/registry/
     path: patterns/Structural/Registry/ReadMe.md
-    img: /patterns/Structural/Adapter/diagram.png
+    img: /patterns/Structural/Registry/diagram.png
+    test:
+      name: RegistryTest.php
+      path: tests/unit/Structural/Registry/RegistryTest.php
     structure:
       folders: ["main"]
       files:

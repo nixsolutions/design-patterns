@@ -7,6 +7,9 @@ patterns:
     permalink: /behavioral/chain-of-responsibility/
     path: patterns/Behavioral/ChainOfResponsibility/ReadMe.md
     img: /patterns/Behavioral/ChainOfResponsibility/diagram.png
+    test:
+      name: ChainOfResponsibilityTest.php
+      path: tests/unit/Behavioral/ChainOfResponsibility/ChainOfResponsibilityTest.php
     structure:
       folders: ["main"]
       files:
@@ -22,6 +25,9 @@ patterns:
     permalink: /behavioral/command/
     path: patterns/Behavioral/Command/ReadMe.md
     img: /patterns/Behavioral/Command/diagram.png
+    test:
+      name: CommandTest.php
+      path: tests/unit/Behavioral/Command/CommandTest.php
     structure:
       folders: ["main"]
       files:
@@ -41,6 +47,9 @@ patterns:
     permalink: /behavioral/iterator/
     path: patterns/Behavioral/Iterator/ReadMe.md
     img: /patterns/Behavioral/Iterator/diagram.png
+    test:
+      name: IteratorTest.php
+      path: tests/unit/Behavioral/Iterator/IteratorTest.php
     structure:
       folders: ["main"]
       files:
@@ -54,6 +63,9 @@ patterns:
     permalink: /behavioral/mediator/
     path: patterns/Behavioral/Mediator/ReadMe.md
     img: /patterns/Behavioral/Mediator/diagram.png
+    test:
+      name: MediatorTest.php
+      path: tests/unit/Behavioral/Mediator/MediatorTest.php
     structure:
       folders: ["main"]
       files:
@@ -73,6 +85,9 @@ patterns:
     permalink: /behavioral/memento/
     path: patterns/Behavioral/Memento/ReadMe.md
     img: /patterns/Behavioral/Memento/diagram.png
+    test:
+      name: MementoTest.php
+      path: tests/unit/Behavioral/Memento/MementoTest.php
     structure:
       folders: ["main"]
       files:
@@ -88,6 +103,9 @@ patterns:
     permalink: /behavioral/null-object/
     path: patterns/Behavioral/NullObject/ReadMe.md
     img: /patterns/Behavioral/NullObject/diagram.png
+    test:
+      name: WorkerPoolTest.php
+      path: tests/unit/Behavioral/NullObject/WorkerPoolTest.php
     structure:
       folders: ["main"]
       files:
@@ -105,6 +123,9 @@ patterns:
     permalink: /behavioral/observer/
     path: patterns/Behavioral/Observer/ReadMe.md
     img: /patterns/Behavioral/Observer/diagram.png
+    test:
+      name: ObserverTest.php
+      path: tests/unit/Behavioral/Observer/ObserverTest.php
     structure:
       folders: ["main"]
       files:
@@ -118,6 +139,9 @@ patterns:
     permalink: /behavioral/specification/
     path: patterns/Behavioral/Specification/ReadMe.md
     img: /patterns/Behavioral/Specification/diagram.png
+    test:
+      name: SpecificationTest.php
+      path: tests/unit/Behavioral/Specification/SpecificationTest.php
     structure:
       folders: ["main"]
       files:
@@ -139,6 +163,9 @@ patterns:
     permalink: /behavioral/state/
     path: patterns/Behavioral/State/ReadMe.md
     img: /patterns/Behavioral/State/diagram.png
+    test:
+      name: StateTest.php
+      path: tests/unit/Behavioral/State/StateTest.php
     structure:
       folders: ["States", "main"]
       files:
@@ -159,6 +186,9 @@ patterns:
     permalink: /behavioral/strategy/
     path: patterns/Behavioral/Strategy/ReadMe.md
     img: /patterns/Behavioral/Strategy/diagram.png
+    test:
+      name: StrategyTest.php
+      path: tests/unit/Behavioral/Strategy/StrategyTest.php
     structure:
       folders: ["Strategies", "main"]
       files:
@@ -179,6 +209,9 @@ patterns:
     permalink: /behavioral/template-method/
     path: patterns/Behavioral/TemplateMethod/ReadMe.md
     img: /patterns/Behavioral/TemplateMethod/diagram.png
+    test:
+      name: TemplateMethodTest.php
+      path: tests/unit/Behavioral/TemplateMethod/TemplateMethodTest.php
     structure:
       folders: ["main"]
       files:
@@ -194,6 +227,9 @@ patterns:
     permalink: /behavioral/visitor/
     path: patterns/Behavioral/Visitor/ReadMe.md
     img: /patterns/Behavioral/Visitor/diagram.png
+    test:
+      name: VisitorTest.php
+      path: tests/unit/Behavioral/Visitor/VisitorTest.php
     structure:
       folders: ["main"]
       files:

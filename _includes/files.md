@@ -52,3 +52,5 @@
     </ul>  
   {% endif %}
 {% endfor %}
+
+{% include example.md %}

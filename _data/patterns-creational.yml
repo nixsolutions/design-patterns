@@ -7,6 +7,9 @@ patterns:
     permalink: /creational/abstract-factory/
     path: patterns/Creational/AbstractFactory/ReadMe.md
     img: /patterns/Creational/AbstractFactory/diagram.png
+    test:
+      name: AbstractFactory.php
+      path: tests/unit/Creational/AbstractFactory/AbstractFactory.php
     structure:
       folders: ["Burgers", "Potatoes", "Recipes", "Waters", "main"]
       files:
@@ -46,6 +49,9 @@ patterns:
     permalink: /creational/builder/
     path: patterns/Creational/Builder/ReadMe.md
     img: /patterns/Creational/Builder/diagram.png
+    test:
+      name: BuilderTest.php
+      path: tests/unit/Creational/Builder/BuilderTest.php
     structure:
       folders: ["Builders", "Burger", "Director"]
       sub-folders:
@@ -80,6 +86,9 @@ patterns:
     permalink: /creational/factory-method/
     path: patterns/Creational/FactoryMethod/ReadMe.md
     img: /patterns/Creational/FactoryMethod/diagram.png
+    test:
+      name: FactoryMethodTest.php
+      path: tests/unit/Creational/FactoryMethod/FactoryMethodTest.php
     structure:
       folders: ["Burgers", "main"]
       files:
@@ -100,6 +109,9 @@ patterns:
     permalink: /creational/multiton/
     path: patterns/Creational/Multiton/ReadMe.md
     img: /patterns/Creational/Multiton/diagram.png
+    test:
+      name: MultitonTest.php
+      path: tests/unit/Creational/Multiton/MultitonTest.php
     structure:
       folders: ["main"]
       files:
@@ -113,6 +125,9 @@ patterns:
     permalink: /creational/pool/
     path: patterns/Creational/Pool/ReadMe.md
     img: /patterns/Creational/Pool/diagram.png
+    test:
+      name: PoolTest.php
+      path: tests/unit/Creational/Pool/PoolTest.php
     structure:
       folders: ["main"]
       files:
@@ -128,6 +143,9 @@ patterns:
     permalink: /creational/prototype/
     path: patterns/Creational/Prototype/ReadMe.md
     img: /patterns/Creational/Prototype/diagram.png
+    test:
+      name: PrototypeTest.php
+      path: tests/unit/Creational/Prototype/PrototypeTest.php
     structure:
       folders: ["main"]
       files:
@@ -139,6 +157,9 @@ patterns:
     permalink: /creational/simple-factory/
     path: patterns/Creational/SimpleFactory/ReadMe.md
     img: /patterns/Creational/SimpleFactory/diagram.png
+    test:
+      name: SimpleFactoryTest.php
+      path: tests/unit/Creational/SimpleFactory/SimpleFactoryTest.php
     structure:
       folders: ["Burgers", "main"]
       files:
@@ -157,6 +178,9 @@ patterns:
     permalink: /creational/singleton/
     path: patterns/Creational/Singleton/ReadMe.md
     img: /patterns/Creational/Singleton/diagram.png
+    test:
+      name: SingletonTest.php
+      path: tests/unit/Creational/Singleton/SingletonTest.php
     structure:
       folders: ["main"]
       files:
@@ -172,6 +196,9 @@ patterns:
     permalink: /creational/static-factory/
     path: patterns/Creational/StaticFactory/ReadMe.md
     img: /patterns/Creational/StaticFactory/diagram.png
+    test:
+      name: StaticFactoryTest.php
+      path: tests/unit/Creational/StaticFactory/StaticFactoryTest.php
     structure:
       folders: ["Burgers", "main"]
       files:
