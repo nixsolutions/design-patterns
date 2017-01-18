@@ -22,7 +22,7 @@ body {
   background: $white;
   font: 18px/1.4 $helvetica;
   color: $darkGray;
-  min-width: 840px;
+  min-width: 320px;
 }
 
 .container {
@@ -183,7 +183,7 @@ img {
 }
 
 .site-info {
-  float: left;
+  //float: left;
 
   @include mobile {
     float: none;
@@ -293,9 +293,27 @@ nav#main .active {
   border-bottom: 2px solid #92A9ED;
 }
 
+@media all and (max-width: 821px) {
+  nav#main { height: auto; }
+  nav#main > a { float: none; width: 95%; }
+  nav#main a { line-height: 40px; }
+  nav#main a { position: relative; }
+  nav#main a { display: block; }
+  nav#main a { text-align: center; }
+  nav#main { float: none;
+  margin-top: 9px;
+  display: block;
+  font-size: 16px; }
+}
+
 .test-example {
   margin-top: 15px;
   border-top: 1px solid #eee;
+}
+
+.img-responsive {
+  display: block;
+  margin: 0 auto 10px;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
