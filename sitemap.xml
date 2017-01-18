@@ -4,7 +4,10 @@
 <loc>http://nixsolutions.github.io/design-patterns/404/</loc>
 </url>
 <url>
-<loc>http://nixsolutions.github.io/design-patterns/creational/simple-factory/</loc>
+<loc>http://nixsolutions.github.io/design-patterns/behavioral/null-object/</loc>
+</url>
+<url>
+<loc>http://nixsolutions.github.io/design-patterns/behavioral/strategy/</loc>
 </url>
 <url>
 <loc>http://nixsolutions.github.io/design-patterns/behavioral/mediator/</loc>
@@ -55,10 +58,10 @@
 <loc>http://nixsolutions.github.io/design-patterns/creational/singleton/</loc>
 </url>
 <url>
-<loc>http://nixsolutions.github.io/design-patterns/behavioral/strategy/</loc>
+<loc>http://nixsolutions.github.io/design-patterns/creational/simple-factory/</loc>
 </url>
 <url>
-<loc>http://nixsolutions.github.io/design-patterns/behavioral/null-object/</loc>
+<loc>http://nixsolutions.github.io/design-patterns/creational/factory-method/</loc>
 </url>
 <url>
 <loc>http://nixsolutions.github.io/design-patterns/creational/prototype/</loc>
@@ -107,8 +110,5 @@
 </url>
 <url>
 <loc>http://nixsolutions.github.io/design-patterns/</loc>
-</url>
-<url>
-<loc>http://nixsolutions.github.io/design-patterns/creational/factory-method/</loc>
 </url>
 </urlset>
