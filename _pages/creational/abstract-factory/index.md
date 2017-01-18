@@ -5,8 +5,7 @@ pattern-title: abstract-factory
 pattern-category: patterns-creational
 permalink: /creational/abstract-factory/
 ---
-![image-title-here]({{ site.baseurl }}{{ site.data.patterns-creational.patterns.abstract-factory.img }}){:class="img-responsive"}
-
+![{{ page.pattern-title }}]({{ site.baseurl }}{{ site.data.patterns-creational.patterns.abstract-factory.img }}){:class="img-responsive"}
 {% include_absolute {{ site.data.patterns-creational.patterns.abstract-factory.path }} %}
 
 {% include files.md %}

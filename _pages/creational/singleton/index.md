@@ -5,8 +5,7 @@ pattern-title: singleton
 pattern-category: patterns-creational
 permalink: /creational/singleton/
 ---
-![image-title-here]({{ site.baseurl }}{{ site.data.patterns-creational.patterns.singleton.img }}){:class="img-responsive"}
-
+![{{ page.pattern-title }}]({{ site.baseurl }}{{ site.data.patterns-creational.patterns.singleton.img }}){:class="img-responsive"}
 {% include_absolute {{ site.data.patterns-creational.patterns.singleton.path }} %}
 
 {% include files.md %}
