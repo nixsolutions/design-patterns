@@ -12,10 +12,4 @@ interface SingletonInterface
      * @return SingletonInterface
      */
     public static function getInstance(): SingletonInterface;
-
-    public function __construct();
-
-    public function __clone();
-
-    public function __wakeup();
 }

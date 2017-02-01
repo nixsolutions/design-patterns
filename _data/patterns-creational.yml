@@ -16,6 +16,8 @@ patterns:
           main:
             Cashbox.php:
               path: patterns/Creational/Singleton/Cashbox.php
+            CashboxTrait.php:
+              path: patterns/Creational/Singleton/CashboxTrait.php
             SingletonInterface.php:
               path: patterns/Creational/Singleton/SingletonInterface.php
             SingletonTrait.php:

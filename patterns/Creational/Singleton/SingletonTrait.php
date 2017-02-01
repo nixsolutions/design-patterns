@@ -25,15 +25,15 @@ trait SingletonTrait
         return static::$instance;
     }
 
-    final public function __construct()
+    private function __construct()
     {
     }
 
-    final public function __clone()
+    private function __clone()
     {
     }
 
-    final public function __wakeup()
+    private function __wakeup()
     {
     }
 }
