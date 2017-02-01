@@ -2,8 +2,6 @@
 
 namespace DesignPatterns\Creational\Multiton;
 
-use DesignPatterns\Creational\Singleton\SingletonInterface;
-
 /**
  * Interface MultitonInterface
  * @package DesignPatterns\Creational\Multiton
@@ -13,13 +11,7 @@ interface MultitonInterface
     /**
      * @param string $instanceName
      *
-     * @return SingletonInterface
+     * @return MultitonInterface
      */
-    public static function getInstance(string $instanceName): SingletonInterface;
-
-    public function __construct();
-
-    public function __clone();
-
-    public function __wakeup();
+    public static function getInstance(string $instanceName): self;
 }

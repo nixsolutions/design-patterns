@@ -12,8 +12,8 @@ class MultitonTest extends PHPUnit_Framework_TestCase
         $firstCashbox = ShopCashSystem::getInstance('Cashbox#1');
         $secondCashbox = ShopCashSystem::getInstance('Cashbox#2');
 
-        $this->assertInstanceOf('DesignPatterns\Creational\Singleton\Cashbox', $firstCashbox);
-        $this->assertInstanceOf('DesignPatterns\Creational\Singleton\Cashbox', $secondCashbox);
+        $this->assertInstanceOf('DesignPatterns\Creational\Multiton\MultitonInterface', $firstCashbox);
+        $this->assertInstanceOf('DesignPatterns\Creational\Multiton\MultitonInterface', $secondCashbox);
 
         $this->assertNotSame($firstCashbox, $secondCashbox);
 
