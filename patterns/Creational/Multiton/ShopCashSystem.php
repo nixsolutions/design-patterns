@@ -2,8 +2,7 @@
 
 namespace DesignPatterns\Creational\Multiton;
 
-use DesignPatterns\Creational\Singleton\Cashbox;
-use DesignPatterns\Creational\Singleton\SingletonInterface;
+use DesignPatterns\Creational\Singleton\CashboxTrait;
 
 /**
  * Class ShopCashSystem
@@ -11,8 +10,10 @@ use DesignPatterns\Creational\Singleton\SingletonInterface;
  */
 class ShopCashSystem implements MultitonInterface
 {
+    use CashboxTrait;
+
     /**
-     * @var SingletonInterface[]
+     * @var MultitonInterface[]
      */
     private static $instances = [];
 
@@ -21,26 +22,26 @@ class ShopCashSystem implements MultitonInterface
      *
      * @param string $instanceName
      *
-     * @return SingletonInterface
+     * @return MultitonInterface
      */
-    public static function getInstance(string $instanceName): SingletonInterface
+    public static function getInstance(string $instanceName): MultitonInterface
     {
         if (!isset(self::$instances[$instanceName])) {
-            self::$instances[$instanceName] = new Cashbox();
+            self::$instances[$instanceName] = new self();
         }
 
         return self::$instances[$instanceName];
     }
 
-    final public function __construct()
+    private function __construct()
     {
     }
 
-    final public function __clone()
+    private function __clone()
     {
     }
 
-    final public function __wakeup()
+    private function __wakeup()
     {
     }
 }
