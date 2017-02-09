@@ -1,0 +1,1 @@
+Sitemap: http://nixsolutions.github.io/design-patterns/sitemap.xml
