@@ -1,7 +1,7 @@
 ---
 layout: page
 breadcrumb: Пулл
-pattern-title: prototype
+pattern-title: pool
 pattern-category: patterns-creational
 permalink: /creational/pool/
 ---
