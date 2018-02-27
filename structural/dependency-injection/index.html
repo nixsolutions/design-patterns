@@ -124,7 +124,7 @@
 <p>На самом деле этот шаблон мы уже использовали в наших примерах. Мы объявляли зависимость класса,
 через типизирование аргумента конструктора:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class MySuperClass
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class MySuperClass
 {
     private $myClass;
     
@@ -133,8 +133,7 @@
         $this-&gt;myClass = $class;
     }
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Если Класс использует некоторый набор параметров настроек, которые могут меняться, и его работа зависит от этих
 параметров, то они должны устанавливаться не в классе, а за его пределами.
@@ -143,12 +142,11 @@
 <p>Если посмотреть в тест, мы увидим что мы тестируем только класс <strong><code class="highlighter-rouge">Worker</code></strong>. Он зависит от интерфейса <strong><code class="highlighter-rouge">BurgerInterface</code></strong>.
 Если бы мы за хардкодили зависимость прямо в конструкторе:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public function __construct()
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public function __construct()
 {
     $this-&gt;myClass = new MyClass();
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Для тестирования нам нужно:</p>
 <ul>
@@ -334,6 +332,17 @@
   </div>
 </div>
 
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
 
 
 </body>
