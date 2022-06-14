@@ -28,11 +28,9 @@ class StaticFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertNotSame($cheeseburger, $someCheeseburger);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testException()
     {
+        $this->expectException(InvalidArgumentException::class);
         Chef::makeBurger('someNameForBurger');
     }
 

@@ -26,11 +26,9 @@ class DataMapperTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('DesignPatterns\Structural\DataMapper\User', $user);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testWillNotMapInvalidData()
     {
+        $this->expectException(InvalidArgumentException::class);
         $storage = new Storage([]);
         $mapper = new UserMapper($storage);
 

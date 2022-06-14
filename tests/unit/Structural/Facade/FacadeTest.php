@@ -60,7 +60,7 @@ class FacadeTest extends \PHPUnit_Framework_TestCase
 
         $firstOrder = $this->cashMan->makeOrder($this->firstOrder, $this->firstOrder['cash']);
 
-        $this->assertInternalType('array', $firstOrder);
+        $this->assertIsArray($firstOrder);
         $this->assertArrayHasKey('price', $firstOrder);
         $this->assertArrayHasKey('change', $firstOrder);
 
@@ -75,7 +75,7 @@ class FacadeTest extends \PHPUnit_Framework_TestCase
     {
         $secondOrder = $this->cashMan->makeOrder($this->secondOrder, $this->secondOrder['cash']);
 
-        $this->assertInternalType('array', $secondOrder);
+        $this->assertIsArray($secondOrder);
         $this->assertArrayHasKey('price', $secondOrder);
         $this->assertArrayHasKey('change', $secondOrder);
 

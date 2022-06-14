@@ -32,11 +32,9 @@ class SimpleFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertNotSame($cheeseburger, $someCheeseburger);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testException()
     {
+        $this->expectException(InvalidArgumentException::class);
         $chef = new Chef();
 
         $chef->makeBurger('someNameForBurger');
