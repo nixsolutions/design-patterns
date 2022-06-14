@@ -11,7 +11,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
      */
     protected static $kitchen;
 
-    public static function setUpBeforeClass():void
+    public static function setUpBeforeClass(): void
     {
         self::$kitchen = new Kitchen();
     }

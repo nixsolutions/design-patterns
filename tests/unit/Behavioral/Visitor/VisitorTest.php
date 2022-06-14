@@ -15,7 +15,7 @@ class VisitorTest extends PHPUnit_Framework_TestCase
      */
     private $visitor;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
         $this->visitor = new RoleVisitor();
     }

@@ -12,7 +12,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
      */
     private $chef;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
         $this->chef = new Chef();
     }

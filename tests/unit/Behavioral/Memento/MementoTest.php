@@ -18,7 +18,7 @@ class MementoTest extends PHPUnit_Framework_TestCase
      */
     protected static $player;
 
-    public static function setUpBeforeClass():void
+    public static function setUpBeforeClass(): void
     {
         self::$game = new Game();
         self::$player = new Player();

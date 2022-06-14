@@ -41,7 +41,7 @@ class FacadeTest extends \PHPUnit_Framework_TestCase
      */
     protected $waterWorker;
 
-    public function setUp():void
+    public function setUp(): void
     {
         $this->cashBox = new CashBox(self::MONEY_IN_CASH_BOX);
         $this->burgerWorker = new BurgerWorker();
