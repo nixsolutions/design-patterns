@@ -12,7 +12,7 @@ class FlyweightTest extends PHPUnit_Framework_TestCase
      */
     protected static $factory;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass():void
     {
         self::$factory = new Factory();
     }

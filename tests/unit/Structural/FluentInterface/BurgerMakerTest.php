@@ -12,7 +12,7 @@ class BurgerMakerTest extends PHPUnit_Framework_TestCase
      */
     protected static $burgerMaker;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass():void
     {
         self::$burgerMaker = new BurgerMaker();
     }

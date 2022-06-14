@@ -16,7 +16,7 @@ class SingletonTest extends PHPUnit_Framework_TestCase
      */
     protected $shopCashbox;
 
-    protected function setUp()
+    protected function setUp():void
     {
         $this->shopCashbox = Cashbox::getInstance();
     }
