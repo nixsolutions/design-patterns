@@ -20,7 +20,7 @@ class CommandTest extends PHPUnit_Framework_TestCase
      */
     protected static $lamp;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$registry = new CommandRegistry();
         self::$lamp = new Lamp();

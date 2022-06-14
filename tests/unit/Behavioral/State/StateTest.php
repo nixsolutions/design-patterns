@@ -40,21 +40,17 @@ class StateTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('DesignPatterns\Behavioral\State\States\EmptyState', $glass->getState());
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testExceptionTryFillFilledGlass()
     {
+        $this->expectException(Exception::class);
         $glass = new Glass();
         $glass->fill();
         $glass->fill();
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testExceptionTryPourTheEmptyGlass()
     {
+        $this->expectException(Exception::class);
         $glass = new Glass();
         $glass->pour();
     }

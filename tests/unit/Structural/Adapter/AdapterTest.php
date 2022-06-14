@@ -18,11 +18,9 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($cashBox->getSumCashInCashBox(), $dollarCash->getCash());
     }
 
-    /**
-     * @expectedException TypeError
-     */
     public function testTypeErrorGetSumWithEuroCash()
     {
+        $this->expectException(TypeError::class);
         $cashBox = new CashBox();
         $euroCash = new EuroCash(15);
 

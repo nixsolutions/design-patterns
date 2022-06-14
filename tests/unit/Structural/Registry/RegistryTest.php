@@ -45,11 +45,9 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('DesignPatterns\Structural\Registry\WorkerData', $registry->getWorker('Petr'));
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testException()
     {
+        $this->expectException(InvalidArgumentException::class);
         $registry = new Registry();
 
         $ivanWorkerData = new WorkerData(
