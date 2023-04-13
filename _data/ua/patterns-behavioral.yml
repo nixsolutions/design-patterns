@@ -1,0 +1,246 @@
+title: Шаблони Проектування
+permalink: /behavioral/
+path: patterns/ua/Behavioral/ReadMe.md
+patterns:
+  chain-of-responsibility:
+    title: Ланцюжок обов'язків
+    permalink: /ua/behavioral/chain-of-responsibility/
+    path: patterns/ua/Behavioral/ChainOfResponsibility/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/ChainOfResponsibility/diagram.png
+    test:
+      name: ChainOfResponsibilityTest.php
+      path: tests/unit/Behavioral/ChainOfResponsibility/ChainOfResponsibilityTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          AbstractDepartment.php:
+            path: patterns/ua/Behavioral/ChainOfResponsibility/AbstractDepartment.php
+          Contract.php:
+            path: patterns/ua/Behavioral/ChainOfResponsibility/Contract.php
+          Department.php:
+            path: patterns/ua/Behavioral/ChainOfResponsibility/Department.php
+  command:
+    title: Команда
+    permalink: /ua/behavioral/command/
+    path: patterns/ua/Behavioral/Command/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/Command/diagram.png
+    test:
+      name: CommandTest.php
+      path: tests/unit/Behavioral/Command/CommandTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          CommandInterface.php:
+            path: patterns/ua/Behavioral/Command/CommandInterface.php
+          CommandRegistry.php:
+            path: patterns/ua/Behavioral/Command/CommandRegistry.php
+          Lamp.php:
+            path: patterns/ua/Behavioral/Command/Lamp.php
+          TurnOffCommand.php:
+            path: patterns/ua/Behavioral/Command/TurnOffCommand.php
+          TurnOnCommand.php:
+            path: patterns/ua/Behavioral/Command/TurnOnCommand.php
+  iterator:
+    title: Ітератор
+    permalink: /ua/behavioral/iterator/
+    path: patterns/ua/Behavioral/Iterator/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/Iterator/diagram.png
+    test:
+      name: IteratorTest.php
+      path: tests/unit/Behavioral/Iterator/IteratorTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Worker.php:
+            path: patterns/ua/Behavioral/Iterator/Worker.php
+          WorkersList.php:
+            path: patterns/ua/Behavioral/Iterator/WorkersList.php
+  mediator:
+    title: Посередник
+    permalink: /ua/behavioral/mediator/
+    path: patterns/ua/Behavioral/Mediator/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/Mediator/diagram.png
+    test:
+      name: MediatorTest.php
+      path: tests/unit/Behavioral/Mediator/MediatorTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Client.php:
+            path: patterns/ua/Behavioral/Mediator/Client.php
+          Colleague.php:
+            path: patterns/ua/Behavioral/Mediator/Colleague.php
+          Database.php:
+            path: patterns/ua/Behavioral/Mediator/Database.php
+          Mediator.php:
+            path: patterns/ua/Behavioral/Mediator/Mediator.php
+          Server.php:
+            path: patterns/ua/Behavioral/Mediator/Server.php
+  memento:
+    title: Зберігач
+    permalink: /ua/behavioral/memento/
+    path: patterns/ua/Behavioral/Memento/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/Memento/diagram.png
+    test:
+      name: MementoTest.php
+      path: tests/unit/Behavioral/Memento/MementoTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Game.php:
+            path: patterns/ua/Behavioral/Memento/Game.php
+          Player.php:
+            path: patterns/ua/Behavioral/Memento/Player.php
+          Save.php:
+            path: patterns/ua/Behavioral/Memento/Save.php
+  null-object:
+    title: Об'єкт Null
+    permalink: /ua/behavioral/null-object/
+    path: patterns/ua/Behavioral/NullObject/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/NullObject/diagram.png
+    test:
+      name: WorkerPoolTest.php
+      path: tests/unit/Behavioral/NullObject/WorkerPoolTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          NullWorker.php:
+            path: patterns/ua/Behavioral/NullObject/NullWorker.php
+          Worker.php:
+            path: patterns/ua/Behavioral/NullObject/Worker.php
+          WorkerInterface.php:
+            path: patterns/ua/Behavioral/NullObject/WorkerInterface.php
+          WorkerPool.php:
+            path: patterns/ua/Behavioral/NullObject/WorkerPool.php
+  observer:
+    title: Спостерігач
+    permalink: /ua/behavioral/observer/
+    path: patterns/ua/Behavioral/Observer/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/Observer/diagram.png
+    test:
+      name: ObserverTest.php
+      path: tests/unit/Behavioral/Observer/ObserverTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Newspaper.php:
+            path: patterns/ua/Behavioral/Observer/Newspaper.php
+          Reader.php:
+            path: patterns/ua/Behavioral/Observer/Reader.php
+  specification:
+    title: Специфікація
+    permalink: /ua/behavioral/specification/
+    path: patterns/ua/Behavioral/Specification/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/Specification/diagram.png
+    test:
+      name: SpecificationTest.php
+      path: tests/unit/Behavioral/Specification/SpecificationTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          AndSpecification.php:
+            path: patterns/ua/Behavioral/Specification/AndSpecification.php
+          Item.php:
+            path: patterns/ua/Behavioral/Specification/Item.php
+          NotSpecification.php:
+            path: patterns/ua/Behavioral/Specification/NotSpecification.php
+          OrSpecification.php:
+            path: patterns/ua/Behavioral/Specification/OrSpecification.php
+          PriceSpecification.php:
+            path: patterns/ua/Behavioral/Specification/PriceSpecification.php
+          SpecificationInterface.php:
+            path: patterns/ua/Behavioral/Specification/SpecificationInterface.php
+  state:
+    title: Стан
+    permalink: /ua/behavioral/state/
+    path: patterns/ua/Behavioral/State/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/State/diagram.png
+    test:
+      name: StateTest.php
+      path: tests/unit/Behavioral/State/StateTest.php
+    structure:
+      folders: ["States", "main"]
+      files:
+        main:
+          Glass.php:
+            path: patterns/ua/Behavioral/State/Glass.php
+        States:
+          AbstractState.php:
+            path: patterns/ua/Behavioral/State/States/AbstractState.php
+          EmptyState.php:
+            path: patterns/ua/Behavioral/State/States/EmptyState.php
+          FillState.php:
+            path: patterns/ua/Behavioral/State/States/FillState.php
+          StateInterface.php:
+            path: patterns/ua/Behavioral/State/States/StateInterface.php
+  strategy:
+    title: Стратегія
+    permalink: /ua/behavioral/strategy/
+    path: patterns/ua/Behavioral/Strategy/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/Strategy/diagram.png
+    test:
+      name: StrategyTest.php
+      path: tests/unit/Behavioral/Strategy/StrategyTest.php
+    structure:
+      folders: ["Strategies", "main"]
+      files:
+        main:
+          SimpleCalculator.php:
+            path: patterns/ua/Behavioral/Strategy/SimpleCalculator.php
+        Strategies:
+          AddStrategy.php:
+            path: patterns/ua/Behavioral/Strategy/Strategies/AddStrategy.php
+          MultiplyStrategy.php:
+            path: patterns/ua/Behavioral/Strategy/Strategies/MultiplyStrategy.php
+          StrategyInterface.php:
+            path: patterns/ua/Behavioral/Strategy/Strategies/StrategyInterface.php
+          SubtractStrategy.php:
+            path: patterns/ua/Behavioral/Strategy/Strategies/SubtractStrategy.php
+  template-method:
+    title: Шаблонний метод
+    permalink: /ua/behavioral/template-method/
+    path: patterns/ua/Behavioral/TemplateMethod/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/TemplateMethod/diagram.png
+    test:
+      name: TemplateMethodTest.php
+      path: tests/unit/Behavioral/TemplateMethod/TemplateMethodTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          BeachJourney.php:
+            path: patterns/ua/Behavioral/TemplateMethod/BeachJourney.php
+          CityJourney.php:
+            path: patterns/ua/Behavioral/TemplateMethod/CityJourney.php
+          Journey.php:
+            path: patterns/ua/Behavioral/TemplateMethod/Journey.php
+  visitor:
+    title: Відвідувач
+    permalink: /ua/behavioral/visitor/
+    path: patterns/ua/Behavioral/Visitor/ReadMe.md
+    img: /_includes/patterns/ua/Behavioral/Visitor/diagram.png
+    test:
+      name: VisitorTest.php
+      path: tests/unit/Behavioral/Visitor/VisitorTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Group.php:
+            path: patterns/ua/Behavioral/Visitor/Group.php
+          Role.php:
+            path: patterns/ua/Behavioral/Visitor/Role.php
+          RoleVisitor.php:
+            path: patterns/ua/Behavioral/Visitor/RoleVisitor.php
+          RoleVisitorInterface.php:
+            path: patterns/ua/Behavioral/Visitor/RoleVisitorInterface.php
+          User.php:
+            path: patterns/ua/Behavioral/Visitor/User.php

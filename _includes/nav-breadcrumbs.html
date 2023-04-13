@@ -1,44 +1,44 @@
-{% capture url %}{% if page.language%}{{ page.url | remove: "/" | remove: page.language }}{% else %}{{ page.url | remove: "/" }}{% endif %}{% endcapture %}
+{% capture url %}{% if page.lang%}{{ page.url | remove: "/" | remove: page.lang }}{% else %}{{ page.url | remove: "/" }}{% endif %}{% endcapture %}
 {% if url.size > 0 %}
-  <nav class="breadcrumbs hidden-sm-down">
+<nav class="breadcrumbs hidden-sm-down">
 
-    <a class="breadcrumb-item" href={{ "/" | prepend: site.baseurl | prepend: site.url }}>{{ site.name }}</a>
+  <a class="breadcrumb-item" href="{{ site.baseurl }}/{% if page.lang != 'ua' %}{{page.lang}}/{% endif %}">{{ site.data[page.lang].patterns-main.nav.title }}</a>
 
-    <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
 
     <!-- Iteration breadcrumb item -->
     {% assign position = 0 %}
     {% for crumb in breadcrumbs %}
 
-      <!-- Skip if root -->
-      {% if crumb.url == "/" %}
-        {% continue %}
-      {% endif %}
+    <!-- Skip if root -->
+    {% if crumb.url == "/" %}
+    {% continue %}
+    {% endif %}
 
-      <!-- Skip if language directory -->
-      {% if page.language %}
-        {% assign langpath = crumb.url | remove: "/" %}
-        {% if langpath == page.language %}
-          {% continue %}
-        {% endif %}
-      {% endif %}
+    <!-- Skip if language directory -->
+    {% if page.lang %}
+    {% assign langpath = crumb.url | remove: "/" %}
+    {% if langpath == page.lang %}
+    {% continue %}
+    {% endif %}
+    {% endif %}
 
-      <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
-      {% assign caption = crumb.title %}
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    {% assign caption = crumb.title %}
 
-      <!-- SEO data -->
-      {% assign position = position  | plus: 1 %}
+    <!-- SEO data -->
+    {% assign position = position  | plus: 1 %}
 
-      <li class="breadcrumb-item{% if crumb.url == page.url %} active{% endif %}" property="itemListElement" typeof="ListItem">
-        {% if crumb.url != page.url %}<a property="item" typeof="WebPage" href="{{ crumb.url | prepend: site.baseurl | prepend: site.url }}">{% endif %}
-        <span property="name">{{ caption }}</span>
-        {% if crumb.url != page.url %}</a>{% endif %}
-        <meta property="position" content="{{ position }}" />
-      </li>
+    <li class="breadcrumb-item{% if crumb.url == page.url %} active{% endif %}" property="itemListElement" typeof="ListItem">
+      {% if crumb.url != page.url %}<a property="item" typeof="WebPage" href="{{ crumb.url | prepend: site.baseurl | prepend: site.url }}">{% endif %}
+      <span property="name">{{ caption }}</span>
+      {% if crumb.url != page.url %}</a>{% endif %}
+      <meta property="position" content="{{ position }}" />
+    </li>
 
     {% endfor %}
 
-    </ol>
+  </ol>
 
-  </nav>
+</nav>
 {% endif %}

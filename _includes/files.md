@@ -1,15 +1,15 @@
 <ul class="spoiler-list">
 
-{% for folder in site.data[page.pattern-category].patterns[page.pattern-title].structure.folders %}
+{% for folder in site.data.ru[page.pattern-category].patterns[page.pattern-title].structure.folders %}
   <li>
   {% if folder != "main" %}
       <b><i>{{ folder }}</i></b>
       <ul class="spoiler-list">
   {% endif %}
     
-  {% for file in site.data[page.pattern-category].patterns[page.pattern-title].structure.files[folder] %}
-    {% if site.data[page.pattern-category].patterns[page.pattern-title].structure.sub-folders %}
-        {% if site.data[page.pattern-category].patterns[page.pattern-title].structure.sub-folders contains file[0] %}
+  {% for file in site.data.ru[page.pattern-category].patterns[page.pattern-title].structure.files[folder] %}
+    {% if site.data.ru[page.pattern-category].patterns[page.pattern-title].structure.sub-folders %}
+        {% if site.data.ru[page.pattern-category].patterns[page.pattern-title].structure.sub-folders contains file[0] %}
             <b><i>{{ file[0] }}</i></b>
             <ul class="spoiler-list">
                 {% for sub-file in file[1] %}
@@ -18,7 +18,7 @@
                       <summary> <b>{{ sub-file[0] }}</b> </summary>
                       {% highlight php startinline %}
                       {% assign file-path = sub-file[1].path %}
-{% include_absolute {{ file-path }} %}
+{% include {{ file-path }} %}
                       {% endhighlight %}
                     </details>
                 </li>
@@ -30,7 +30,7 @@
               <summary> <b>{{ file[0] }}</b> </summary>
               {% highlight php startinline %}
               {% assign file-path = file[1].path %}
-{% include_absolute {{ file-path }} %}
+{% include {{ file-path }} %}
               {% endhighlight %}
             </details>
           </li>
@@ -41,7 +41,7 @@
               <summary> <b>{{ file[0] }}</b> </summary>
               {% highlight php startinline %}
               {% assign file-path = file[1].path %}
-{% include_absolute {{ file-path }} %}
+{% include {{ file-path }} %}
               {% endhighlight %}
             </details>
           </li>
