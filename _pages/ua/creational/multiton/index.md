@@ -1,6 +1,6 @@
 ---
 layout: page
-breadcrumb: Пул Самотніх
+breadcrumb: Пул Одинаків
 pattern-title: multiton
 pattern-category: patterns-creational
 permalink: /ua/creational/multiton/
