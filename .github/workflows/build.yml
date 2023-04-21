@@ -22,3 +22,4 @@ jobs:
         with:
           publish_dir: ./_site
           force_orphan: true
+          ref: master
