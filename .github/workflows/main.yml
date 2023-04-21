@@ -14,7 +14,7 @@ jobs:
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
-          with:
+        with:
             ruby-version: 3.x.x
 
       - name: Install Jekyll and Bundler
