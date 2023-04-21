@@ -12,7 +12,6 @@ tests/_output/*
 .project
 /tests/_support/_generated/
 
-_site
 .DS_Store
 .jekyll
 .jekyll-metadata
