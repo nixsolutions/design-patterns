@@ -1,5 +1,4 @@
 name: Jekyll Build
-
 on:
   push:
     branches:
