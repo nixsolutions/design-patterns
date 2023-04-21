@@ -1,25 +1,30 @@
-name: Build and Deploy
+# .github/workflows/pages.yml
+
+name: Deploy to GitHub Pages
+
 on:
   push:
     branches:
       - source
+
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Build site
-        run: |
-          ruby/setup-ruby@v1
-          gem install bundler
-          bundle install
-          bundle exec jekyll build
-          
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+      - name: Build and deploy
+        uses: helaili/jekyll-action@v2.0.0
+        with:
+          jekyll_src: .
+          jekyll_dest: ./_site
+        env:
+          JEKYLL_ENV: production
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           force_orphan: true
-          ref: master
+          branch: master
