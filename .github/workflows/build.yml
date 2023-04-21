@@ -9,14 +9,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
       - name: Build site
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.0.3
         run: |
+          ruby/setup-ruby@v1
           gem install bundler
           bundle install
           bundle exec jekyll build
+          
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
