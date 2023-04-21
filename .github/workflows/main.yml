@@ -11,9 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Jekyll
-        uses: helaili/jekyll-action@v2.1.2
+        uses: jekyllrb/action-jekyll-build@v1.6.0
         with:
-          build_script: jekyll build --destination ./_site
+          destination: ./_site
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
