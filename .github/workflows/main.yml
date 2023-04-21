@@ -1,0 +1,21 @@
+name: Auto Deploy
+
+on:
+  push:
+    branches:
+      - source
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Jekyll
+        uses: helaili/jekyll-action@v2.1.2
+        with:
+          build_script: jekyll build --destination ./_site
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: master
+          folder: _site
