@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }}</title>
+  <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.data[page.lang].patterns-main.nav.description }}</title>
 
   {% include meta.html %}
 
@@ -20,17 +20,17 @@
 <div class="wrapper-masthead">
   <div class="container">
     <header class="masthead clearfix">
-      <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.baseurl }}/images/{{ site.logo }}"/></a>
-
+      <a href="{{ site.baseurl }}/{% if page.lang != 'ua' %}{{page.lang}}/{% endif %}" class="site-avatar"><img src="{{ site.baseurl }}/images/{{ site.logo }}"/></a>
+      {% include lang.html %}
       <div class="site-info">
-        <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+        <h1 class="site-name"><a href="{{ site.baseurl }}/{% if page.lang != 'ua' %}{{page.lang}}/{% endif %}">{{ site.data[page.lang].patterns-main.nav.description }}</a></h1>
       </div>
 
       <nav id="main">
-        <a href="{{ site.baseurl }}/" {% if page.url == '/' %} class="active"{% endif %}>Главная</a>
-        <a href="{{ site.baseurl }}/creational/" {% if page.pattern-category == 'patterns-creational' %} class="active"{% endif %}>Порождающие шаблоны</a>
-        <a href="{{ site.baseurl }}/behavioral/" {% if page.pattern-category == 'patterns-behavioral' %} class="active"{% endif %}>Шаблоны поведения</a>
-        <a href="{{ site.baseurl }}/structural/" {% if page.pattern-category == 'patterns-structural' %} class="active"{% endif %}>Структурные шаблоны</a>
+        <a href="{{ site.baseurl }}/{% if page.lang != 'ua' %}{{page.lang}}/{% endif %}" {% if page.url == '/' or page.url == '/ru/' %} class="active"{% endif %}>{{ site.data[page.lang].patterns-main.nav.title }}</a>
+        <a href="{{ site.baseurl }}/{{page.lang}}/creational/" {% if page.pattern-category == 'patterns-creational' %} class="active"{% endif %}>{{ site.data[page.lang].patterns-main.nav.creational }}</a>
+        <a href="{{ site.baseurl }}/{{page.lang}}/behavioral/" {% if page.pattern-category == 'patterns-behavioral' %} class="active"{% endif %}>{{ site.data[page.lang].patterns-main.nav.behavioral }}</a>
+        <a href="{{ site.baseurl }}/{{page.lang}}/structural/" {% if page.pattern-category == 'patterns-structural' %} class="active"{% endif %}>{{ site.data[page.lang].patterns-main.nav.structural }}</a>
       </nav>
     </header>
   </div>

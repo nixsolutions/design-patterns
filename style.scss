@@ -22,6 +22,7 @@ body {
   background: $white;
   font: 18px/1.4 $helvetica;
   color: $darkGray;
+  height: 100%;
   min-width: 320px;
 }
 
@@ -213,7 +214,6 @@ img {
 }
 
 nav {
-  float: left;
   margin-top: 23px; // @TODO: Vertically middle align
   font-family: $helveticaNeue;
   font-size: 18px;
@@ -291,6 +291,20 @@ footer {
 
 nav#main .active {
   border-bottom: 2px solid #92A9ED;
+}
+
+.lang {
+  margin: 15px;
+  float: right;
+}
+
+.lang li {
+  display: inline;
+}
+
+.lang li a.active {
+  color: #EB1746;
+  border-bottom: 1px solid #00ACED;
 }
 
 @media all and (max-width: 821px) {

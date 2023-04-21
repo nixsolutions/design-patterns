@@ -1,0 +1,216 @@
+title: Порождающие шаблоны
+permalink: /ru/creational/
+path: patterns/ru/Creational/ReadMe.md
+patterns:
+  singleton:
+      title: Одиночка
+      permalink: /ru/creational/singleton/
+      path: patterns/ru/Creational/Singleton/ReadMe.md
+      img: /_includes/patterns/ru/Creational/Singleton/diagram.png
+      test:
+        name: SingletonTest.php
+        path: tests/unit/Creational/Singleton/SingletonTest.php
+      structure:
+        folders: ["main"]
+        files:
+          main:
+            Cashbox.php:
+              path: patterns/ru/Creational/Singleton/Cashbox.php
+            CashboxTrait.php:
+              path: patterns/ru/Creational/Singleton/CashboxTrait.php
+            SingletonInterface.php:
+              path: patterns/ru/Creational/Singleton/SingletonInterface.php
+            SingletonTrait.php:
+              path: patterns/ru/Creational/Singleton/SingletonTrait.php
+  multiton:
+      title: Пулл Одиночек
+      permalink: /ru/creational/multiton/
+      path: patterns/ru/Creational/Multiton/ReadMe.md
+      img: /_includes/patterns/ru/Creational/Multiton/diagram.png
+      test:
+        name: MultitonTest.php
+        path: tests/unit/Creational/Multiton/MultitonTest.php
+      structure:
+        folders: ["main"]
+        files:
+          main:
+            MultitonInterface.php:
+              path: patterns/ru/Creational/Multiton/MultitonInterface.php
+            ShopCashSystem.php:
+              path: patterns/ru/Creational/Multiton/ShopCashSystem.php
+  pool:
+      title: Пулл
+      permalink: /ru/creational/pool/
+      path: patterns/ru/Creational/Pool/ReadMe.md
+      img: /_includes/patterns/ru/Creational/Pool/diagram.png
+      test:
+        name: PoolTest.php
+        path: tests/unit/Creational/Pool/PoolTest.php
+      structure:
+        folders: ["main"]
+        files:
+          main:
+            ShopStaff.php:
+              path: patterns/ru/Creational/Pool/ShopStaff.php
+            Worker.php:
+              path: patterns/ru/Creational/Pool/Worker.php
+            WorkerInterface.php:
+              path: patterns/ru/Creational/Pool/WorkerInterface.php
+  factory-method:
+      title: Фабричный метод
+      permalink: /ru/creational/factory-method/
+      path: patterns/ru/Creational/FactoryMethod/ReadMe.md
+      img: /_includes/patterns/ru/Creational/FactoryMethod/diagram.png
+      test:
+        name: FactoryMethodTest.php
+        path: tests/unit/Creational/FactoryMethod/FactoryMethodTest.php
+      structure:
+        folders: ["Burgers", "main"]
+        files:
+          Burgers:
+            Burger.php:
+              path: patterns/ru/Creational/FactoryMethod/Burgers/Burger.php
+            Cheeseburger.php:
+              path: patterns/ru/Creational/FactoryMethod/Burgers/Cheeseburger.php
+            Hamburger.php:
+              path: patterns/ru/Creational/FactoryMethod/Burgers/Hamburger.php
+          main:
+            Chef.php:
+              path: patterns/ru/Creational/FactoryMethod/Chef.php
+            FactoryMethodInterface.php:
+              path: patterns/ru/Creational/FactoryMethod/FactoryMethodInterface.php
+  builder:
+    title: Строитель
+    permalink: /ru/creational/builder/
+    path: patterns/ru/Creational/Builder/ReadMe.md
+    img: /_includes/patterns/ru/Creational/Builder/diagram.png
+    test:
+      name: BuilderTest.php
+      path: tests/unit/Creational/Builder/BuilderTest.php
+    structure:
+      folders: ["Builders", "Burger", "Director"]
+      sub-folders:
+        - Parts
+      files:
+        Builders:
+          BurgerBuilderInterface.php:
+            path: patterns/ru/Creational/Builder/Builders/BurgerBuilderInterface.php
+          CheeseburgerBuilder.php:
+            path: patterns/ru/Creational/Builder/Builders/CheeseburgerBuilder.php
+          HamburgerBuilder.php:
+            path: patterns/ru/Creational/Builder/Builders/HamburgerBuilder.php
+        Burger:
+          Parts:
+            AbstractPart.php:
+              path: patterns/ru/Creational/Builder/Burger/Parts/AbstractPart.php
+            Meat.php:
+              path: patterns/ru/Creational/Builder/Burger/Parts/Meat.php
+            Muffin.php:
+              path: patterns/ru/Creational/Builder/Burger/Parts/Muffin.php
+            Sauce.php:
+              path: patterns/ru/Creational/Builder/Burger/Parts/Sauce.php
+          AbstractBurger.php:
+            path: patterns/ru/Creational/Builder/Burger/AbstractBurger.php
+        Director:
+          Chef.php:
+            path: patterns/ru/Creational/Builder/Director/Chef.php
+          DirectorInterface.php:
+            path: patterns/ru/Creational/Builder/Director/DirectorInterface.php
+  simple-factory:
+    title: Простая Фабрика
+    permalink: /ru/creational/simple-factory/
+    path: patterns/ru/Creational/SimpleFactory/ReadMe.md
+    img: /_includes/patterns/ru/Creational/SimpleFactory/diagram.png
+    test:
+      name: SimpleFactoryTest.php
+      path: tests/unit/Creational/SimpleFactory/SimpleFactoryTest.php
+    structure:
+      folders: ["Burgers", "main"]
+      files:
+        Burgers:
+          Burger.php:
+            path: patterns/ru/Creational/SimpleFactory/Burgers/Burger.php
+          Cheeseburger.php:
+            path: patterns/ru/Creational/SimpleFactory/Burgers/Cheeseburger.php
+          Hamburger.php:
+            path: patterns/ru/Creational/SimpleFactory/Burgers/Hamburger.php
+        main:
+          Chef.php:
+            path: patterns/ru/Creational/SimpleFactory/Chef.php
+  static-factory:
+    title: Статическая Фабрика
+    permalink: /ru/creational/static-factory/
+    path: patterns/ru/Creational/StaticFactory/ReadMe.md
+    img: /_includes/patterns/ru/Creational/StaticFactory/diagram.png
+    test:
+      name: StaticFactoryTest.php
+      path: tests/unit/Creational/StaticFactory/StaticFactoryTest.php
+    structure:
+      folders: ["Burgers", "main"]
+      files:
+        Burgers:
+          Burger.php:
+            path: patterns/ru/Creational/StaticFactory/Burgers/Burger.php
+          Cheeseburger.php:
+            path: patterns/ru/Creational/StaticFactory/Burgers/Cheeseburger.php
+          Hamburger.php:
+            path: patterns/ru/Creational/StaticFactory/Burgers/Hamburger.php
+        main:
+          Chef.php:
+            path: patterns/ru/Creational/StaticFactory/Chef.php
+  abstract-factory:
+      title: Абстрактная Фабрика
+      permalink: /ru/creational/abstract-factory/
+      path: patterns/ru/Creational/AbstractFactory/ReadMe.md
+      img: /_includes/patterns/ru/Creational/AbstractFactory/diagram.png
+      test:
+        name: AbstractFactory.php
+        path: tests/unit/Creational/AbstractFactory/AbstractFactory.php
+      structure:
+        folders: ["Burgers", "Potatoes", "Recipes", "Waters", "main"]
+        files:
+          main:
+            Chef.php:
+              path: patterns/ru/Creational/AbstractFactory/Chef.php
+          Burgers:
+            AbstractBurger.php:
+              path: patterns/ru/Creational/AbstractFactory/Burgers/AbstractBurger.php
+            Cheeseburger.php:
+              path: patterns/ru/Creational/AbstractFactory/Burgers/Cheeseburger.php
+            Hamburger.php:
+              path: patterns/ru/Creational/AbstractFactory/Burgers/Hamburger.php
+          Potatoes:
+            AbstractPotato.php:
+              path: patterns/ru/Creational/AbstractFactory/Potatoes/AbstractPotato.php
+            FriesPotato.php:
+              path: patterns/ru/Creational/AbstractFactory/Potatoes/FriesPotato.php
+            RusticPotato.php:
+              path: patterns/ru/Creational/AbstractFactory/Potatoes/RusticPotato.php
+          Recipes:
+            AbstractFactoryInterface.php:
+              path: patterns/ru/Creational/AbstractFactory/Recipes/AbstractFactoryInterface.php
+            EuropeComboRecipe.php:
+              path: patterns/ru/Creational/AbstractFactory/Recipes/EuropeComboRecipe.php
+            UsaComboRecipe.php:
+              path: patterns/ru/Creational/AbstractFactory/Recipes/UsaComboRecipe.php
+          Waters:
+            AbstractWater.php:
+              path: patterns/ru/Creational/AbstractFactory/Waters/AbstractWater.php
+            CocaColaWater.php:
+              path: patterns/ru/Creational/AbstractFactory/Waters/CocaColaWater.php
+            FantaWater.php:
+              path: patterns/ru/Creational/AbstractFactory/Waters/FantaWater.php
+  prototype:
+      title: Прототип
+      permalink: /ru/creational/prototype/
+      path: patterns/ru/Creational/Prototype/ReadMe.md
+      img: /_includes/patterns/ru/Creational/Prototype/diagram.png
+      test:
+        name: PrototypeTest.php
+        path: tests/unit/Creational/Prototype/PrototypeTest.php
+      structure:
+        folders: ["main"]
+        files:
+          main:
+            BoxPrototype.php:
+              path: patterns/ru/Creational/Prototype/BoxPrototype.php

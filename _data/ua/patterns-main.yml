@@ -1,0 +1,7 @@
+path: patterns/ua/ReadMe.md
+nav:
+  title: Головна
+  description: Шаблони проєктування
+  creational: Породжувальні шаблони
+  behavioral: Шаблони поведінки
+  structural: Структурні шаблони
