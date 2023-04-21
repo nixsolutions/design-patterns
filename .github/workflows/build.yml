@@ -15,7 +15,7 @@ jobs:
         with:
           submodules: 'recursive'
       - name: Build and deploy
-        uses: helaili/jekyll-action@v2.0.0
+        uses: helaili/jekyll-action@v2.4.0
         with:
           jekyll_src: .
           jekyll_dest: ./_site
