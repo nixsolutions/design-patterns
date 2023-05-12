@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/ru/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" >Ua</a></li>
+    <li><a href="/design-patterns/ru/" class="active">Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/ru/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/ru/" >Главная</a>
+        <a href="/design-patterns/ru/creational/" >Порождающие шаблоны</a>
+        <a href="/design-patterns/ru/behavioral/"  class="active">Шаблоны поведения</a>
+        <a href="/design-patterns/ru/structural/" >Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/ru/">Главная</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ru/behavioral/">
+      <span property="name">Шаблоны поведения</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Посетитель</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ru/Behavioral/Visitor/diagram.png" alt="visitor" class="img-responsive" />
+<strong>Посетитель</strong> (англ. <strong>Visitor</strong>) — поведенческий шаблон проектирования,
+основным назначением которого является добавление доп. функционала для объектов разных классов, не изменяя их.
+Для этого данный функционал переноситься в сам класс <strong>Посетителя</strong>.</p>
+
+<p><strong>Применение:</strong></p>
+<ul>
+  <li>
+    <p>В структуре присутствуют объекты многих классов с различными интерфейсами, и вы хотите выполнять над ними операции,
+зависящие от конкретных классов.</p>
+  </li>
+  <li>
+    <p><strong>Посетитель</strong> позволяет добавить одну и ту же операцию в различные типы объектов, которые он посещает.</p>
+  </li>
+  <li>
+    <p>Над объектами, входящими в состав структуры, надо выполнять разнообразные,
+не связанные между собой операции и вы не хотите “засорять” классы такими операциями.</p>
+  </li>
+  <li>
+    <p><strong>Посетитель</strong> позволяет объединить родственные операции, поместив их в один класс.
+Если структура объектов является общей для нескольких приложений,
+то шаблон <strong>посетитель</strong> позволит в каждое приложение включить только относящиеся к нему операции.</p>
+  </li>
+</ul>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Group.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Visitor</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Group
+ * @package DesignPatterns\Behavioral\Visitor
+ */</span>
+<span class="kd">class</span> <span class="nc">Group</span> <span class="kd">implements</span> <span class="nc">Role</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">private</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * Group constructor.
+     *
+     * @param string $name
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getName</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Group: %s'</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param RoleVisitorInterface $visitor
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">accept</span><span class="p">(</span><span class="kt">RoleVisitorInterface</span> <span class="nv">$visitor</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$visitor</span><span class="o">-&gt;</span><span class="nf">visitGroup</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Role.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Visitor</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface Role
+ * @package DesignPatterns\Behavioral\Visitor
+ */</span>
+<span class="kd">interface</span> <span class="nc">Role</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @param RoleVisitorInterface $visitor
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">accept</span><span class="p">(</span><span class="kt">RoleVisitorInterface</span> <span class="nv">$visitor</span><span class="p">);</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>RoleVisitor.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Visitor</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class RoleVisitor
+ * @package DesignPatterns\Behavioral\Visitor
+ */</span>
+<span class="kd">class</span> <span class="nc">RoleVisitor</span> <span class="kd">implements</span> <span class="nc">RoleVisitorInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var Role[]
+     */</span>
+    <span class="k">private</span> <span class="nv">$visited</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @param Group $role
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">visitGroup</span><span class="p">(</span><span class="kt">Group</span> <span class="nv">$role</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">visited</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$role</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param User $role
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">visitUser</span><span class="p">(</span><span class="kt">User</span> <span class="nv">$role</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">visited</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$role</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return Role[]
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getVisited</span><span class="p">():</span> <span class="kt">array</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">visited</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>RoleVisitorInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Visitor</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface RoleVisitorInterface
+ * @package DesignPatterns\Behavioral\Visitor
+ */</span>
+<span class="kd">interface</span> <span class="nc">RoleVisitorInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @param User $role
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">visitUser</span><span class="p">(</span><span class="kt">User</span> <span class="nv">$role</span><span class="p">);</span>
+
+    <span class="cd">/**
+     * @param Group $role
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">visitGroup</span><span class="p">(</span><span class="kt">Group</span> <span class="nv">$role</span><span class="p">);</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>User.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Visitor</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class User
+ * @package DesignPatterns\Behavioral\Visitor
+ */</span>
+<span class="kd">class</span> <span class="nc">User</span> <span class="kd">implements</span> <span class="nc">Role</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">private</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * User constructor.
+     *
+     * @param string $name
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getName</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">'User %s'</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param RoleVisitorInterface $visitor
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">accept</span><span class="p">(</span><span class="kt">RoleVisitorInterface</span> <span class="nv">$visitor</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$visitor</span><span class="o">-&gt;</span><span class="nf">visitUser</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> VisitorTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Behavioral\Visitor</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Visitor\Group</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Visitor\Role</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Visitor\RoleVisitor</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Visitor\User</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">VisitorTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var RoleVisitor
+     */</span>
+    <span class="k">private</span> <span class="nv">$visitor</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">setUp</span><span class="p">():</span> <span class="kt">void</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">visitor</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RoleVisitor</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">provideRoles</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">[</span><span class="k">new</span> <span class="nc">User</span><span class="p">(</span><span class="s1">'Dominik'</span><span class="p">)],</span>
+            <span class="p">[</span><span class="k">new</span> <span class="nc">Group</span><span class="p">(</span><span class="s1">'Administrators'</span><span class="p">)],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @dataProvider provideRoles
+     *
+     * @param Role $role
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testVisitSomeRole</span><span class="p">(</span><span class="kt">Role</span> <span class="nv">$role</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$role</span><span class="o">-&gt;</span><span class="nf">accept</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">visitor</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="nv">$role</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">visitor</span><span class="o">-&gt;</span><span class="nf">getVisited</span><span class="p">()[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

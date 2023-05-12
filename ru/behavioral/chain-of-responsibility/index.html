@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/ru/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" >Ua</a></li>
+    <li><a href="/design-patterns/ru/" class="active">Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/ru/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/ru/" >Главная</a>
+        <a href="/design-patterns/ru/creational/" >Порождающие шаблоны</a>
+        <a href="/design-patterns/ru/behavioral/"  class="active">Шаблоны поведения</a>
+        <a href="/design-patterns/ru/structural/" >Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/ru/">Главная</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ru/behavioral/">
+      <span property="name">Шаблоны поведения</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Цепочка обязанностей</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ru/Behavioral/ChainOfResponsibility/diagram.png" alt="chain-of-responsibility" class="img-responsive" />
+<strong>Цепочка обязанностей</strong> (англ. <strong>Chain of Responsibility</strong>) - относится к классу поведенческих шаблонов.
+Служит для ослабления связи между отправителем и получателем запроса.
+При этом сам по себе запрос может быть произвольным.</p>
+
+<p>Шаблон не просто так называется цепочкой обязанностей. По сути, это набор обработчиков, которые по очереди получают
+запрос, а затем решают, обрабатывать его или нет. Если запрос не обработан, то он передается дальше по цепочке.
+Если же он обработан, то шаблон сам решает передавать его дальше или нет.</p>
+
+<p>Нам нужно подписать какой-то документ(<strong>Contract</strong>). У него есть какая-то важность(<strong><code class="language-plaintext highlighter-rouge">Contract-&gt;importance</code></strong>),
+от которой зависит в каком департаменте(<strong>Department</strong>) будет подписан документ.
+Последний департамент в цепочке всегда обработает документ.</p>
+
+<p><strong>Применение:</strong></p>
+<ul>
+  <li>фреймворк для записи журналов, где каждый элемент цепи самостоятельно принимает решение,
+что делать с сообщением для логирования;</li>
+  <li>фильтр спама;</li>
+  <li><strong>кеширование</strong>: первый объект является экземпляром, к примеру, интерфейса Memcached.
+Если запись в кеше отсутствует, вызов делегируется интерфейсу базы данных;</li>
+  <li><strong>Yii Framework</strong>: <strong><code class="language-plaintext highlighter-rouge">CFilterChain</code></strong> — это цепочка фильтров действий контроллера.
+Точка вызова передаётся от фильтра к фильтру по цепочке и только если все фильтры скажут “да”,
+действие в итоге может быть вызвано.</li>
+</ul>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>AbstractDepartment.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\ChainOfResponsibility</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class AbstractDepartment
+ * @package DesignPatterns\Behavioral\ChainOfResponsibility
+ */</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">AbstractDepartment</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var int
+     */</span>
+    <span class="k">protected</span> <span class="nv">$importance</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var AbstractDepartment
+     */</span>
+    <span class="k">protected</span> <span class="nv">$parent</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getName</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getImportance</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">importance</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return AbstractDepartment
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getParent</span><span class="p">():</span> <span class="kt">AbstractDepartment</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="k">parent</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param Contract $contract
+     *
+     * @return Contract
+     */</span>
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="n">getSign</span><span class="p">(</span><span class="kt">Contract</span> <span class="nv">$contract</span><span class="p">):</span> <span class="kt">Contract</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @param Contract $contract
+     *
+     * @return Contract
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">setSign</span><span class="p">(</span><span class="kt">Contract</span> <span class="nv">$contract</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$contract</span><span class="o">-&gt;</span><span class="nf">setSign</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getName</span><span class="p">());</span>
+
+        <span class="k">return</span> <span class="nv">$contract</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Contract.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\ChainOfResponsibility</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Contract
+ * @package DesignPatterns\Behavioral\ChainOfResponsibility
+ */</span>
+<span class="kd">class</span> <span class="nc">Contract</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var int
+     */</span>
+    <span class="k">protected</span> <span class="nv">$importance</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$sign</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * Contract constructor.
+     *
+     * @param int $importance
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">int</span> <span class="nv">$importance</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">importance</span> <span class="o">=</span> <span class="nv">$importance</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getImportance</span><span class="p">():</span> <span class="kt">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">importance</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $name
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setSign</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">sign</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getSign</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">sign</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Department.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\ChainOfResponsibility</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Department
+ * @package DesignPatterns\Behavioral\ChainOfResponsibility
+ */</span>
+<span class="kd">class</span> <span class="nc">Department</span> <span class="kd">extends</span> <span class="nc">AbstractDepartment</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * Department constructor.
+     *
+     * @param string $nameDepartment
+     * @param int $importance
+     * @param AbstractDepartment|null $parent
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$nameDepartment</span><span class="p">,</span> <span class="kt">int</span> <span class="nv">$importance</span><span class="p">,</span> <span class="kt">AbstractDepartment</span> <span class="nv">$parent</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$nameDepartment</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">importance</span> <span class="o">=</span> <span class="nv">$importance</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="k">parent</span> <span class="o">=</span> <span class="nv">$parent</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param Contract $contract
+     *
+     * @return Contract
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getSign</span><span class="p">(</span><span class="kt">Contract</span> <span class="nv">$contract</span><span class="p">):</span> <span class="kt">Contract</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getImportance</span><span class="p">()</span> <span class="o">&lt;</span> <span class="nv">$contract</span><span class="o">-&gt;</span><span class="nf">getImportance</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="k">parent</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="k">parent</span><span class="o">-&gt;</span><span class="nf">getSign</span><span class="p">(</span><span class="nv">$contract</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">setSign</span><span class="p">(</span><span class="nv">$contract</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> ChainOfResponsibilityTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Behavioral\ChainOfResponsibility</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\ChainOfResponsibility\Contract</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\ChainOfResponsibility\Department</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">ChainOfResponsibilityTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testWithOutParent</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$contract</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Contract</span><span class="p">(</span><span class="mi">78</span><span class="p">);</span>
+
+        <span class="nv">$mainDepartment</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Department</span><span class="p">(</span><span class="s1">'MAIN'</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+        <span class="nv">$contractWithSign</span> <span class="o">=</span> <span class="nv">$mainDepartment</span><span class="o">-&gt;</span><span class="nf">getSign</span><span class="p">(</span><span class="nv">$contract</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertGreaterThan</span><span class="p">(</span><span class="nv">$mainDepartment</span><span class="o">-&gt;</span><span class="nf">getImportance</span><span class="p">(),</span> <span class="nv">$contract</span><span class="o">-&gt;</span><span class="nf">getImportance</span><span class="p">());</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'MAIN'</span><span class="p">,</span> <span class="nv">$contractWithSign</span><span class="o">-&gt;</span><span class="nf">getSign</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testWithParent</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$contract</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Contract</span><span class="p">(</span><span class="mi">18</span><span class="p">);</span>
+
+        <span class="nv">$mainDepartment</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Department</span><span class="p">(</span><span class="s1">'MAIN'</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+        <span class="nv">$subDepartment</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Department</span><span class="p">(</span><span class="s1">'SUB'</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="nv">$mainDepartment</span><span class="p">);</span>
+        <span class="nv">$contractWithSign</span> <span class="o">=</span> <span class="nv">$subDepartment</span><span class="o">-&gt;</span><span class="nf">getSign</span><span class="p">(</span><span class="nv">$contract</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertGreaterThan</span><span class="p">(</span><span class="nv">$contract</span><span class="o">-&gt;</span><span class="nf">getImportance</span><span class="p">(),</span> <span class="nv">$subDepartment</span><span class="o">-&gt;</span><span class="nf">getImportance</span><span class="p">());</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'SUB'</span><span class="p">,</span> <span class="nv">$contractWithSign</span><span class="o">-&gt;</span><span class="nf">getSign</span><span class="p">());</span>
+
+        <span class="nv">$newContract</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Contract</span><span class="p">(</span><span class="mi">25</span><span class="p">);</span>
+        <span class="nv">$contractWithSign</span> <span class="o">=</span> <span class="nv">$subDepartment</span><span class="o">-&gt;</span><span class="nf">getSign</span><span class="p">(</span><span class="nv">$newContract</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertGreaterThan</span><span class="p">(</span><span class="nv">$subDepartment</span><span class="o">-&gt;</span><span class="nf">getImportance</span><span class="p">(),</span> <span class="nv">$newContract</span><span class="o">-&gt;</span><span class="nf">getImportance</span><span class="p">());</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'MAIN'</span><span class="p">,</span> <span class="nv">$contractWithSign</span><span class="o">-&gt;</span><span class="nf">getSign</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

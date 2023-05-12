@@ -1,0 +1,7 @@
+path: patterns/ru/ReadMe.md
+nav:
+  title: Главная
+  description: Шаблоны проектирования
+  creational: Порождающие шаблоны
+  behavioral: Шаблоны поведения
+  structural: Структурные шаблоны

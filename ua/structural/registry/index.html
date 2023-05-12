@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/" >Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/"  class="active">Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/structural/">
+      <span property="name">Структурні шаблони</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Реєстр</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Structural/Registry/diagram.png" alt="registry" class="img-responsive" />
+<strong>Реєстр</strong> (англ. <strong>Registry</strong>) - це шаблон, призначений для зберігання записів, які в нього поміщають, і відповідно
+повернення цих записів (<em>за ключем</em>), якщо вони будуть потрібні.</p>
+
+<p>Як на нормальному підприємстві, коли у нас з’являється новий працівник – у бухгалтерії з’являється новий запис із його даними.
+Журнал працівників і є Реєстром, а кожен об’єкт інформації працівника - запис у реєстрі.
+<strong>Реєстр</strong> нерідко є <strong>Одинаком</strong>, проте це не завжди має бути саме так. Наприклад, ми можемо завести
+у бухгалтерії кілька журналів. В одному працівники від “А” до “М”. В іншому від “Н” до “Я”. Кожен такий журнал буде
+<strong>Реєстром</strong>, але не <strong>Одинаком</strong>, тому що журналів вже 2.</p>
+
+<p><strong>Примітка</strong>:
+Зауважимо, що <strong>Реєстр</strong> дуже схожий на <strong>Мультитон</strong> та <strong>Пул об’єктів</strong>. Сам шаблон <strong>Реєстр</strong> не є
+_ “породжувальним шаблоном”_ у сенсі цього терміна, проте його зручно розглядати саме у взаємозв’язку з ними.
+На відміну від <strong>Мультитона</strong> та <strong>Пула</strong>, він не вміє породжувати нові сутності. <strong>Реєстр</strong> - це сховище!</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Registry.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Registry</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">InvalidArgumentException</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Registry
+ * @package DesignPatterns\Structural\Registry
+ */</span>
+<span class="kd">class</span> <span class="nc">Registry</span>
+<span class="p">{</span>
+
+    <span class="cd">/**
+     * @var WorkerData[]
+     */</span>
+    <span class="k">protected</span> <span class="nv">$workerDataRegistry</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @param string $key
+     * @param WorkerData $workerData
+     *
+     * @return void
+     * @throws InvalidArgumentException
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addWorker</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$key</span><span class="p">,</span> <span class="kt">WorkerData</span> <span class="nv">$workerData</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$key</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">prepareKey</span><span class="p">(</span><span class="nv">$key</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">key_exists</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">workerDataRegistry</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">workerDataRegistry</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$workerData</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nc">InvalidArgumentException</span><span class="p">(</span><span class="s1">'Worker with key: #'</span> <span class="mf">.</span> <span class="nv">$key</span> <span class="mf">.</span> <span class="s1">' exists.'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $key
+     *
+     * @return WorkerData
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getWorker</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$key</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$key</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">prepareKey</span><span class="p">(</span><span class="nv">$key</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">key_exists</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">workerDataRegistry</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">workerDataRegistry</span><span class="p">[</span><span class="nv">$key</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="err">\</span><span class="nf">InvalidArgumentException</span><span class="p">(</span><span class="s1">'Worker with key: #'</span> <span class="mf">.</span> <span class="nv">$key</span> <span class="mf">.</span> <span class="s1">' not exists.'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $key
+     *
+     * @return string
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="n">prepareKey</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$key</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">trim</span><span class="p">(</span><span class="nb">strtolower</span><span class="p">(</span><span class="nv">$key</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>WorkerData.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Registry</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class WorkerData
+ * @package DesignPatterns\Structural\Registry
+ */</span>
+<span class="kd">class</span> <span class="nc">WorkerData</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$firstName</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$lastName</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$fullName</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var int
+     */</span>
+    <span class="k">protected</span> <span class="nv">$age</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$phone</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * WorkerData constructor.
+     *
+     * @param string $firstName
+     * @param string $lastName
+     * @param int $age
+     * @param int $phone
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$firstName</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$lastName</span><span class="p">,</span> <span class="kt">int</span> <span class="nv">$age</span><span class="p">,</span> <span class="kt">int</span> <span class="nv">$phone</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">firstName</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">prepareName</span><span class="p">(</span><span class="nv">$firstName</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">lastName</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">prepareName</span><span class="p">(</span><span class="nv">$lastName</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">fullName</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">setFullName</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">age</span> <span class="o">=</span> <span class="nv">$age</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">phone</span> <span class="o">=</span> <span class="nv">$phone</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getFirstName</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">firstName</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $firstName
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setFirstName</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$firstName</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">firstName</span> <span class="o">=</span> <span class="nv">$firstName</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getLastName</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">lastName</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $lastName
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setLastName</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$lastName</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">lastName</span> <span class="o">=</span> <span class="nv">$lastName</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getFullName</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">fullName</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setFullName</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">firstName</span> <span class="mf">.</span> <span class="s1">' '</span> <span class="mf">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">lastName</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getAge</span><span class="p">():</span> <span class="kt">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">age</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param int $age
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setAge</span><span class="p">(</span><span class="kt">int</span> <span class="nv">$age</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">age</span> <span class="o">=</span> <span class="nv">$age</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getPhone</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">phone</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $phone
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setPhone</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$phone</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">phone</span> <span class="o">=</span> <span class="nv">$phone</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $name
+     *
+     * @return string
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="n">prepareName</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">ucfirst</span><span class="p">(</span><span class="nb">strtolower</span><span class="p">(</span><span class="nv">$name</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> RegistryTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Structural\Registry</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Registry\Registry</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Registry\WorkerData</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">InvalidArgumentException</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">RegistryTest</span> <span class="k">extends</span> <span class="err">\</span><span class="n">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$ivanDataFixture</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'firstName'</span> <span class="o">=&gt;</span> <span class="s1">'ivan'</span><span class="p">,</span>
+        <span class="s1">'lastName'</span>  <span class="o">=&gt;</span> <span class="s1">'ivanov'</span><span class="p">,</span>
+        <span class="s1">'age'</span>       <span class="o">=&gt;</span> <span class="mi">21</span><span class="p">,</span>
+        <span class="s1">'phone'</span>     <span class="o">=&gt;</span> <span class="mi">380936547896</span><span class="p">,</span>
+    <span class="p">];</span>
+
+    <span class="k">private</span> <span class="nv">$petrDataFixture</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'firstName'</span> <span class="o">=&gt;</span> <span class="s1">'petr'</span><span class="p">,</span>
+        <span class="s1">'lastName'</span>  <span class="o">=&gt;</span> <span class="s1">'petrov'</span><span class="p">,</span>
+        <span class="s1">'age'</span>       <span class="o">=&gt;</span> <span class="mi">18</span><span class="p">,</span>
+        <span class="s1">'phone'</span>     <span class="o">=&gt;</span> <span class="mi">380668524785</span><span class="p">,</span>
+    <span class="p">];</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCanSetUpWorkerToRegistry</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$ivanWorkerData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WorkerData</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">ivanDataFixture</span><span class="p">[</span><span class="s1">'firstName'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">ivanDataFixture</span><span class="p">[</span><span class="s1">'lastName'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">ivanDataFixture</span><span class="p">[</span><span class="s1">'age'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">ivanDataFixture</span><span class="p">[</span><span class="s1">'phone'</span><span class="p">]</span>
+        <span class="p">);</span>
+        <span class="nv">$petrWorkerData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WorkerData</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">petrDataFixture</span><span class="p">[</span><span class="s1">'firstName'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">petrDataFixture</span><span class="p">[</span><span class="s1">'lastName'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">petrDataFixture</span><span class="p">[</span><span class="s1">'age'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">petrDataFixture</span><span class="p">[</span><span class="s1">'phone'</span><span class="p">]</span>
+        <span class="p">);</span>
+
+        <span class="nv">$registry</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Registry</span><span class="p">();</span>
+
+        <span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="s1">'Ivan'</span><span class="p">,</span> <span class="nv">$ivanWorkerData</span><span class="p">);</span>
+        <span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="s1">'Petr'</span><span class="p">,</span> <span class="nv">$petrWorkerData</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Structural\Registry\WorkerData'</span><span class="p">,</span> <span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">(</span><span class="s1">'Ivan'</span><span class="p">));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Structural\Registry\WorkerData'</span><span class="p">,</span> <span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">(</span><span class="s1">'Petr'</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testException</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectException</span><span class="p">(</span><span class="nc">InvalidArgumentException</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+        <span class="nv">$registry</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Registry</span><span class="p">();</span>
+
+        <span class="nv">$ivanWorkerData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WorkerData</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">ivanDataFixture</span><span class="p">[</span><span class="s1">'firstName'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">ivanDataFixture</span><span class="p">[</span><span class="s1">'lastName'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">ivanDataFixture</span><span class="p">[</span><span class="s1">'age'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">ivanDataFixture</span><span class="p">[</span><span class="s1">'phone'</span><span class="p">]</span>
+        <span class="p">);</span>
+        <span class="nv">$petrWorkerData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WorkerData</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">petrDataFixture</span><span class="p">[</span><span class="s1">'firstName'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">petrDataFixture</span><span class="p">[</span><span class="s1">'lastName'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">petrDataFixture</span><span class="p">[</span><span class="s1">'age'</span><span class="p">],</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">petrDataFixture</span><span class="p">[</span><span class="s1">'phone'</span><span class="p">]</span>
+        <span class="p">);</span>
+
+        <span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="s1">'Ivan'</span><span class="p">,</span> <span class="nv">$ivanWorkerData</span><span class="p">);</span>
+        <span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="s1">'Ivan'</span><span class="p">,</span> <span class="nv">$petrWorkerData</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

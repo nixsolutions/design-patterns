@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/ru/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" >Ua</a></li>
+    <li><a href="/design-patterns/ru/" class="active">Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/ru/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/ru/" >Главная</a>
+        <a href="/design-patterns/ru/creational/" >Порождающие шаблоны</a>
+        <a href="/design-patterns/ru/behavioral/"  class="active">Шаблоны поведения</a>
+        <a href="/design-patterns/ru/structural/" >Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/ru/">Главная</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ru/behavioral/">
+      <span property="name">Шаблоны поведения</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Итератор</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ru/Behavioral/Iterator/diagram.png" alt="iterator" class="img-responsive" />
+<strong>Итератор</strong> (англ. <strong>Iterator</strong>) относится к классу шаблонов поведения. Используется в составных объектах.
+Предоставляет доступ к своим внутренним полям, не раскрывая их структуру.</p>
+
+<p>Зачастую этот шаблон используется вместо массива объектов, чтобы не только предоставить доступ к элементам,
+но и наделить некоторой логикой. Это может быть ограничение доступа, сортировка или любая другая операция
+над множеством объектов.</p>
+
+<p>Из коробки PHP, нам доступен интерфейс <strong><code class="language-plaintext highlighter-rouge">Iterator</code></strong>.</p>
+<ul>
+  <li>Метод <strong><code class="language-plaintext highlighter-rouge">Iterator-&gt;current()</code></strong> возвращает текущий элемент</li>
+  <li>Метод <strong><code class="language-plaintext highlighter-rouge">Iterator-&gt;next()</code></strong> перемещает указатель на следующий элемент</li>
+  <li>Метод <strong><code class="language-plaintext highlighter-rouge">Iterator-&gt;key()</code></strong> возвращает индекс текущего элемента</li>
+  <li>Метод <strong><code class="language-plaintext highlighter-rouge">Iterator-&gt;valid()</code></strong> проверяет, существует ли текущий элемент или нет</li>
+  <li>Метод <strong><code class="language-plaintext highlighter-rouge">Iterator-&gt;rewind()</code></strong> переводит указатель текущего элемента на первый</li>
+</ul>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Worker.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Iterator</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Worker
+ * @package DesignPatterns\Behavioral\Iterator
+ */</span>
+<span class="kd">class</span> <span class="nc">Worker</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * Worker constructor.
+     *
+     * @param string $name
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getName</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>WorkersList.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Iterator</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Countable</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Iterator</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class WorkersList
+ * @package DesignPatterns\Behavioral\Iterator
+ */</span>
+<span class="kd">class</span> <span class="nc">WorkersList</span> <span class="kd">implements</span> <span class="nc">Iterator</span><span class="p">,</span> <span class="nc">Countable</span>
+<span class="p">{</span>
+
+    <span class="cd">/**
+     * @var Worker[]
+     */</span>
+    <span class="k">protected</span> <span class="nv">$workers</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="cd">/**
+     * @var int
+     */</span>
+    <span class="k">protected</span> <span class="nv">$currentIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @param Worker $worker
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addWorker</span><span class="p">(</span><span class="kt">Worker</span> <span class="nv">$worker</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">workers</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$worker</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return Worker
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">current</span><span class="p">():</span> <span class="kt">Worker</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">workers</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">next</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">key</span><span class="p">():</span> <span class="kt">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return bool
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">valid</span><span class="p">():</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">workers</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">rewind</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">currentIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">count</span><span class="p">():</span> <span class="kt">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">workers</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> IteratorTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Behavioral\Iterator</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Iterator\Worker</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Iterator\WorkersList</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">IteratorTest</span> <span class="k">extends</span> <span class="err">\</span><span class="n">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testWorkerGetName</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$name</span> <span class="o">=</span> <span class="s1">'TestName'</span><span class="p">;</span>
+
+        <span class="nv">$worker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$worker</span><span class="o">-&gt;</span><span class="nf">getName</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCountList</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$ivanWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="s1">'Ivan'</span><span class="p">);</span>
+        <span class="nv">$petrWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="s1">'Petr'</span><span class="p">);</span>
+        <span class="nv">$andreyWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="s1">'Andrey'</span><span class="p">);</span>
+
+        <span class="nv">$workersList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WorkersList</span><span class="p">();</span>
+
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="nv">$ivanWorker</span><span class="p">);</span>
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="nv">$petrWorker</span><span class="p">);</span>
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="nv">$andreyWorker</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertCount</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nv">$workersList</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testWorkersListKey</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$workersList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WorkersList</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">key</span><span class="p">());</span>
+
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">next</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">key</span><span class="p">());</span>
+
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">next</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">key</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testWorkersListValid</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$ivanWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="s1">'Ivan'</span><span class="p">);</span>
+        <span class="nv">$petrWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="s1">'Petr'</span><span class="p">);</span>
+        <span class="nv">$andreyWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="s1">'Andrey'</span><span class="p">);</span>
+
+        <span class="nv">$workersList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WorkersList</span><span class="p">();</span>
+
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="nv">$ivanWorker</span><span class="p">);</span>
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="nv">$petrWorker</span><span class="p">);</span>
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="nv">$andreyWorker</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">valid</span><span class="p">());</span>
+
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">next</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">valid</span><span class="p">());</span>
+
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">next</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">valid</span><span class="p">());</span>
+
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">next</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">valid</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testWorkersListResetKey</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$workersList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WorkersList</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">key</span><span class="p">());</span>
+
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">next</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">key</span><span class="p">());</span>
+
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">next</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">key</span><span class="p">());</span>
+
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">rewind</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">key</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testWorkerListCurrentWorker</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$ivanWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="s1">'Ivan'</span><span class="p">);</span>
+        <span class="nv">$petrWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="s1">'Petr'</span><span class="p">);</span>
+        <span class="nv">$andreyWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="s1">'Andrey'</span><span class="p">);</span>
+
+        <span class="nv">$workersList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WorkersList</span><span class="p">();</span>
+
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="nv">$ivanWorker</span><span class="p">);</span>
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="nv">$petrWorker</span><span class="p">);</span>
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nf">addWorker</span><span class="p">(</span><span class="nv">$andreyWorker</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="nv">$ivanWorker</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">current</span><span class="p">());</span>
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">next</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="nv">$petrWorker</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">current</span><span class="p">());</span>
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">next</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="nv">$andreyWorker</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">current</span><span class="p">());</span>
+        <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">rewind</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="nv">$ivanWorker</span><span class="p">,</span> <span class="nv">$workersList</span><span class="o">-&gt;</span><span class="nb">current</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

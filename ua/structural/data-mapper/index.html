@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/" >Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/"  class="active">Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/structural/">
+      <span property="name">Структурні шаблони</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Перетворювач Даних</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Structural/DataMapper/diagram.png" alt="data-mapper" class="img-responsive" />
+<strong>Перетворювач Даних</strong> (англ. <strong>Data Mapper</strong>) — це шаблон, який виступає в ролі посередника для
+двоспрямованої передачі між постійним сховищем даних (часто, реляційної бази даних)
+і подання даних у пам’яті (шар домену, що вже завантажено і використовується для логічної обробки).</p>
+
+<p>Мета шаблону в тому, щоб тримати подання даних у пам’яті та постійне сховище даних незалежними один від одного та від самого перетворювача даних. Шар складається з одного або більше <strong>mapper</strong>‘а (або об’єктів доступу до даних),
+відровідальних за передачу даних. Реалізації <strong>mapper</strong>‘ів різняться за призначенням. Загальні <strong>mapper</strong>‘и можуть
+обробляти різні типи сутностей доменів, а виділені <strong>mapper</strong>‘и будуть обробляти один або кілька
+конкретних типів.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Storage.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\DataMapper</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Storage
+ * @package DesignPatterns\Structural\DataMapper
+ */</span>
+<span class="kd">class</span> <span class="nc">Storage</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var array
+     */</span>
+    <span class="k">private</span> <span class="nv">$data</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * Storage constructor.
+     *
+     * @param array $data
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">array</span> <span class="nv">$data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="nv">$data</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param int $id
+     *
+     * @return array|null
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">find</span><span class="p">(</span><span class="kt">int</span> <span class="nv">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="nv">$id</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="nv">$id</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>User.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\DataMapper</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class User
+ * @package DesignPatterns\Structural\DataMapper
+ */</span>
+<span class="kd">class</span> <span class="nc">User</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">private</span> <span class="nv">$username</span><span class="p">;</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">private</span> <span class="nv">$email</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @param array $state
+     *
+     * @return User
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">fromState</span><span class="p">(</span><span class="kt">array</span> <span class="nv">$state</span><span class="p">):</span> <span class="kt">User</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">self</span><span class="p">(</span>
+            <span class="nv">$state</span><span class="p">[</span><span class="s1">'username'</span><span class="p">],</span>
+            <span class="nv">$state</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * User constructor.
+     *
+     * @param string $username
+     * @param string $email
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$username</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$email</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">username</span> <span class="o">=</span> <span class="nv">$username</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span> <span class="o">=</span> <span class="nv">$email</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getUsername</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">username</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getEmail</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>UserMapper.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\DataMapper</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">InvalidArgumentException</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class UserMapper
+ * @package DesignPatterns\Structural\DataMapper
+ */</span>
+<span class="kd">class</span> <span class="nc">UserMapper</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var Storage
+     */</span>
+    <span class="k">private</span> <span class="nv">$storage</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * UserMapper constructor.
+     *
+     * @param Storage $storage
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">Storage</span> <span class="nv">$storage</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">storage</span> <span class="o">=</span> <span class="nv">$storage</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param int $id
+     *
+     * @return User
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">findById</span><span class="p">(</span><span class="kt">int</span> <span class="nv">$id</span><span class="p">):</span> <span class="kt">User</span>
+    <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">storage</span><span class="o">-&gt;</span><span class="nf">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$result</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nc">InvalidArgumentException</span><span class="p">(</span><span class="s1">'User #'</span> <span class="mf">.</span> <span class="nv">$id</span> <span class="mf">.</span> <span class="s1">' not found'</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">mapRowToUser</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param array $row
+     *
+     * @return User
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="n">mapRowToUser</span><span class="p">(</span><span class="kt">array</span> <span class="nv">$row</span><span class="p">):</span> <span class="kt">User</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nc">User</span><span class="o">::</span><span class="nf">fromState</span><span class="p">(</span><span class="nv">$row</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> UserMapperTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Structural\DataMapper</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\DataMapper\Storage</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\DataMapper\UserMapper</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">InvalidArgumentException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">DataMapperTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCanMapUserFromStorage</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$storage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Storage</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="mi">1</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'zyuzka'</span><span class="p">,</span>
+                    <span class="s1">'email'</span>    <span class="o">=&gt;</span> <span class="s1">'zyuzka@mail.com'</span><span class="p">,</span>
+                <span class="p">],</span>
+            <span class="p">]</span>
+        <span class="p">);</span>
+        <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UserMapper</span><span class="p">(</span><span class="nv">$storage</span><span class="p">);</span>
+
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$mapper</span><span class="o">-&gt;</span><span class="nf">findById</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Structural\DataMapper\User'</span><span class="p">,</span> <span class="nv">$user</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testWillNotMapInvalidData</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectException</span><span class="p">(</span><span class="nc">InvalidArgumentException</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+        <span class="nv">$storage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Storage</span><span class="p">([]);</span>
+        <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UserMapper</span><span class="p">(</span><span class="nv">$storage</span><span class="p">);</span>
+
+        <span class="nv">$mapper</span><span class="o">-&gt;</span><span class="nf">findById</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

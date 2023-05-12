@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/" >Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/"  class="active">Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/structural/">
+      <span property="name">Структурні шаблони</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Міст</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Structural/Bridge/diagram.png" alt="bridge" class="img-responsive" />
+<strong>Міст</strong> (англ. <strong>Bridge</strong>) — структурний шаблон проєктування, який використовується в проєктуванні програмного забезпечення,
+щоб “розділяти абстракцію та реалізацію так, щоб вони могли змінюватися незалежно”. Шаблон міст використовує
+інкапсуляцію, агрегування та може використовувати успадкування для того, щоб розділити відповідальність між класами.</p>
+
+<p>Спорідненим шаблоном для <strong>Моста</strong> є шаблон <strong>Адаптер</strong>, який поєднує пов’язані частини системи та надає
+простий інтерфейс.</p>
+
+<p>У нас є філії у штатах та Європі. Кожен із регіонів має різну валюту. І підрахунки прибутку теж здійснюються
+по-різному. Але наші <strong><code class="language-plaintext highlighter-rouge">CashBox</code></strong> завжди повинні бути <strong><code class="language-plaintext highlighter-rouge">CashBox</code></strong>. Це і є абстракція.
+Деякі методи нашої абстракції залежать від аргументу, який передається. Тип вказаного інтерфейсу <strong><code class="language-plaintext highlighter-rouge">CurrencyInterface</code></strong>.
+Інтерфейс і є реалізація. Нам не потрібно щоразу успадковувати батька і міняти щось. У нас є один тип, і ми знаємо,
+як із ним працювати. Як бачимо, цей шаблон ми вже зустрічали у прикладах.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+      <b><i>Abstraction</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>AbstractCashBox.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Bridge\Abstraction</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Bridge\Implementation\CurrencyInterface</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class AbstractCashBox
+ * @package DesignPatterns\Structural\Bridge\Abstraction
+ */</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">AbstractCashBox</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var CurrencyInterface
+     */</span>
+    <span class="k">protected</span> <span class="nv">$defaultCurrency</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var CurrencyInterface[]|float
+     */</span>
+    <span class="k">protected</span> <span class="nv">$cash</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * AbstractCashBox constructor.
+     *
+     * @param CurrencyInterface $currency
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">CurrencyInterface</span> <span class="nv">$currency</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">defaultCurrency</span> <span class="o">=</span> <span class="nv">$currency</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return CurrencyInterface
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getDefaultCurrency</span><span class="p">():</span> <span class="kt">CurrencyInterface</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">defaultCurrency</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="n">getCashInCashBox</span><span class="p">():</span> <span class="kt">float</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @param CurrencyInterface $currency
+     *
+     * @return void
+     */</span>
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="n">setCash</span><span class="p">(</span><span class="kt">CurrencyInterface</span> <span class="nv">$currency</span><span class="p">);</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>EuropeCashBox.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Bridge\Abstraction</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Bridge\Implementation\CurrencyInterface</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class EuropeCashBox
+ * @package DesignPatterns\Structural\Bridge\Abstraction
+ */</span>
+<span class="kd">class</span> <span class="nc">EuropeCashBox</span> <span class="kd">extends</span> <span class="nc">AbstractCashBox</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCashInCashBox</span><span class="p">():</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">array_sum</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param CurrencyInterface $currency
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setCash</span><span class="p">(</span><span class="kt">CurrencyInterface</span> <span class="nv">$currency</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$defaultCurrencyRate</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">defaultCurrency</span><span class="o">-&gt;</span><span class="nf">getCurrencyRate</span><span class="p">();</span>
+
+        <span class="nb">array_push</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span><span class="p">,</span> <span class="p">(</span><span class="nv">$currency</span><span class="o">-&gt;</span><span class="nf">getSum</span><span class="p">()</span> <span class="o">*</span> <span class="nv">$defaultCurrencyRate</span><span class="p">)</span> <span class="o">/</span> <span class="nv">$currency</span><span class="o">-&gt;</span><span class="nf">getCurrencyRate</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>UsaCashBox.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Bridge\Abstraction</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Bridge\Implementation\CurrencyInterface</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class UsaCashBox
+ * @package DesignPatterns\Structural\Bridge\Abstraction
+ */</span>
+<span class="kd">class</span> <span class="nc">UsaCashBox</span> <span class="kd">extends</span> <span class="nc">AbstractCashBox</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCashInCashBox</span><span class="p">():</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+
+        <span class="nv">$defaultCurrencyRate</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">defaultCurrency</span><span class="o">-&gt;</span><span class="nf">getCurrencyRate</span><span class="p">();</span>
+
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span> <span class="k">as</span> <span class="nv">$cash</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$result</span> <span class="o">+=</span> <span class="p">(</span><span class="nv">$cash</span><span class="o">-&gt;</span><span class="nf">getSum</span><span class="p">()</span> <span class="o">*</span> <span class="nv">$defaultCurrencyRate</span><span class="p">)</span> <span class="o">/</span> <span class="nv">$cash</span><span class="o">-&gt;</span><span class="nf">getCurrencyRate</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param CurrencyInterface $currency
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setCash</span><span class="p">(</span><span class="kt">CurrencyInterface</span> <span class="nv">$currency</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nb">array_push</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span><span class="p">,</span> <span class="nv">$currency</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+      <b><i>Implementation</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>AbstractCurrency.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Bridge\Implementation</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class AbstractCurrency
+ * @package DesignPatterns\Structural\Bridge\Implementation
+ */</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">AbstractCurrency</span> <span class="kd">implements</span> <span class="nc">CurrencyInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$symbol</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var float
+     */</span>
+    <span class="k">protected</span> <span class="nv">$sumCash</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * AbstractCurrency constructor.
+     *
+     * @param float $sumCash
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">float</span> <span class="nv">$sumCash</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$sumCash</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">sumCash</span> <span class="o">=</span> <span class="nv">$sumCash</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCurrencySymbol</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">symbol</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCurrencyRate</span><span class="p">():</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="no">CURRENCY_RATE</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getSum</span><span class="p">():</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">sumCash</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>CurrencyInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Bridge\Implementation</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface CurrencyInterface
+ * @package DesignPatterns\Structural\Bridge\Implementation
+ */</span>
+<span class="kd">interface</span> <span class="nc">CurrencyInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * CurrencyInterface constructor.
+     *
+     * @param float $sumCash
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">float</span> <span class="nv">$sumCash</span><span class="p">);</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCurrencySymbol</span><span class="p">():</span> <span class="kt">string</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCurrencyRate</span><span class="p">():</span> <span class="kt">float</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getSum</span><span class="p">():</span> <span class="kt">float</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>DollarCurrency.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Bridge\Implementation</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class DollarCurrency
+ * @package DesignPatterns\Structural\Bridge\Implementation
+ */</span>
+<span class="kd">class</span> <span class="nc">DollarCurrency</span> <span class="kd">extends</span> <span class="nc">AbstractCurrency</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$symbol</span> <span class="o">=</span> <span class="s1">'$'</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var float
+     */</span>
+    <span class="k">const</span> <span class="no">CURRENCY_RATE</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>EuroCurrency.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Bridge\Implementation</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class EuroCurrency
+ * @package DesignPatterns\Structural\Bridge\Implementation
+ */</span>
+<span class="kd">class</span> <span class="nc">EuroCurrency</span> <span class="kd">extends</span> <span class="nc">AbstractCurrency</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$symbol</span> <span class="o">=</span> <span class="s1">'€'</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var float
+     */</span>
+    <span class="k">const</span> <span class="no">CURRENCY_RATE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+    </ul>  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> BridgeTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Structural\Bridge</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Bridge\Abstraction\EuropeCashBox</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Bridge\Abstraction\UsaCashBox</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Bridge\Implementation\CurrencyInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Bridge\Implementation\DollarCurrency</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Bridge\Implementation\EuroCurrency</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">BridgeTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testDollarCurrencyInstanceOfCurrencyInterface</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$dollar</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DollarCurrency</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Structural\Bridge\Implementation\CurrencyInterface'</span><span class="p">,</span> <span class="nv">$dollar</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$dollar</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @depends testDollarCurrencyInstanceOfCurrencyInterface
+     *
+     * @param CurrencyInterface $dollar
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testDollarGetSymbol</span><span class="p">(</span><span class="kt">CurrencyInterface</span> <span class="nv">$dollar</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'$'</span><span class="p">,</span> <span class="nv">$dollar</span><span class="o">-&gt;</span><span class="nf">getCurrencySymbol</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @depends testDollarCurrencyInstanceOfCurrencyInterface
+     *
+     * @param CurrencyInterface $dollar
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testDollarGetRate</span><span class="p">(</span><span class="kt">CurrencyInterface</span> <span class="nv">$dollar</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nc">DollarCurrency</span><span class="o">::</span><span class="no">CURRENCY_RATE</span><span class="p">,</span> <span class="nv">$dollar</span><span class="o">-&gt;</span><span class="nf">getCurrencyRate</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testDollarGetSum</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$val</span> <span class="o">=</span> <span class="mf">234.24</span><span class="p">;</span>
+        <span class="nv">$dollar</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DollarCurrency</span><span class="p">(</span><span class="nv">$val</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$val</span><span class="p">,</span> <span class="nv">$dollar</span><span class="o">-&gt;</span><span class="nf">getSum</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testEuroCurrencyInstanceOfCurrencyInterface</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$euro</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EuroCurrency</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Structural\Bridge\Implementation\CurrencyInterface'</span><span class="p">,</span> <span class="nv">$euro</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$euro</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @depends testEuroCurrencyInstanceOfCurrencyInterface
+     *
+     * @param CurrencyInterface $euro
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testEuroGetSymbol</span><span class="p">(</span><span class="kt">CurrencyInterface</span> <span class="nv">$euro</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'€'</span><span class="p">,</span> <span class="nv">$euro</span><span class="o">-&gt;</span><span class="nf">getCurrencySymbol</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @depends testEuroCurrencyInstanceOfCurrencyInterface
+     *
+     * @param CurrencyInterface $euro
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testEuroGetRate</span><span class="p">(</span><span class="kt">CurrencyInterface</span> <span class="nv">$euro</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nc">EuroCurrency</span><span class="o">::</span><span class="no">CURRENCY_RATE</span><span class="p">,</span> <span class="nv">$euro</span><span class="o">-&gt;</span><span class="nf">getCurrencyRate</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testEuroGetSum</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$val</span> <span class="o">=</span> <span class="mf">2555.24</span><span class="p">;</span>
+        <span class="nv">$dollar</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EuroCurrency</span><span class="p">(</span><span class="nv">$val</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$val</span><span class="p">,</span> <span class="nv">$dollar</span><span class="o">-&gt;</span><span class="nf">getSum</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testUsaCashBoxInstanceOfAbstractCashBox</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$dollar</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DollarCurrency</span><span class="p">();</span>
+        <span class="nv">$usaCashBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UsaCashBox</span><span class="p">(</span><span class="nv">$dollar</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Structural\Bridge\Abstraction\AbstractCashBox'</span><span class="p">,</span> <span class="nv">$usaCashBox</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testEuroCashBoxInstanceOfAbstractCashBox</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$euro</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EuroCurrency</span><span class="p">();</span>
+        <span class="nv">$euroCashBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EuropeCashBox</span><span class="p">(</span><span class="nv">$euro</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Structural\Bridge\Abstraction\AbstractCashBox'</span><span class="p">,</span> <span class="nv">$euroCashBox</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testUsaCashBoxGetCashInCashBox</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$dollar</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DollarCurrency</span><span class="p">();</span>
+
+        <span class="nv">$fiveDollars</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DollarCurrency</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+        <span class="nv">$sixDollars</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DollarCurrency</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+        <span class="nv">$tenEuros</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EuroCurrency</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+        <span class="nv">$usaCashBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UsaCashBox</span><span class="p">(</span><span class="nv">$dollar</span><span class="p">);</span>
+
+        <span class="nv">$usaCashBox</span><span class="o">-&gt;</span><span class="nf">setCash</span><span class="p">(</span><span class="nv">$fiveDollars</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$fiveDollars</span><span class="o">-&gt;</span><span class="nf">getSum</span><span class="p">(),</span> <span class="nv">$usaCashBox</span><span class="o">-&gt;</span><span class="nf">getCashInCashBox</span><span class="p">());</span>
+
+        <span class="nv">$usaCashBox</span><span class="o">-&gt;</span><span class="nf">setCash</span><span class="p">(</span><span class="nv">$sixDollars</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span>
+            <span class="nv">$fiveDollars</span><span class="o">-&gt;</span><span class="nf">getSum</span><span class="p">()</span> <span class="o">+</span> <span class="nv">$sixDollars</span><span class="o">-&gt;</span><span class="nf">getSum</span><span class="p">(),</span>
+            <span class="nv">$usaCashBox</span><span class="o">-&gt;</span><span class="nf">getCashInCashBox</span><span class="p">()</span>
+        <span class="p">);</span>
+
+        <span class="nv">$usaCashBox</span><span class="o">-&gt;</span><span class="nf">setCash</span><span class="p">(</span><span class="nv">$tenEuros</span><span class="p">);</span>
+        <span class="nv">$defaultCurrencyRate</span> <span class="o">=</span> <span class="nv">$usaCashBox</span><span class="o">-&gt;</span><span class="nf">getDefaultCurrency</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">getCurrencyRate</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span>
+            <span class="nv">$fiveDollars</span><span class="o">-&gt;</span><span class="nf">getSum</span><span class="p">()</span>
+            <span class="o">+</span> <span class="nv">$sixDollars</span><span class="o">-&gt;</span><span class="nf">getSum</span><span class="p">()</span>
+            <span class="o">+</span> <span class="p">((</span><span class="nv">$tenEuros</span><span class="o">-&gt;</span><span class="nf">getSum</span><span class="p">()</span> <span class="o">*</span> <span class="nv">$defaultCurrencyRate</span><span class="p">)</span> <span class="o">/</span> <span class="nv">$tenEuros</span><span class="o">-&gt;</span><span class="nf">getCurrencyRate</span><span class="p">()),</span>
+            <span class="nv">$usaCashBox</span><span class="o">-&gt;</span><span class="nf">getCashInCashBox</span><span class="p">()</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

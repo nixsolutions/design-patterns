@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/" >Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/"  class="active">Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/structural/">
+      <span property="name">Структурні шаблони</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Фасад</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Structural/Facade/diagram.png" alt="facade" class="img-responsive" />
+<strong>Фасад</strong> (англ. <strong>Facade</strong>) належить до класу структурних шаблонів. Являє собою уніфікований інтерфейс замість набору інтерфейсів деякої підсистеми.</p>
+
+<p><strong>Фасад</strong> призначений для поділу клієнта та підсистеми. <strong>Фасад</strong> не забороняє прямий доступ до підсистеми.
+Він робить його простішим і зрозумілішим.</p>
+
+<p>Сам шаблон дуже схожий на Будівник. Не варто забувати, що <strong>Будівельник</strong> породжує, а <strong>Фасад</strong> - структурний.
+Коли наш клієнт робить замовлення, він не хоче знати, що, де, коли відбувається. Він просто робить замовлення у касира (** <code class="language-plaintext highlighter-rouge">CashMan</code>**).
+А касир уже знає, що робити з цими даними, і з якими частинами системи взаємодіяти задля досягнення результату.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>BurgerWorker.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Facade</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class BurgerWorker
+ * @package DesignPatterns\Structural\Facade
+ */</span>
+<span class="kd">class</span> <span class="nc">BurgerWorker</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var array
+     */</span>
+    <span class="k">protected</span> <span class="nv">$burgers</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'hamburger'</span>    <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">'muffin'</span>     <span class="o">=&gt;</span> <span class="s1">'muffin'</span><span class="p">,</span>
+            <span class="s1">'meat'</span>       <span class="o">=&gt;</span> <span class="s1">'beef'</span><span class="p">,</span>
+            <span class="s1">'sauce'</span>      <span class="o">=&gt;</span> <span class="s1">'ketchup'</span><span class="p">,</span>
+            <span class="s1">'withCheese'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">'cheeseburger'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">'muffin'</span>     <span class="o">=&gt;</span> <span class="s1">'muffin'</span><span class="p">,</span>
+            <span class="s1">'meat'</span>       <span class="o">=&gt;</span> <span class="s1">'chicken'</span><span class="p">,</span>
+            <span class="s1">'sauce'</span>      <span class="o">=&gt;</span> <span class="s1">'mayonnaise'</span><span class="p">,</span>
+            <span class="s1">'withCheese'</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">];</span>
+
+    <span class="cd">/**
+     * @var array
+     */</span>
+    <span class="k">protected</span> <span class="nv">$prices</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'hamburger'</span>    <span class="o">=&gt;</span> <span class="mf">12.5</span><span class="p">,</span>
+        <span class="s1">'cheeseburger'</span> <span class="o">=&gt;</span> <span class="mf">14.25</span><span class="p">,</span>
+    <span class="p">];</span>
+
+    <span class="cd">/**
+     * @param string $burgerName
+     *
+     * @return array
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">make</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$burgerName</span><span class="p">):</span> <span class="kt">array</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">burgers</span><span class="p">[</span><span class="nv">$burgerName</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $burgerName
+     *
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getPrice</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$burgerName</span><span class="p">):</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">prices</span><span class="p">[</span><span class="nv">$burgerName</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>CashBox.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Facade</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Exception</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class CashBox
+ * @package DesignPatterns\Structural\Facade
+ */</span>
+<span class="kd">class</span> <span class="nc">CashBox</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var float
+     */</span>
+    <span class="k">protected</span> <span class="nv">$cash</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * CashBox constructor.
+     *
+     * @param float $cash
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">float</span> <span class="nv">$cash</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span> <span class="o">=</span> <span class="nv">$cash</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCash</span><span class="p">():</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param $orderPrice
+     * @param $cash
+     *
+     * @return float
+     * @throws Exception
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">makeOrder</span><span class="p">(</span><span class="nv">$orderPrice</span><span class="p">,</span> <span class="nv">$cash</span><span class="p">):</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="nv">$change</span> <span class="o">=</span> <span class="nv">$cash</span> <span class="o">-</span> <span class="nv">$orderPrice</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$change</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nc">Exception</span><span class="p">(</span><span class="s1">'Need more money.'</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span> <span class="o">+=</span> <span class="nv">$cash</span> <span class="o">-</span> <span class="nv">$change</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$change</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>CashMan.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Facade</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">InvalidArgumentException</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class CashMan
+ * @package DesignPatterns\Structural\Facade
+ */</span>
+<span class="kd">class</span> <span class="nc">CashMan</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var BurgerWorker
+     */</span>
+    <span class="k">protected</span> <span class="nv">$burgerWorker</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var WaterWorker
+     */</span>
+    <span class="k">protected</span> <span class="nv">$waterWorker</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var CashBox
+     */</span>
+    <span class="k">protected</span> <span class="nv">$cashBox</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var array
+     */</span>
+    <span class="k">protected</span> <span class="nv">$order</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @var float
+     */</span>
+    <span class="k">protected</span> <span class="nv">$orderPrice</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * CashMan constructor.
+     *
+     * @param BurgerWorker $burgerWorker
+     * @param WaterWorker $waterWorker
+     * @param CashBox $cashBox
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">BurgerWorker</span> <span class="nv">$burgerWorker</span><span class="p">,</span> <span class="kt">WaterWorker</span> <span class="nv">$waterWorker</span><span class="p">,</span> <span class="kt">CashBox</span> <span class="nv">$cashBox</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">burgerWorker</span> <span class="o">=</span> <span class="nv">$burgerWorker</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">waterWorker</span> <span class="o">=</span> <span class="nv">$waterWorker</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cashBox</span> <span class="o">=</span> <span class="nv">$cashBox</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param array $order
+     * @param $cash
+     *
+     * @return array
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">makeOrder</span><span class="p">(</span><span class="kt">array</span> <span class="nv">$order</span><span class="p">,</span> <span class="nv">$cash</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">'waters'</span><span class="p">,</span> <span class="nv">$order</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">'burgers'</span><span class="p">,</span> <span class="nv">$order</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nc">InvalidArgumentException</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">'waters'</span><span class="p">,</span> <span class="nv">$order</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">setProductsToOrderWithPrice</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">waterWorker</span><span class="p">,</span> <span class="nv">$order</span><span class="p">[</span><span class="s1">'waters'</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">'burgers'</span><span class="p">,</span> <span class="nv">$order</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">setProductsToOrderWithPrice</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">burgerWorker</span><span class="p">,</span> <span class="nv">$order</span><span class="p">[</span><span class="s1">'burgers'</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="nv">$change</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cashBox</span><span class="o">-&gt;</span><span class="nf">makeOrder</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">orderPrice</span><span class="p">,</span> <span class="nv">$cash</span><span class="p">);</span>
+
+        <span class="nv">$fullOrder</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">'order'</span>  <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">order</span><span class="p">,</span>
+            <span class="s1">'price'</span>  <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">orderPrice</span><span class="p">,</span>
+            <span class="s1">'change'</span> <span class="o">=&gt;</span> <span class="nv">$change</span><span class="p">,</span>
+        <span class="p">];</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">resetResult</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nv">$fullOrder</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param WaterWorker|BurgerWorker $worker
+     * @param array|string $products
+     *
+     * @return void
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">setProductsToOrderWithPrice</span><span class="p">(</span><span class="nv">$worker</span><span class="p">,</span> <span class="nv">$products</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">is_array</span><span class="p">(</span><span class="nv">$products</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="nv">$products</span> <span class="k">as</span> <span class="nv">$product</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">setProductAndPrice</span><span class="p">(</span><span class="nv">$worker</span><span class="p">,</span> <span class="nv">$product</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">setProductAndPrice</span><span class="p">(</span><span class="nv">$worker</span><span class="p">,</span> <span class="nv">$products</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param WaterWorker|BurgerWorker $worker
+     * @param string $product
+     *
+     * @return void
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">setProductAndPrice</span><span class="p">(</span><span class="nv">$worker</span><span class="p">,</span> <span class="nv">$product</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">order</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$worker</span><span class="o">-&gt;</span><span class="nf">make</span><span class="p">(</span><span class="nv">$product</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">orderPrice</span> <span class="o">+=</span> <span class="nv">$worker</span><span class="o">-&gt;</span><span class="nf">getPrice</span><span class="p">(</span><span class="nv">$product</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">resetResult</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">orderPrice</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">order</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>WaterWorker.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Facade</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class WaterWorker
+ * @package DesignPatterns\Structural\Facade
+ */</span>
+<span class="kd">class</span> <span class="nc">WaterWorker</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var array
+     */</span>
+    <span class="k">protected</span> <span class="nv">$waters</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'cocaCola'</span> <span class="o">=&gt;</span> <span class="s1">'Coca-Cola'</span><span class="p">,</span>
+        <span class="s1">'fanta'</span>    <span class="o">=&gt;</span> <span class="s1">'Fanta'</span><span class="p">,</span>
+        <span class="s1">'sprite'</span>   <span class="o">=&gt;</span> <span class="s1">'Sprite'</span><span class="p">,</span>
+    <span class="p">];</span>
+
+    <span class="cd">/**
+     * @var array
+     */</span>
+    <span class="k">protected</span> <span class="nv">$prices</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'cocaCola'</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s1">'fanta'</span>    <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s1">'sprite'</span>   <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">];</span>
+
+    <span class="cd">/**
+     * @param string $waterName
+     *
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">make</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$waterName</span><span class="p">):</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">waters</span><span class="p">[</span><span class="nv">$waterName</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $waterName
+     *
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getPrice</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$waterName</span><span class="p">):</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">prices</span><span class="p">[</span><span class="nv">$waterName</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> FacadeTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Facade</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">FacadeTest</span> <span class="k">extends</span> <span class="err">\</span><span class="n">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">MONEY_IN_CASH_BOX</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="nv">$firstOrder</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'burgers'</span> <span class="o">=&gt;</span> <span class="s1">'hamburger'</span><span class="p">,</span>
+        <span class="s1">'waters'</span>  <span class="o">=&gt;</span> <span class="s1">'fanta'</span><span class="p">,</span>
+        <span class="s1">'cash'</span>    <span class="o">=&gt;</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="p">];</span>
+
+    <span class="k">protected</span> <span class="nv">$secondOrder</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'burgers'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">'hamburger'</span><span class="p">,</span>
+            <span class="s1">'cheeseburger'</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">'waters'</span>  <span class="o">=&gt;</span> <span class="s1">'cocaCola'</span><span class="p">,</span>
+        <span class="s1">'cash'</span>    <span class="o">=&gt;</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="p">];</span>
+
+    <span class="cd">/**
+     * @var CashBox
+     */</span>
+    <span class="k">protected</span> <span class="nv">$cashBox</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var CashMan
+     */</span>
+    <span class="k">protected</span> <span class="nv">$cashMan</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var BurgerWorker
+     */</span>
+    <span class="k">protected</span> <span class="nv">$burgerWorker</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var WaterWorker
+     */</span>
+    <span class="k">protected</span> <span class="nv">$waterWorker</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setUp</span><span class="p">():</span> <span class="kt">void</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cashBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CashBox</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="no">MONEY_IN_CASH_BOX</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">burgerWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BurgerWorker</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">waterWorker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WaterWorker</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cashMan</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CashMan</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">burgerWorker</span><span class="p">,</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">waterWorker</span><span class="p">,</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cashBox</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testMakeFirstOrder</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cashBox</span><span class="o">-&gt;</span><span class="nf">getCash</span><span class="p">(),</span> <span class="k">self</span><span class="o">::</span><span class="no">MONEY_IN_CASH_BOX</span><span class="p">);</span>
+
+        <span class="nv">$firstOrder</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cashMan</span><span class="o">-&gt;</span><span class="nf">makeOrder</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">firstOrder</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">firstOrder</span><span class="p">[</span><span class="s1">'cash'</span><span class="p">]);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertIsArray</span><span class="p">(</span><span class="nv">$firstOrder</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertArrayHasKey</span><span class="p">(</span><span class="s1">'price'</span><span class="p">,</span> <span class="nv">$firstOrder</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertArrayHasKey</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="nv">$firstOrder</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$firstOrder</span><span class="p">[</span><span class="s1">'change'</span><span class="p">],</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">firstOrder</span><span class="p">[</span><span class="s1">'cash'</span><span class="p">]</span> <span class="o">-</span> <span class="nv">$firstOrder</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cashBox</span><span class="o">-&gt;</span><span class="nf">getCash</span><span class="p">(),</span> <span class="k">self</span><span class="o">::</span><span class="no">MONEY_IN_CASH_BOX</span> <span class="o">+</span> <span class="nv">$firstOrder</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]);</span>
+
+        <span class="k">return</span> <span class="nv">$firstOrder</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testMakeSecondOrder</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$secondOrder</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cashMan</span><span class="o">-&gt;</span><span class="nf">makeOrder</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">secondOrder</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">secondOrder</span><span class="p">[</span><span class="s1">'cash'</span><span class="p">]);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertIsArray</span><span class="p">(</span><span class="nv">$secondOrder</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertArrayHasKey</span><span class="p">(</span><span class="s1">'price'</span><span class="p">,</span> <span class="nv">$secondOrder</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertArrayHasKey</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="nv">$secondOrder</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$secondOrder</span><span class="p">[</span><span class="s1">'change'</span><span class="p">],</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">secondOrder</span><span class="p">[</span><span class="s1">'cash'</span><span class="p">]</span> <span class="o">-</span> <span class="nv">$secondOrder</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cashBox</span><span class="o">-&gt;</span><span class="nf">getCash</span><span class="p">(),</span>
+            <span class="k">self</span><span class="o">::</span><span class="no">MONEY_IN_CASH_BOX</span> <span class="o">+</span> <span class="nv">$secondOrder</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

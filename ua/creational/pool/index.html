@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/"  class="active">Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/" >Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/" >Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/creational/">
+      <span property="name">Породжуючі Шаблони</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Пул</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Creational/Pool/diagram.png" alt="pool" class="img-responsive" />
+<strong>Пул Об’єктів</strong> (англ. <strong>Object pool</strong>) - це хеш, в який можна складати
+ініціалізовані об’єкти та діставати їх звідти за потреби. По суті, є
+окремим випадком реєстру.</p>
+
+<p>Зберігання об’єктів у пулі може помітно підвищити продуктивність, коли
+вартість ініціалізації екземпляра класу висока, швидкість екземпляра класу висока,
+а кількість екземплярів, що одночасно використовуються, в будь-який момент часу є низькою.
+Час вилучення об’єкта з пулу легко прогнозується, на відміну створення нових
+об’єктів (особливо з мережевим зверху), що займає невизначений час.</p>
+
+<p><strong>Застосування:</strong></p>
+<ul>
+  <li>Інформація про видимі об’єкти у багатьох комп’ютерних іграх. Ця інформація є актуальною
+лише протягом одного кадру;</li>
+  <li>З’єднання з базами даних;</li>
+  <li>З’єднання сокетів;</li>
+  <li>Ініціалізація великих графічних об’єктів, таких як шрифти або растрові зображення.</li>
+</ul>
+
+<p>У нашій закусочній є відділ кадрів. Так само є один
+різноробочий, і він вільний. З’явилося якесь завдання, яке потрібно виконати. Ми говоримо
+відділу кадрів: “Дайте нам робітника”. Відділ кадрів дивиться, чи є вільні робітники. Якщо
+є, віддає нам одного робітника і позначає його як зайнятого.</p>
+
+<p><strong>Примітка:</strong></p>
+<ul>
+  <li>Після того, як об’єкт повернуто, він повинен повернутися в стан, придатний для
+подальшого використання. Якщо об’єкти після повернення в пул опиняються в неправильному
+або невизначеному стані, така конструкція називається <strong>Об’єктною Клоакою</strong> (англ. <strong>Object
+Cesspool</strong>).</li>
+  <li>Повторне використання об’єктів також може призвести до витоку інформації. Якщо в об’єкті
+є секретні дані (наприклад, номер кредитної картки), після звільнення об’єкта цю
+інформацію треба затерти.</li>
+</ul>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>ShopStaff.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Pool</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Countable</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class ShopStaff
+ * @package DesignPatterns\Creational\Pool
+ */</span>
+<span class="kd">class</span> <span class="nc">ShopStaff</span> <span class="kd">implements</span> <span class="nc">Countable</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var Worker[]
+     */</span>
+    <span class="k">private</span> <span class="nv">$occupiedWorkers</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @var Worker[]
+     */</span>
+    <span class="k">private</span> <span class="nv">$freeWorkers</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @param bool $delay
+     *
+     * @return Worker
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getWorker</span><span class="p">(</span><span class="kt">bool</span> <span class="nv">$delay</span> <span class="o">=</span> <span class="kc">null</span><span class="p">):</span> <span class="kt">Worker</span>
+    <span class="p">{</span>
+        <span class="nv">$workerNumber</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nb">count</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getCountFreeWorkers</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nv">$worker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Worker</span><span class="p">(</span><span class="nv">$workerNumber</span><span class="p">,</span> <span class="nv">$delay</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$worker</span> <span class="o">=</span> <span class="nb">array_pop</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">freeWorkers</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">occupiedWorkers</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getHash</span><span class="p">(</span><span class="nv">$worker</span><span class="p">)]</span> <span class="o">=</span> <span class="nv">$worker</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$worker</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param Worker $worker
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">dispose</span><span class="p">(</span><span class="kt">Worker</span> <span class="nv">$worker</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$key</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getHash</span><span class="p">(</span><span class="nv">$worker</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">occupiedWorkers</span><span class="p">[</span><span class="nv">$key</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">occupiedWorkers</span><span class="p">[</span><span class="nv">$key</span><span class="p">]);</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">freeWorkers</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$worker</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">count</span><span class="p">():</span> <span class="kt">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getCountOccupiedWorkers</span><span class="p">()</span> <span class="o">+</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getCountFreeWorkers</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCountFreeWorkers</span><span class="p">():</span> <span class="kt">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">freeWorkers</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCountOccupiedWorkers</span><span class="p">():</span> <span class="kt">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">occupiedWorkers</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param Worker $worker
+     *
+     * @return string
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="n">getHash</span><span class="p">(</span><span class="kt">Worker</span> <span class="nv">$worker</span><span class="p">):</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">spl_object_hash</span><span class="p">(</span><span class="nv">$worker</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Worker.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Pool</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Worker
+ * @package DesignPatterns\Creational\Pool
+ */</span>
+<span class="kd">class</span> <span class="nc">Worker</span> <span class="kd">implements</span> <span class="nc">WorkerInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var int
+     */</span>
+    <span class="k">protected</span> <span class="nv">$workerNumber</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * Worker constructor.
+     *
+     * @param int $workerNumber
+     * @param bool $performance
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">int</span> <span class="nv">$workerNumber</span><span class="p">,</span> <span class="nv">$performance</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$performance</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getDelay</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">setNumberWorker</span><span class="p">(</span><span class="nv">$workerNumber</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">run</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">'Hello. My number is '</span> <span class="mf">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getNumberWorker</span><span class="p">()</span> <span class="mf">.</span> <span class="s1">'!'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return int
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="n">getNumberWorker</span><span class="p">():</span> <span class="kt">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">workerNumber</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param int $workerNumber
+     *
+     * @return void
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="n">setNumberWorker</span><span class="p">(</span><span class="kt">int</span> <span class="nv">$workerNumber</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">workerNumber</span> <span class="o">=</span> <span class="nv">$workerNumber</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * Method for test performance Pool pattern.
+     *
+     * @return void
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="n">getDelay</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nb">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>WorkerInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Pool</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface WorkerInterface
+ * @package DesignPatterns\Creational\Pool
+ */</span>
+<span class="kd">interface</span> <span class="nc">WorkerInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * WorkerInterface constructor.
+     *
+     * @param int $workerNumber
+     * @param bool $performance
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">int</span> <span class="nv">$workerNumber</span><span class="p">,</span> <span class="nv">$performance</span> <span class="o">=</span> <span class="kc">false</span><span class="p">);</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">run</span><span class="p">():</span> <span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> PoolTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Creational\Pool</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Pool\ShopStaff</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">PoolTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCanShopStaffCreateNewWorkers</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$pool</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShopStaff</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nb">count</span><span class="p">(),</span> <span class="s1">'Now pool don\'t have workers.'</span><span class="p">);</span>
+
+        <span class="cd">/**
+         * Add to workers
+         */</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nb">count</span><span class="p">(),</span> <span class="s1">'Now pool have two workers.'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testWorkersNotSame</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$pool</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShopStaff</span><span class="p">();</span>
+
+        <span class="nv">$firstWorker</span> <span class="o">=</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">();</span>
+        <span class="nv">$secondWorker</span> <span class="o">=</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nb">count</span><span class="p">(),</span> <span class="s1">'Now pool have two workers.'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\Pool\Worker'</span><span class="p">,</span> <span class="nv">$firstWorker</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\Pool\Worker'</span><span class="p">,</span> <span class="nv">$secondWorker</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotSame</span><span class="p">(</span><span class="nv">$firstWorker</span><span class="p">,</span> <span class="nv">$secondWorker</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testGetWorkerNumberForFiveWorkers</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$pool</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShopStaff</span><span class="p">();</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$worker</span> <span class="o">=</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">();</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'Hello. My number is '</span> <span class="mf">.</span> <span class="nv">$i</span> <span class="mf">.</span> <span class="s1">'!'</span><span class="p">,</span> <span class="nv">$worker</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">(),</span> <span class="s1">'Worker have right number.'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCountFreeAndOccupiedWorkers</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$pool</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShopStaff</span><span class="p">();</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nb">count</span><span class="p">(),</span> <span class="s1">'Now pool have five workers.'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getCountOccupiedWorkers</span><span class="p">(),</span> <span class="s1">'Now pool have five occupied workers.'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getCountFreeWorkers</span><span class="p">(),</span> <span class="s1">'Now pool don\'t have free workers.'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testDisposeWorker</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$pool</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShopStaff</span><span class="p">();</span>
+
+        <span class="nv">$firstWorker</span> <span class="o">=</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">();</span>
+        <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">();</span>
+        <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getCountOccupiedWorkers</span><span class="p">(),</span> <span class="s1">'Now pool have three occupied workers.'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getCountFreeWorkers</span><span class="p">(),</span> <span class="s1">'Now pool don\'t have free workers.'</span><span class="p">);</span>
+
+        <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">dispose</span><span class="p">(</span><span class="nv">$firstWorker</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getCountOccupiedWorkers</span><span class="p">(),</span> <span class="s1">'Now pool have two occupied workers.'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getCountFreeWorkers</span><span class="p">(),</span> <span class="s1">'Now pool have one free worker.'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testPerformancePoolPattern</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$pool</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShopStaff</span><span class="p">();</span>
+
+        <span class="cd">/**
+         * Start initialization new workers with timers.
+         */</span>
+        <span class="nv">$start</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getTime</span><span class="p">();</span>
+
+        <span class="nv">$firstWorker</span> <span class="o">=</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+        <span class="nv">$secondWorker</span> <span class="o">=</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+        <span class="nv">$thirdWorker</span> <span class="o">=</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+        <span class="nv">$finish</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getTime</span><span class="p">();</span>
+
+        <span class="nv">$timeWithInitial</span> <span class="o">=</span> <span class="nv">$finish</span> <span class="o">-</span> <span class="nv">$start</span><span class="p">;</span>
+
+        <span class="cd">/**
+         * Dispose all workers
+         */</span>
+        <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">dispose</span><span class="p">(</span><span class="nv">$firstWorker</span><span class="p">);</span>
+        <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">dispose</span><span class="p">(</span><span class="nv">$secondWorker</span><span class="p">);</span>
+        <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">dispose</span><span class="p">(</span><span class="nv">$thirdWorker</span><span class="p">);</span>
+
+        <span class="cd">/**
+         * Get free workers with timers.
+         */</span>
+        <span class="nv">$start</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getTime</span><span class="p">();</span>
+
+        <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+        <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+        <span class="nv">$pool</span><span class="o">-&gt;</span><span class="nf">getWorker</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+        <span class="nv">$finish</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getTime</span><span class="p">();</span>
+
+        <span class="nv">$timeWitOutInitial</span> <span class="o">=</span> <span class="nv">$finish</span> <span class="o">-</span> <span class="nv">$start</span><span class="p">;</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertGreaterThan</span><span class="p">(</span>
+            <span class="nv">$timeWitOutInitial</span><span class="p">,</span>
+            <span class="nv">$timeWithInitial</span><span class="p">,</span>
+            <span class="s1">'Time initialization workers longer than the time without initialization.'</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="n">getTime</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="nb">microtime</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

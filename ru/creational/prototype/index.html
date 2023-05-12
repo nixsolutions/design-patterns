@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/ru/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" >Ua</a></li>
+    <li><a href="/design-patterns/ru/" class="active">Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/ru/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/ru/" >Главная</a>
+        <a href="/design-patterns/ru/creational/"  class="active">Порождающие шаблоны</a>
+        <a href="/design-patterns/ru/behavioral/" >Шаблоны поведения</a>
+        <a href="/design-patterns/ru/structural/" >Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/ru/">Главная</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ru/creational/">
+      <span property="name">Порождающие Шаблоны</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Прототип</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ru/Creational/Prototype/diagram.png" alt="prototype" class="img-responsive" />
+<strong>Прототип</strong> (англ. <strong>Prototype</strong>) - позволяет создавать новые объекты на основе некоторого объекта-прототипа при этом совсем
+необязательно знать, как необходимый объект устроен.</p>
+
+<p>Пример, конечно не очень, но он покажет суть шаблона. Перед подачей, наши бургеры нужно сложить в коробки.
+Создание коробки привычным путем через <strong><code class="language-plaintext highlighter-rouge">new</code></strong> занимает много времени (в конструкторе мы эмулируем задержку в 1 секунду).
+Если нужны 10 - это 10 секунд, 100 - 100 секунд и т.д. Что нам мешает сделать один общий объект, а дальше его клонировать?</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>BoxPrototype.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Prototype</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class BoxPrototype
+ * @package DesignPatterns\Creational\Prototype
+ */</span>
+<span class="kd">class</span> <span class="nc">BoxPrototype</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$title</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * BoxPrototype constructor.
+     *
+     * If TRUE === delay, init object created 1 sec.
+     *
+     * @param bool $delay
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="nv">$delay</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="kc">true</span> <span class="o">===</span> <span class="nv">$delay</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * All classes have the magic method __clone.
+     * Implement this method if you want to change the default behavior.
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__clone</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getTitle</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">title</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $title
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setTitle</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$title</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">title</span> <span class="o">=</span> <span class="nv">$title</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> PrototypeTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Creational\Prototype</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Prototype\BoxPrototype</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">PrototypeTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testPerformanceGetBoxWithDelay</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$start</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getTime</span><span class="p">();</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$box</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BoxPrototype</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+            <span class="nv">$box</span><span class="o">-&gt;</span><span class="nf">setTitle</span><span class="p">(</span><span class="s1">'BOX#'</span> <span class="mf">.</span> <span class="nv">$i</span><span class="p">);</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\Prototype\BoxPrototype'</span><span class="p">,</span> <span class="nv">$box</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nv">$finish</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getTime</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nv">$finish</span> <span class="o">-</span> <span class="nv">$start</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @depends testPerformanceGetBoxWithDelay
+     *
+     * @param int $testPerformanceInitWithNew
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testPerformanceGetBoxWithClone</span><span class="p">(</span><span class="kt">int</span> <span class="nv">$testPerformanceInitWithNew</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$start</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getTime</span><span class="p">();</span>
+
+        <span class="nv">$boxPrototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BoxPrototype</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$box</span> <span class="o">=</span> <span class="k">clone</span> <span class="nv">$boxPrototype</span><span class="p">;</span>
+            <span class="nv">$box</span><span class="o">-&gt;</span><span class="nf">setTitle</span><span class="p">(</span><span class="s1">'BOX#'</span> <span class="mf">.</span> <span class="nv">$i</span><span class="p">);</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\Prototype\BoxPrototype'</span><span class="p">,</span> <span class="nv">$box</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nv">$finish</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getTime</span><span class="p">();</span>
+
+        <span class="nv">$testPerformanceInitWithClone</span> <span class="o">=</span> <span class="nv">$finish</span> <span class="o">-</span> <span class="nv">$start</span><span class="p">;</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertGreaterThan</span><span class="p">(</span><span class="nv">$testPerformanceInitWithClone</span><span class="p">,</span> <span class="nv">$testPerformanceInitWithNew</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="n">getTime</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="nb">microtime</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

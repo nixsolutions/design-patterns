@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/"  class="active">Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/" >Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/" >Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/creational/">
+      <span property="name">Породжуючі Шаблони</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Пул Одинаків</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Creational/Multiton/diagram.png" alt="multiton" class="img-responsive" />
+<strong>Пул одинаків</strong> (англ. <strong>Multiton</strong>) - схожий на шаблон <strong>Одинак</strong>.
+Дозволяє створювати та утримувати кілька <strong>одинаків</strong>, доступ до яких можна отримати за унікальним “ключем”.</p>
+
+<p>Продовжуємо тему нашої закусочної. Бізнес йде в гору, і ми встановлюємо ще кілька касових апаратів.
+Для зручного доступу до всіх апаратів ми створимо систему ShopCashSystem, яку і реалізує наш Multiton.
+Як і з Singleton, ми закрили всі магічні методи. Для доступу до об’єкта використовується
+статичний метод <strong><code class="language-plaintext highlighter-rouge">ShopCashSystem::getInstance()</code></strong>.</p>
+
+<p><strong>Застосування:</strong></p>
+<ul>
+  <li>Два об’єкти для доступу до баз даних, наприклад, один для <strong>MySQL</strong>, а другий для <strong>SQLite</strong></li>
+  <li>Декілька логуючих об’єктів (один для налагоджувальних повідомлень, інший для помилок тощо)</li>
+</ul>
+
+<p><strong>Примітка:</strong>
+Іноді цей шаблон називають Реєстр одинаків.
+Нагадаю про антипаттерн <strong>Самотність</strong> (<strong>Singletonitis</strong>).</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>MultitonInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Multiton</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface MultitonInterface
+ * @package DesignPatterns\Creational\Multiton
+ */</span>
+<span class="kd">interface</span> <span class="nc">MultitonInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @param string $instanceName
+     *
+     * @return MultitonInterface
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">getInstance</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$instanceName</span><span class="p">):</span> <span class="kt">self</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>ShopCashSystem.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Multiton</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Singleton\CashboxTrait</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class ShopCashSystem
+ * @package DesignPatterns\Creational\Multiton
+ */</span>
+<span class="kd">class</span> <span class="nc">ShopCashSystem</span> <span class="kd">implements</span> <span class="nc">MultitonInterface</span>
+<span class="p">{</span>
+    <span class="kn">use</span> <span class="nc">CashboxTrait</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var MultitonInterface[]
+     */</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nv">$instances</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * Return Singleton instance
+     *
+     * @param string $instanceName
+     *
+     * @return MultitonInterface
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">getInstance</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$instanceName</span><span class="p">):</span> <span class="kt">MultitonInterface</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">isset</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$instances</span><span class="p">[</span><span class="nv">$instanceName</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">self</span><span class="o">::</span><span class="nv">$instances</span><span class="p">[</span><span class="nv">$instanceName</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">self</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">self</span><span class="o">::</span><span class="nv">$instances</span><span class="p">[</span><span class="nv">$instanceName</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="n">__clone</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="n">__wakeup</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> MultitonTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Creational\Multiton</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Multiton\ShopCashSystem</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">MultitonTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testUniqueness</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$firstCashbox</span> <span class="o">=</span> <span class="nc">ShopCashSystem</span><span class="o">::</span><span class="nf">getInstance</span><span class="p">(</span><span class="s1">'Cashbox#1'</span><span class="p">);</span>
+        <span class="nv">$secondCashbox</span> <span class="o">=</span> <span class="nc">ShopCashSystem</span><span class="o">::</span><span class="nf">getInstance</span><span class="p">(</span><span class="s1">'Cashbox#2'</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\Multiton\MultitonInterface'</span><span class="p">,</span> <span class="nv">$firstCashbox</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\Multiton\MultitonInterface'</span><span class="p">,</span> <span class="nv">$secondCashbox</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotSame</span><span class="p">(</span><span class="nv">$firstCashbox</span><span class="p">,</span> <span class="nv">$secondCashbox</span><span class="p">);</span>
+
+        <span class="nv">$thirdCashbox</span> <span class="o">=</span> <span class="nc">ShopCashSystem</span><span class="o">::</span><span class="nf">getInstance</span><span class="p">(</span><span class="s1">'Cashbox#1'</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="nv">$firstCashbox</span><span class="p">,</span> <span class="nv">$thirdCashbox</span><span class="p">);</span>
+
+        <span class="nv">$firstCashbox</span><span class="o">-&gt;</span><span class="nf">setCash</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="nv">$firstCashbox</span><span class="p">,</span> <span class="nv">$thirdCashbox</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

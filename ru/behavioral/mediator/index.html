@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/ru/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" >Ua</a></li>
+    <li><a href="/design-patterns/ru/" class="active">Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/ru/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/ru/" >Главная</a>
+        <a href="/design-patterns/ru/creational/" >Порождающие шаблоны</a>
+        <a href="/design-patterns/ru/behavioral/"  class="active">Шаблоны поведения</a>
+        <a href="/design-patterns/ru/structural/" >Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/ru/">Главная</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ru/behavioral/">
+      <span property="name">Шаблоны поведения</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Посредник</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ru/Behavioral/Mediator/diagram.png" alt="mediator" class="img-responsive" />
+<strong>Посредник</strong> (англ. <strong>Mediator</strong>) — поведенческий шаблон проектирования, обеспечивающий взаимодействие множества объектов,
+формируя при этом слабую связанность и избавляя объекты от необходимости явно ссылаться друг на друга.</p>
+
+<p>Это хорошая альтернатива Наблюдателю, если у вас есть “центр интеллекта” вроде контроллера(но не в смысле MVC).</p>
+
+<p>Все компоненты (называемые “Коллеги”) объединяются в <strong>Mediator</strong> и это хорошо, потому что в рамках ООП,
+“старый друг лучше новых двух”.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Client.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Mediator</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Client</span> <span class="kd">extends</span> <span class="nc">Colleague</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">request</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">mediator</span><span class="o">-&gt;</span><span class="nf">makeRequest</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">output</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$content</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$content</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Colleague.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Mediator</span><span class="p">;</span>
+
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Colleague</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var Mediator
+     */</span>
+    <span class="k">protected</span> <span class="nv">$mediator</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setMediator</span><span class="p">(</span><span class="kt">Mediator</span> <span class="nv">$mediator</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">mediator</span> <span class="o">=</span> <span class="nv">$mediator</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Database.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Mediator</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Database</span> <span class="kd">extends</span> <span class="nc">Colleague</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getData</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">'World'</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Mediator.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Mediator</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Mediator</span>
+<span class="p">{</span>
+
+    <span class="k">private</span> <span class="nv">$server</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$database</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$client</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">Database</span> <span class="nv">$database</span><span class="p">,</span> <span class="kt">Client</span> <span class="nv">$client</span><span class="p">,</span> <span class="kt">Server</span> <span class="nv">$server</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">database</span> <span class="o">=</span> <span class="nv">$database</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">server</span> <span class="o">=</span> <span class="nv">$server</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">client</span> <span class="o">=</span> <span class="nv">$client</span><span class="p">;</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">database</span><span class="o">-&gt;</span><span class="nf">setMediator</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">server</span><span class="o">-&gt;</span><span class="nf">setMediator</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">client</span><span class="o">-&gt;</span><span class="nf">setMediator</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">makeRequest</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">server</span><span class="o">-&gt;</span><span class="nf">process</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">queryDb</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">database</span><span class="o">-&gt;</span><span class="nf">getData</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">sendResponse</span><span class="p">(</span><span class="nv">$content</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">client</span><span class="o">-&gt;</span><span class="nf">output</span><span class="p">(</span><span class="nv">$content</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Server.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Mediator</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Server</span> <span class="kd">extends</span> <span class="nc">Colleague</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">process</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">mediator</span><span class="o">-&gt;</span><span class="nf">queryDb</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">mediator</span><span class="o">-&gt;</span><span class="nf">sendResponse</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s2">"Hello %s"</span><span class="p">,</span> <span class="nv">$data</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> MediatorTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Behavioral\Mediator</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Mediator\Client</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Mediator\Database</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Mediator\Mediator</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Mediator\Server</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">MediatorTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testOutputHelloWorld</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Client</span><span class="p">();</span>
+        <span class="k">new</span> <span class="nc">Mediator</span><span class="p">(</span><span class="k">new</span> <span class="nc">Database</span><span class="p">(),</span> <span class="nv">$client</span><span class="p">,</span> <span class="k">new</span> <span class="nc">Server</span><span class="p">());</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectOutputString</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="nf">request</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/ru/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" >Ua</a></li>
+    <li><a href="/design-patterns/ru/" class="active">Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/ru/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/ru/" >Главная</a>
+        <a href="/design-patterns/ru/creational/"  class="active">Порождающие шаблоны</a>
+        <a href="/design-patterns/ru/behavioral/" >Шаблоны поведения</a>
+        <a href="/design-patterns/ru/structural/" >Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/ru/">Главная</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ru/creational/">
+      <span property="name">Порождающие Шаблоны</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Статическая Фабрика</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ru/Creational/StaticFactory/diagram.png" alt="static-factory" class="img-responsive" />
+<strong>Статическая Фабрика</strong> (англ. <strong>Static Factory</strong>)</p>
+
+<p>Разница между этим шаблоном и Простой Фабрикой заключается в том, что Статическая Фабрика использует только один
+статический метод, чтобы создать все допустимые типы объектов. Этот метод, обычно, называется <strong><code class="language-plaintext highlighter-rouge">factory</code></strong> или <strong><code class="language-plaintext highlighter-rouge">build</code></strong>.</p>
+
+<p>Пример такой же, как и с Простой Фабрикой. Только метод мы делаем статическим.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+      <b><i>Burgers</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Burger.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\StaticFactory\Burgers</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Burger
+ * @package DesignPatterns\Creational\StaticFactory\Burgers
+ */</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Burger</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$meat</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$sauce</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$withCheese</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getMeat</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">meat</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $meat
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setMeat</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$meat</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">meat</span> <span class="o">=</span> <span class="nv">$meat</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getSauce</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">sauce</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $sauce
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setSauce</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$sauce</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">sauce</span> <span class="o">=</span> <span class="nv">$sauce</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return bool
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getWithCheese</span><span class="p">():</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">withCheese</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param bool $withCheese
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setWithCheese</span><span class="p">(</span><span class="kt">bool</span> <span class="nv">$withCheese</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">withCheese</span> <span class="o">=</span> <span class="nv">$withCheese</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Cheeseburger.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\StaticFactory\Burgers</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Cheeseburger
+ * @package DesignPatterns\Creational\StaticFactory\Burgers
+ */</span>
+<span class="kd">class</span> <span class="nc">Cheeseburger</span> <span class="kd">extends</span> <span class="nc">Burger</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$meat</span> <span class="o">=</span> <span class="s1">'chicken'</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$sauce</span> <span class="o">=</span> <span class="s1">'mayonnaise'</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var bool
+     */</span>
+    <span class="k">protected</span> <span class="nv">$withCheese</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Hamburger.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\StaticFactory\Burgers</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Hamburger
+ * @package DesignPatterns\Creational\StaticFactory\Burgers
+ */</span>
+<span class="kd">class</span> <span class="nc">Hamburger</span> <span class="kd">extends</span> <span class="nc">Burger</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$meat</span> <span class="o">=</span> <span class="s1">'beef'</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$sauce</span> <span class="o">=</span> <span class="s1">'ketchup'</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var bool
+     */</span>
+    <span class="k">protected</span> <span class="nv">$withCheese</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Chef.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\StaticFactory</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\StaticFactory\Burgers\Burger</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\StaticFactory\Burgers\Hamburger</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\StaticFactory\Burgers\Cheeseburger</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Chef
+ * @package DesignPatterns\Creational\StaticFactory
+ */</span>
+<span class="kd">class</span> <span class="nc">Chef</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @param string $typeBurger
+     *
+     * @return Burger
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">makeBurger</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$typeBurger</span><span class="p">):</span> <span class="kt">Burger</span>
+    <span class="p">{</span>
+        <span class="nv">$typeBurger</span> <span class="o">=</span> <span class="nb">strtolower</span><span class="p">(</span><span class="nv">$typeBurger</span><span class="p">);</span>
+
+        <span class="k">switch</span> <span class="p">(</span><span class="nv">$typeBurger</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="s1">'cheeseburger'</span><span class="o">:</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="nc">Cheeseburger</span><span class="p">();</span>
+            <span class="k">case</span> <span class="s1">'hamburger'</span><span class="o">:</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="nc">Hamburger</span><span class="p">();</span>
+            <span class="k">default</span><span class="o">:</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="err">\</span><span class="nf">InvalidArgumentException</span><span class="p">(</span><span class="s1">'Sorry. But we haven\'t this burger.'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> StaticFactoryTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Creational\StaticFactory</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\StaticFactory\Chef</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">InvalidArgumentException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">StaticFactoryTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testHamburgerInstanceOfBurger</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$hamburger</span> <span class="o">=</span> <span class="nc">Chef</span><span class="o">::</span><span class="nf">makeBurger</span><span class="p">(</span><span class="s1">'hamburger'</span><span class="p">);</span>
+        <span class="nv">$someHamburger</span> <span class="o">=</span> <span class="nc">Chef</span><span class="o">::</span><span class="nf">makeBurger</span><span class="p">(</span><span class="s1">'hamburger'</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\StaticFactory\Burgers\Burger'</span><span class="p">,</span> <span class="nv">$hamburger</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\StaticFactory\Burgers\Burger'</span><span class="p">,</span> <span class="nv">$someHamburger</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotSame</span><span class="p">(</span><span class="nv">$hamburger</span><span class="p">,</span> <span class="nv">$someHamburger</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCheeseburgerInstanceOfBurger</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$cheeseburger</span> <span class="o">=</span> <span class="nc">Chef</span><span class="o">::</span><span class="nf">makeBurger</span><span class="p">(</span><span class="s1">'cheeseburger'</span><span class="p">);</span>
+        <span class="nv">$someCheeseburger</span> <span class="o">=</span> <span class="nc">Chef</span><span class="o">::</span><span class="nf">makeBurger</span><span class="p">(</span><span class="s1">'cheeseburger'</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\StaticFactory\Burgers\Burger'</span><span class="p">,</span> <span class="nv">$cheeseburger</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\StaticFactory\Burgers\Burger'</span><span class="p">,</span> <span class="nv">$someCheeseburger</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotSame</span><span class="p">(</span><span class="nv">$cheeseburger</span><span class="p">,</span> <span class="nv">$someCheeseburger</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testException</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectException</span><span class="p">(</span><span class="nc">InvalidArgumentException</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+        <span class="nc">Chef</span><span class="o">::</span><span class="nf">makeBurger</span><span class="p">(</span><span class="s1">'someNameForBurger'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testHamburgerСomposition</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$hamburger</span> <span class="o">=</span> <span class="nc">Chef</span><span class="o">::</span><span class="nf">makeBurger</span><span class="p">(</span><span class="s1">'hamburger'</span><span class="p">);</span>
+
+        <span class="nv">$hamburgerMeat</span> <span class="o">=</span> <span class="nv">$hamburger</span><span class="o">-&gt;</span><span class="nf">getMeat</span><span class="p">();</span>
+        <span class="nv">$hamburgerSauce</span> <span class="o">=</span> <span class="nv">$hamburger</span><span class="o">-&gt;</span><span class="nf">getSauce</span><span class="p">();</span>
+        <span class="nv">$hamburgerWithCheese</span> <span class="o">=</span> <span class="nv">$hamburger</span><span class="o">-&gt;</span><span class="nf">getWithCheese</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'beef'</span><span class="p">,</span> <span class="nv">$hamburgerMeat</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotEquals</span><span class="p">(</span><span class="s1">'chicken'</span><span class="p">,</span> <span class="nv">$hamburgerMeat</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'ketchup'</span><span class="p">,</span> <span class="nv">$hamburgerSauce</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotEquals</span><span class="p">(</span><span class="s1">'mayonnaise'</span><span class="p">,</span> <span class="nv">$hamburgerSauce</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="nv">$hamburgerWithCheese</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotEquals</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nv">$hamburgerWithCheese</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCheeseburgerСomposition</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$cheeseburger</span> <span class="o">=</span> <span class="nc">Chef</span><span class="o">::</span><span class="nf">makeBurger</span><span class="p">(</span><span class="s1">'cheeseburger'</span><span class="p">);</span>
+
+        <span class="nv">$cheeseburgerMeat</span> <span class="o">=</span> <span class="nv">$cheeseburger</span><span class="o">-&gt;</span><span class="nf">getMeat</span><span class="p">();</span>
+        <span class="nv">$cheeseburgerSauce</span> <span class="o">=</span> <span class="nv">$cheeseburger</span><span class="o">-&gt;</span><span class="nf">getSauce</span><span class="p">();</span>
+        <span class="nv">$cheeseburgerWithCheese</span> <span class="o">=</span> <span class="nv">$cheeseburger</span><span class="o">-&gt;</span><span class="nf">getWithCheese</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'chicken'</span><span class="p">,</span> <span class="nv">$cheeseburgerMeat</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotEquals</span><span class="p">(</span><span class="s1">'beef'</span><span class="p">,</span> <span class="nv">$cheeseburgerMeat</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'mayonnaise'</span><span class="p">,</span> <span class="nv">$cheeseburgerSauce</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotEquals</span><span class="p">(</span><span class="s1">'ketchup'</span><span class="p">,</span> <span class="nv">$cheeseburgerSauce</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nv">$cheeseburgerWithCheese</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotEquals</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="nv">$cheeseburgerWithCheese</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/" >Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/"  class="active">Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/structural/">
+      <span property="name">Структурні шаблони</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Компонувальник</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Structural/Composite/diagram.png" alt="composite" class="img-responsive" />
+<strong>Компоновщик</strong> (англ. <strong>Composite pattern</strong>) — структурний шаблон проєктування, що поєднує об’єкти в деревоподібну
+структуру для подання ієрархії від частки до цілого. Компонувальник дозволяє клієнтам звертатися
+до окремих об’єктів та до груп об’єктів однаково.</p>
+
+<p>Дуже простий шаблон. Будемо створювати HTML документ для надсилання нашому менеджеру. У нас є один інтерфейс
+для всіх компонентів документа HTML. Це дає нам можливість звертатися до всіх компонентів одним і тим самим способом.
+Для наочності реалізуємо інтерфейс двома абстрактними класами:</p>
+
+<ul>
+  <li><strong>Composite</strong> - батьківський компонент, який має спадкоємці;</li>
+  <li><strong>Leaf</strong> - кінцевий елемент. Спадкоємців мати не може.</li>
+</ul>
+
+<p>У тесті(<strong>CompositeTest</strong>) наведено приклад побудови HTML документа.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+      <b><i>Abstraction</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Composite.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Composite\Abstraction</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Helper\NewLineHelper</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Composite
+ * @package DesignPatterns\Structural\Composite\Abstraction
+ */</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Composite</span> <span class="kd">implements</span> <span class="nc">CompositeInterface</span>
+<span class="p">{</span>
+    <span class="kn">use</span> <span class="nc">NewLineHelper</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var CompositeInterface[]
+     */</span>
+    <span class="k">protected</span> <span class="nv">$elements</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @param CompositeInterface $element
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addElement</span><span class="p">(</span><span class="kt">CompositeInterface</span> <span class="nv">$element</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">elements</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$element</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="n">render</span><span class="p">():</span> <span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>CompositeInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Composite\Abstraction</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface CompositeInterface
+ * @package DesignPatterns\Structural\Composite\Abstraction
+ */</span>
+<span class="kd">interface</span> <span class="nc">CompositeInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @param CompositeInterface $element
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addElement</span><span class="p">(</span><span class="kt">CompositeInterface</span> <span class="nv">$element</span><span class="p">);</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">render</span><span class="p">():</span> <span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Leaf.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Composite\Abstraction</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Helper\NewLineHelper</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Leaf
+ * @package DesignPatterns\Structural\Composite\Abstraction
+ */</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Leaf</span> <span class="kd">implements</span> <span class="nc">CompositeInterface</span>
+<span class="p">{</span>
+    <span class="kn">use</span> <span class="nc">NewLineHelper</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$content</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * Leaf constructor.
+     *
+     * @param string $content
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$content</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">content</span> <span class="o">=</span> <span class="nv">$content</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param CompositeInterface $element
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addElement</span><span class="p">(</span><span class="kt">CompositeInterface</span> <span class="nv">$element</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="n">render</span><span class="p">():</span> <span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+      <b><i>Helper</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>NewLineHelper.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Composite\Helper</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class NewLineHelper
+ * @package DesignPatterns\Structural\Composite\Helper
+ */</span>
+<span class="kd">trait</span> <span class="nc">NewLineHelper</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @param string $str
+     *
+     * @return string
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">newLineStringPrepare</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$str</span><span class="p">):</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$str</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+      <b><i>Html</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Body.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Composite\Html</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Abstraction\Composite</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Body
+ * @package DesignPatterns\Structural\Composite\Html
+ */</span>
+<span class="kd">class</span> <span class="nc">Body</span> <span class="kd">extends</span> <span class="nc">Composite</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$document</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">render</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">newLineStringPrepare</span><span class="p">(</span><span class="s1">'&lt;body&gt;'</span><span class="p">);</span>
+
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">elements</span> <span class="k">as</span> <span class="nv">$element</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="mf">.</span><span class="o">=</span> <span class="nv">$element</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="mf">.</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">newLineStringPrepare</span><span class="p">(</span><span class="s1">'&lt;/body&gt;'</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Div.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Composite\Html</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Abstraction\Composite</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Div
+ * @package DesignPatterns\Structural\Composite\Html
+ */</span>
+<span class="kd">class</span> <span class="nc">Div</span> <span class="kd">extends</span> <span class="nc">Composite</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$document</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">render</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">newLineStringPrepare</span><span class="p">(</span><span class="s1">'&lt;div&gt;'</span><span class="p">);</span>
+
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">elements</span> <span class="k">as</span> <span class="nv">$element</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="mf">.</span><span class="o">=</span> <span class="nv">$element</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="mf">.</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">newLineStringPrepare</span><span class="p">(</span><span class="s1">'&lt;/div&gt;'</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>H4.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Composite\Html</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Abstraction\Leaf</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class H4
+ * @package DesignPatterns\Structural\Composite\Html
+ */</span>
+<span class="kd">class</span> <span class="nc">H4</span> <span class="kd">extends</span> <span class="nc">Leaf</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">render</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">newLineStringPrepare</span><span class="p">(</span><span class="s1">'&lt;h4&gt;'</span> <span class="mf">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">content</span> <span class="mf">.</span> <span class="s1">'&lt;/h4&gt;'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Header.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Composite\Html</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Abstraction\Composite</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Helper\NewLineHelper</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Header
+ * @package DesignPatterns\Structural\Composite\Html
+ */</span>
+<span class="kd">class</span> <span class="nc">Header</span> <span class="kd">extends</span> <span class="nc">Composite</span>
+<span class="p">{</span>
+    <span class="kn">use</span> <span class="nc">NewLineHelper</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$document</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">render</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">newLineStringPrepare</span><span class="p">(</span><span class="s1">'&lt;header&gt;'</span><span class="p">);</span>
+
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">elements</span> <span class="k">as</span> <span class="nv">$element</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="mf">.</span><span class="o">=</span> <span class="nv">$element</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="mf">.</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">newLineStringPrepare</span><span class="p">(</span><span class="s1">'&lt;/header&gt;'</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Html.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Composite\Html</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Abstraction\Composite</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Html
+ * @package DesignPatterns\Structural\Composite\Html
+ */</span>
+<span class="kd">class</span> <span class="nc">Html</span> <span class="kd">extends</span> <span class="nc">Composite</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$document</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">render</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">newLineStringPrepare</span><span class="p">(</span><span class="s1">'&lt;html&gt;'</span><span class="p">);</span>
+
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">elements</span> <span class="k">as</span> <span class="nv">$element</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="mf">.</span><span class="o">=</span> <span class="nv">$element</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span> <span class="mf">.</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">newLineStringPrepare</span><span class="p">(</span><span class="s1">'&lt;/html&gt;'</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Paragraph.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Composite\Html</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Abstraction\Leaf</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Paragraph
+ * @package DesignPatterns\Structural\Composite\Html
+ */</span>
+<span class="kd">class</span> <span class="nc">Paragraph</span> <span class="kd">extends</span> <span class="nc">Leaf</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">render</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">newLineStringPrepare</span><span class="p">(</span><span class="s1">'&lt;p&gt;'</span> <span class="mf">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">content</span> <span class="mf">.</span> <span class="s1">'&lt;/p&gt;'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Title.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Composite\Html</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Abstraction\Leaf</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Title
+ * @package DesignPatterns\Structural\Composite\Html
+ */</span>
+<span class="kd">class</span> <span class="nc">Title</span> <span class="kd">extends</span> <span class="nc">Leaf</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">render</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">newLineStringPrepare</span><span class="p">(</span><span class="s1">'&lt;title&gt;'</span> <span class="mf">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">content</span> <span class="mf">.</span> <span class="s1">'&lt;/title&gt;'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+    </ul>  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> CompositeTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Structural\Composite</span><span class="p">;</span>
+
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Html\Body</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Html\Div</span><span class="p">;</span>
+<span class="kn">use</span> <span class="no">DesignPatterns\Structural\Composite\Html\H4</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Html\Header</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Html\Html</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Html\Paragraph</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Composite\Html\Title</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">CompositeTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testRender</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="s1">'&lt;html&gt;'</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span>
+            <span class="mf">.</span> <span class="s1">'&lt;header&gt;'</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span>
+            <span class="mf">.</span> <span class="s1">'&lt;title&gt;Custom Page&lt;/title&gt;'</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span>
+            <span class="mf">.</span> <span class="s1">'&lt;/header&gt;'</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span>
+            <span class="mf">.</span> <span class="s1">'&lt;body&gt;'</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span>
+            <span class="mf">.</span> <span class="s1">'&lt;div&gt;'</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span>
+            <span class="mf">.</span> <span class="s1">'&lt;h4&gt;Custom header&lt;/h4&gt;'</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span>
+            <span class="mf">.</span> <span class="s1">'&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Vivamus convallis velit massa, faucibus egestas mauris vestibulum id. Vivamus ut justo.&lt;/p&gt;'</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span>
+            <span class="mf">.</span> <span class="s1">'&lt;/div&gt;'</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span>
+            <span class="mf">.</span> <span class="s1">'&lt;/body&gt;'</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span>
+            <span class="mf">.</span> <span class="s1">'&lt;/html&gt;'</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span><span class="p">;</span>
+
+
+        <span class="nv">$htmlDocument</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Html</span><span class="p">();</span>
+
+        <span class="nv">$header</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Header</span><span class="p">();</span>
+        <span class="nv">$title</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Title</span><span class="p">(</span><span class="s1">'Custom Page'</span><span class="p">);</span>
+        <span class="nv">$header</span><span class="o">-&gt;</span><span class="nf">addElement</span><span class="p">(</span><span class="nv">$title</span><span class="p">);</span>
+        <span class="nv">$htmlDocument</span><span class="o">-&gt;</span><span class="nf">addElement</span><span class="p">(</span><span class="nv">$header</span><span class="p">);</span>
+
+        <span class="nv">$body</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Body</span><span class="p">();</span>
+        <span class="nv">$div</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Div</span><span class="p">();</span>
+        <span class="nv">$h4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">H4</span><span class="p">(</span><span class="s1">'Custom header'</span><span class="p">);</span>
+        <span class="nv">$paragraph</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Paragraph</span><span class="p">(</span>
+            <span class="s1">'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Vivamus convallis velit massa, faucibus egestas mauris vestibulum id. Vivamus ut justo.'</span>
+        <span class="p">);</span>
+        <span class="nv">$div</span><span class="o">-&gt;</span><span class="nf">addElement</span><span class="p">(</span><span class="nv">$h4</span><span class="p">);</span>
+        <span class="nv">$div</span><span class="o">-&gt;</span><span class="nf">addElement</span><span class="p">(</span><span class="nv">$paragraph</span><span class="p">);</span>
+        <span class="nv">$body</span><span class="o">-&gt;</span><span class="nf">addElement</span><span class="p">(</span><span class="nv">$div</span><span class="p">);</span>
+        <span class="nv">$htmlDocument</span><span class="o">-&gt;</span><span class="nf">addElement</span><span class="p">(</span><span class="nv">$body</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$result</span><span class="p">,</span> <span class="nv">$htmlDocument</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></li></li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

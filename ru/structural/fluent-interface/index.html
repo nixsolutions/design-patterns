@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/ru/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" >Ua</a></li>
+    <li><a href="/design-patterns/ru/" class="active">Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/ru/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/ru/" >Главная</a>
+        <a href="/design-patterns/ru/creational/" >Порождающие шаблоны</a>
+        <a href="/design-patterns/ru/behavioral/" >Шаблоны поведения</a>
+        <a href="/design-patterns/ru/structural/"  class="active">Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/ru/">Главная</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ru/structural/">
+      <span property="name">Структурные Шаблоны</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Текучий интерфейс</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ru/Structural/FluentInterface/diagram.png" alt="fluent-interface" class="img-responsive" />
+<strong>Текучий интерфейс</strong> (англ. <strong>Fluent interface</strong>) — способ реализации в разработке программного обеспечения,
+объектно-ориентированного API, нацеленный на повышение читабельности исходного кода программы.</p>
+
+<p>Текучий интерфейс хорош тем, что упрощается множественный вызов методов одного объекта. Обычно это реализуется
+использованием цепочки методов, передающих контекст вызова следующему звену.</p>
+
+<p>Тут всё очень просто. Благодаря данному шаблону мы можем делать бургер через цепочку вызовов,
+а не каждый раз вызывать новый метод.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>BurgerMaker.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\FluentInterface</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class BurgerMaker
+ * @package DesignPatterns\Structural\FluentInterface
+ */</span>
+<span class="kd">class</span> <span class="nc">BurgerMaker</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">public</span> <span class="nv">$muffin</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">public</span> <span class="nv">$sauce</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">public</span> <span class="nv">$meat</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">public</span> <span class="nv">$cheese</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @param string $muffin
+     *
+     * @return BurgerMaker
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setMuffin</span><span class="p">(</span><span class="nv">$muffin</span><span class="p">):</span> <span class="kt">BurgerMaker</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">muffin</span> <span class="o">=</span> <span class="nv">$muffin</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $sauce
+     *
+     * @return BurgerMaker
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setSauce</span><span class="p">(</span><span class="nv">$sauce</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">sauce</span> <span class="o">=</span> <span class="nv">$sauce</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $meat
+     *
+     * @return BurgerMaker
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setMeat</span><span class="p">(</span><span class="nv">$meat</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">meat</span> <span class="o">=</span> <span class="nv">$meat</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $cheese
+     *
+     * @return BurgerMaker
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setCheese</span><span class="p">(</span><span class="nv">$cheese</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cheese</span> <span class="o">=</span> <span class="nv">$cheese</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return array
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getBurger</span><span class="p">():</span> <span class="kt">array</span>
+    <span class="p">{</span>
+        <span class="nv">$burger</span> <span class="o">=</span> <span class="p">[];</span>
+
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span> <span class="k">as</span> <span class="nv">$valName</span> <span class="o">=&gt;</span> <span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$burger</span><span class="p">[</span><span class="nv">$valName</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$val</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">clearWorkbench</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nv">$burger</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">clearWorkbench</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span> <span class="k">as</span> <span class="nv">$valName</span> <span class="o">=&gt;</span> <span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nv">$valName</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> BurgerMakerTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Structural\FluentInterface</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\FluentInterface\BurgerMaker</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">BurgerMakerTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var BurgerMaker
+     */</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$burgerMaker</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">setUpBeforeClass</span><span class="p">():</span> <span class="kt">void</span>
+    <span class="p">{</span>
+        <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BurgerMaker</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testBurgerSetMuffin</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">muffin</span><span class="p">);</span>
+
+        <span class="nv">$maker</span> <span class="o">=</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="nf">setMuffin</span><span class="p">(</span><span class="s1">'muffin'</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'muffin'</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">muffin</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="p">,</span> <span class="nv">$maker</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testBurgerSetSauce</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">sauce</span><span class="p">);</span>
+
+        <span class="nv">$maker</span> <span class="o">=</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="nf">setSauce</span><span class="p">(</span><span class="s1">'ketchup'</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'ketchup'</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">sauce</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="p">,</span> <span class="nv">$maker</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testBurgerSetMeat</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">meat</span><span class="p">);</span>
+
+        <span class="nv">$maker</span> <span class="o">=</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="nf">setMeat</span><span class="p">(</span><span class="s1">'beef'</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'beef'</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">meat</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="p">,</span> <span class="nv">$maker</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testBurgerSetCheese</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">cheese</span><span class="p">);</span>
+
+        <span class="nv">$maker</span> <span class="o">=</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="nf">setCheese</span><span class="p">(</span><span class="s1">'cheddar'</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'cheddar'</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">cheese</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="p">,</span> <span class="nv">$maker</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testBurgerGetBurger</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'muffin'</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">muffin</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'ketchup'</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">sauce</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'beef'</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">meat</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'cheddar'</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">cheese</span><span class="p">);</span>
+
+        <span class="nv">$burger</span> <span class="o">=</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span>
+            <span class="o">-&gt;</span><span class="nf">setMuffin</span><span class="p">(</span><span class="s1">'muffin'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="nf">setSauce</span><span class="p">(</span><span class="s1">'sauce'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="nf">setMeat</span><span class="p">(</span><span class="s1">'meat'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="nf">setCheese</span><span class="p">(</span><span class="s1">'cheese'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="nf">getBurger</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertArrayHasKey</span><span class="p">(</span><span class="s1">'muffin'</span><span class="p">,</span> <span class="nv">$burger</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertArrayHasKey</span><span class="p">(</span><span class="s1">'sauce'</span><span class="p">,</span> <span class="nv">$burger</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertArrayHasKey</span><span class="p">(</span><span class="s1">'meat'</span><span class="p">,</span> <span class="nv">$burger</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertArrayHasKey</span><span class="p">(</span><span class="s1">'cheese'</span><span class="p">,</span> <span class="nv">$burger</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'muffin'</span><span class="p">,</span> <span class="nv">$burger</span><span class="p">[</span><span class="s1">'muffin'</span><span class="p">]);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'sauce'</span><span class="p">,</span> <span class="nv">$burger</span><span class="p">[</span><span class="s1">'sauce'</span><span class="p">]);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'meat'</span><span class="p">,</span> <span class="nv">$burger</span><span class="p">[</span><span class="s1">'meat'</span><span class="p">]);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'cheese'</span><span class="p">,</span> <span class="nv">$burger</span><span class="p">[</span><span class="s1">'cheese'</span><span class="p">]);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">muffin</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">sauce</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">meat</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$burgerMaker</span><span class="o">-&gt;</span><span class="n">cheese</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/"  class="active">Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/" >Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/behavioral/">
+      <span property="name">Шаблони поведінки</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Стан</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Behavioral/State/diagram.png" alt="state" class="img-responsive" />
+<strong>Стан</strong> (англ. <strong>State</strong>) — поведінковий шаблон проєктування.
+Інкапсулює зміну поведінки одних і тих самих методів залежно від стану об’єкта. Цей шаблон допоможе
+витонченим способом змінити поведінку об’єкта під час виконання, не вдаючись до великих монолітних умовних операторів.
+Ззовні складається враження, що змінився клас об’єкта.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+      <b><i>States</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>AbstractState.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\State\States</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\State\Glass</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Exception</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class AbstractState
+ * @package DesignPatterns\Behavioral\State\States
+ */</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">AbstractState</span> <span class="kd">implements</span> <span class="nc">StateInterface</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">STATE</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var Glass
+     */</span>
+    <span class="k">protected</span> <span class="nv">$glass</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * AbstractState constructor.
+     *
+     * @param Glass $glass
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">Glass</span> <span class="nv">$glass</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">glass</span> <span class="o">=</span> <span class="nv">$glass</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">getGlassState</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="nv">$glassState</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">glass</span><span class="o">-&gt;</span><span class="nf">getState</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nv">$glassState</span><span class="o">::</span><span class="no">STATE</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return FillState
+     *
+     * @throws Exception
+     */</span>
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="n">onFilled</span><span class="p">():</span> <span class="kt">FillState</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return EmptyState
+     *
+     * @throws Exception
+     */</span>
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="n">onEmpty</span><span class="p">():</span> <span class="kt">EmptyState</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>EmptyState.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\State\States</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Exception</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class EmptyState
+ * @package DesignPatterns\Behavioral\State\States
+ */</span>
+<span class="kd">class</span> <span class="nc">EmptyState</span> <span class="kd">extends</span> <span class="nc">AbstractState</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">STATE</span> <span class="o">=</span> <span class="s1">'Empty'</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return FillState
+     *
+     * @throws Exception
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">onFilled</span><span class="p">():</span> <span class="kt">FillState</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">static</span><span class="o">::</span><span class="no">STATE</span> <span class="o">===</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getGlassState</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">FillState</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">glass</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">throw</span> <span class="k">new</span> <span class="nc">Exception</span><span class="p">(</span><span class="s1">'Can\'t to fill filled glass.'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return EmptyState
+     *
+     * @throws Exception
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">onEmpty</span><span class="p">():</span> <span class="kt">EmptyState</span>
+    <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nc">Exception</span><span class="p">(</span><span class="s1">'Сan\'t pour the empty glass.'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>FillState.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\State\States</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Exception</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class FillState
+ * @package DesignPatterns\Behavioral\State\States
+ */</span>
+<span class="kd">class</span> <span class="nc">FillState</span> <span class="kd">extends</span> <span class="nc">AbstractState</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">STATE</span> <span class="o">=</span> <span class="s1">'Fill'</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @throws Exception
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">onFilled</span><span class="p">():</span> <span class="kt">FillState</span>
+    <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nc">Exception</span><span class="p">(</span><span class="s1">'Can\'t to fill filled glass.'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return EmptyState
+     *
+     * @throws Exception
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">onEmpty</span><span class="p">():</span> <span class="kt">EmptyState</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">static</span><span class="o">::</span><span class="no">STATE</span> <span class="o">===</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getGlassState</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">EmptyState</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">glass</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">throw</span> <span class="k">new</span> <span class="nc">Exception</span><span class="p">(</span><span class="s1">'Сan\'t pour the empty glass.'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>StateInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\State\States</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\State\Glass</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface StateInterface
+ * @package DesignPatterns\Behavioral\State\States
+ */</span>
+<span class="kd">interface</span> <span class="nc">StateInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * StateInterface constructor.
+     *
+     * @param Glass $glass
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">Glass</span> <span class="nv">$glass</span><span class="p">);</span>
+
+    <span class="cd">/**
+     * @return FillState
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">onFilled</span><span class="p">():</span> <span class="kt">FillState</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return EmptyState
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">onEmpty</span><span class="p">():</span> <span class="kt">EmptyState</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Glass.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\State</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\State\States\EmptyState</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Glass</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$state</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EmptyState</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">fill</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">state</span><span class="o">-&gt;</span><span class="nf">onFilled</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">pour</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">state</span><span class="o">-&gt;</span><span class="nf">onEmpty</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getState</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">state</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> StateTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Behavioral\State</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\State\Glass</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Exception</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">StateTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testTryGlassInit</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$glass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Glass</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Behavioral\State\States\EmptyState'</span><span class="p">,</span> <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">getState</span><span class="p">());</span>
+
+        <span class="nv">$someGlass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Glass</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Behavioral\State\States\FillState'</span><span class="p">,</span> <span class="nv">$someGlass</span><span class="o">-&gt;</span><span class="nf">getState</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testTryFillGlass</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$glass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Glass</span><span class="p">();</span>
+        <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">fill</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Behavioral\State\States\FillState'</span><span class="p">,</span> <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">getState</span><span class="p">());</span>
+
+        <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">pour</span><span class="p">();</span>
+        <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">fill</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Behavioral\State\States\FillState'</span><span class="p">,</span> <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">getState</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testTryPourGlass</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$glass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Glass</span><span class="p">();</span>
+        <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">fill</span><span class="p">();</span>
+        <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">pour</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Behavioral\State\States\EmptyState'</span><span class="p">,</span> <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">getState</span><span class="p">());</span>
+
+        <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">fill</span><span class="p">();</span>
+        <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">pour</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Behavioral\State\States\EmptyState'</span><span class="p">,</span> <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">getState</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testExceptionTryFillFilledGlass</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectException</span><span class="p">(</span><span class="nc">Exception</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+        <span class="nv">$glass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Glass</span><span class="p">();</span>
+        <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">fill</span><span class="p">();</span>
+        <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">fill</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testExceptionTryPourTheEmptyGlass</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectException</span><span class="p">(</span><span class="nc">Exception</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+        <span class="nv">$glass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Glass</span><span class="p">();</span>
+        <span class="nv">$glass</span><span class="o">-&gt;</span><span class="nf">pour</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

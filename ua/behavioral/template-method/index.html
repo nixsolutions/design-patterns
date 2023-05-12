@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/"  class="active">Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/" >Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/behavioral/">
+      <span property="name">Шаблони поведінки</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Шаблонний метод</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Behavioral/TemplateMethod/diagram.png" alt="template-method" class="img-responsive" />
+<strong>Шаблонний метод</strong> (англ. <strong>Template method</strong>) — поведінковий шаблон проєктування, що визначає скелет алгоритму,
+перекладаючи відповідальність за деякі його кроки на підкласи. Дозволяє підкласам перевизначати кроки алгоритму,
+не змінюючи його загальну структуру.</p>
+
+<p>Іншими словами, це каркас алгоритму, який добре підходить для бібліотек (у фреймворках, наприклад).
+Користувач просто реалізує методи уточнення, а суперклас робить всю основну роботу.</p>
+
+<p>Це простий спосіб ізолювати логіку в конкретні класи та зменшити копіпаст,
+тому ви повсюдно зустрінете його у тому чи іншому вигляді.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>BeachJourney.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\TemplateMethod</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class BeachJourney
+ * @package DesignPatterns\Behavioral\TemplateMethod
+ */</span>
+<span class="kd">class</span> <span class="nc">BeachJourney</span> <span class="kd">extends</span> <span class="nc">Journey</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">enjoyVacation</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">"Swimming and sun-bathing"</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>CityJourney.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\TemplateMethod</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class CityJourney
+ * @package DesignPatterns\Behavioral\TemplateMethod
+ */</span>
+<span class="kd">class</span> <span class="nc">CityJourney</span> <span class="kd">extends</span> <span class="nc">Journey</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">enjoyVacation</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">"Eat, drink, take photos and sleep"</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">buyGift</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">"Buy a gift"</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Journey.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\TemplateMethod</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Journey
+ * @package DesignPatterns\Behavioral\TemplateMethod
+ */</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">Journey</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string[]
+     */</span>
+    <span class="k">private</span> <span class="nv">$thingsToDo</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">final</span> <span class="k">public</span> <span class="k">function</span> <span class="n">takeATrip</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">thingsToDo</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">buyAFlight</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">thingsToDo</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">takePlane</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">thingsToDo</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">enjoyVacation</span><span class="p">();</span>
+        <span class="nv">$buyGift</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">buyGift</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$buyGift</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">thingsToDo</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$buyGift</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">thingsToDo</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">takePlane</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">abstract</span> <span class="k">protected</span> <span class="k">function</span> <span class="n">enjoyVacation</span><span class="p">():</span> <span class="kt">string</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return string|null
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">buyGift</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="n">buyAFlight</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">'Buy a flight ticket'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="n">takePlane</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">'Taking the plane'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string[]
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getThingsToDo</span><span class="p">():</span> <span class="kt">array</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">thingsToDo</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> TemplateMethodTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Behavioral\TemplateMethod</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\TemplateMethod\BeachJourney</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\TemplateMethod\CityJourney</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">TemplateMethodTest</span> <span class="k">extends</span> <span class="err">\</span><span class="n">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCanGetOnVacationOnTheBeach</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$beachJourney</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BeachJourney</span><span class="p">();</span>
+        <span class="nv">$beachJourney</span><span class="o">-&gt;</span><span class="nf">takeATrip</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span>
+            <span class="p">[</span><span class="s1">'Buy a flight ticket'</span><span class="p">,</span> <span class="s1">'Taking the plane'</span><span class="p">,</span> <span class="s1">'Swimming and sun-bathing'</span><span class="p">,</span> <span class="s1">'Taking the plane'</span><span class="p">],</span>
+            <span class="nv">$beachJourney</span><span class="o">-&gt;</span><span class="nf">getThingsToDo</span><span class="p">()</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCanGetOnAJourneyToACity</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$beachJourney</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CityJourney</span><span class="p">();</span>
+        <span class="nv">$beachJourney</span><span class="o">-&gt;</span><span class="nf">takeATrip</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="s1">'Buy a flight ticket'</span><span class="p">,</span>
+                <span class="s1">'Taking the plane'</span><span class="p">,</span>
+                <span class="s1">'Eat, drink, take photos and sleep'</span><span class="p">,</span>
+                <span class="s1">'Buy a gift'</span><span class="p">,</span>
+                <span class="s1">'Taking the plane'</span>
+            <span class="p">],</span>
+            <span class="nv">$beachJourney</span><span class="o">-&gt;</span><span class="nf">getThingsToDo</span><span class="p">()</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

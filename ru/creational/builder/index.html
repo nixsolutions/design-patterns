@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/ru/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" >Ua</a></li>
+    <li><a href="/design-patterns/ru/" class="active">Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/ru/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/ru/" >Главная</a>
+        <a href="/design-patterns/ru/creational/"  class="active">Порождающие шаблоны</a>
+        <a href="/design-patterns/ru/behavioral/" >Шаблоны поведения</a>
+        <a href="/design-patterns/ru/structural/" >Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/ru/">Главная</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ru/creational/">
+      <span property="name">Порождающие Шаблоны</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Строитель</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ru/Creational/Builder/diagram.png" alt="builder" class="img-responsive" />
+<strong>Строитель</strong> (англ. <strong>Builder</strong>) — это интерфейс для инкапсулирования механизма создания сложного объекта. Суть его заключается в том, чтобы отделить
+процесс создания некоторого сложного объекта от его представления. Таким образом, можно получать различные представления
+объекта, используя один и тот же “технологический” процесс. Данный шаблон очень тесно переплетается с шаблоном <strong>Фабрика</strong>.</p>
+
+<p><strong>Применение:</strong></p>
+<ul>
+  <li>алгоритм создания сложного объекта не должен зависеть от того, из каких частей состоит объект и как они стыкуются между собой;</li>
+  <li>процесс конструирования должен обеспечивать различные представления конструируемого объекта.</li>
+</ul>
+
+<p>Раньше мы создавали наши бургеры уже из готовых классов. Что бы показать работу этого шаблона мы изменим создание бургеров.
+Разобьём весь бургер на части и потом с помощью билдера соберём тот, который нам нужен. В этом примере билдеры - это своего рода рецепты,
+которые мы передали повару. А повар в свою очередь, как с ним обращаться.</p>
+
+<p><strong>Примеры:</strong></p>
+<ul>
+  <li>PHPUnit: Mock Builder</li>
+</ul>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+      <b><i>Builders</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        
+          <li>
+            <details>
+              <summary> <b>BurgerBuilderInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Builder\Builders</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\AbstractBurger</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface BurgerBuilderInterface
+ * @package DesignPatterns\Creational\Builder\Builders
+ */</span>
+<span class="kd">interface</span> <span class="nc">BurgerBuilderInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">createBurger</span><span class="p">();</span>
+
+    <span class="cd">/**
+     * @return AbstractBurger
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getBurger</span><span class="p">():</span> <span class="kt">AbstractBurger</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addSauce</span><span class="p">();</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addMeat</span><span class="p">();</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addMuffin</span><span class="p">();</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+         
+    
+  
+    
+        
+          <li>
+            <details>
+              <summary> <b>CheeseburgerBuilder.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Builder\Builders</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\AbstractBurger</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\Burger</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\Parts\Meat</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\Parts\Muffin</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\Parts\Sauce</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class CheeseburgerBuilder
+ * @package DesignPatterns\Creational\Builder\Builders
+ */</span>
+<span class="kd">class</span> <span class="nc">CheeseburgerBuilder</span> <span class="kd">implements</span> <span class="nc">BurgerBuilderInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var AbstractBurger
+     */</span>
+    <span class="k">private</span> <span class="nv">$cheeseburger</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">createBurger</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cheeseburger</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Burger</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return AbstractBurger
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getBurger</span><span class="p">():</span> <span class="kt">AbstractBurger</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cheeseburger</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addSauce</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cheeseburger</span><span class="o">-&gt;</span><span class="nf">setBurgerParts</span><span class="p">(</span><span class="s1">'sauce'</span><span class="p">,</span> <span class="k">new</span> <span class="nc">Sauce</span><span class="p">(</span><span class="s1">'mayonnaise'</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addMeat</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cheeseburger</span><span class="o">-&gt;</span><span class="nf">setBurgerParts</span><span class="p">(</span><span class="s1">'meet'</span><span class="p">,</span> <span class="k">new</span> <span class="nc">Meat</span><span class="p">(</span><span class="s1">'chicken'</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addMuffin</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cheeseburger</span><span class="o">-&gt;</span><span class="nf">setBurgerParts</span><span class="p">(</span><span class="s1">'muffin'</span><span class="p">,</span> <span class="k">new</span> <span class="nc">Muffin</span><span class="p">(</span><span class="s1">'muffin'</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+         
+    
+  
+    
+        
+          <li>
+            <details>
+              <summary> <b>HamburgerBuilder.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Builder\Builders</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\AbstractBurger</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\Burger</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\Parts\Meat</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\Parts\Muffin</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\Parts\Sauce</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class HamburgerBuilder
+ * @package DesignPatterns\Creational\Builder\Builders
+ */</span>
+<span class="kd">class</span> <span class="nc">HamburgerBuilder</span> <span class="kd">implements</span> <span class="nc">BurgerBuilderInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var AbstractBurger
+     */</span>
+    <span class="k">private</span> <span class="nv">$hamburger</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">createBurger</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">hamburger</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Burger</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return AbstractBurger
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getBurger</span><span class="p">():</span> <span class="kt">AbstractBurger</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">hamburger</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addSauce</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">hamburger</span><span class="o">-&gt;</span><span class="nf">setBurgerParts</span><span class="p">(</span><span class="s1">'sauce'</span><span class="p">,</span> <span class="k">new</span> <span class="nc">Sauce</span><span class="p">(</span><span class="s1">'Ketchup'</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addMeat</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">hamburger</span><span class="o">-&gt;</span><span class="nf">setBurgerParts</span><span class="p">(</span><span class="s1">'meet'</span><span class="p">,</span> <span class="k">new</span> <span class="nc">Meat</span><span class="p">(</span><span class="s1">'beef'</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">addMuffin</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">hamburger</span><span class="o">-&gt;</span><span class="nf">setBurgerParts</span><span class="p">(</span><span class="s1">'muffin'</span><span class="p">,</span> <span class="k">new</span> <span class="nc">Muffin</span><span class="p">(</span><span class="s1">'muffin'</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+         
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+      <b><i>Burger</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        
+            <b><i>Parts</i></b>
+            <ul class="spoiler-list">
+                
+                <li>
+                    <details>
+                      <summary> <b>AbstractPart.php</b> </summary>
+                      
+<figure class="highlight"><pre><code class="language-php" data-lang="php">                      
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Builder\Burger\Parts</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class AbstractPart
+ * @package DesignPatterns\Creational\Builder\Burger\Parts
+ */</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">AbstractPart</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$title</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * AbstractPart constructor.
+     *
+     * @param string $title
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$title</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">title</span> <span class="o">=</span> <span class="nv">$title</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getTitle</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">title</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+                      </code></pre></figure>
+
+                    </details>
+                </li>
+                
+                <li>
+                    <details>
+                      <summary> <b>Meat.php</b> </summary>
+                      
+<figure class="highlight"><pre><code class="language-php" data-lang="php">                      
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Builder\Burger\Parts</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Meat
+ * @package DesignPatterns\Creational\Builder\Burger\Parts
+ */</span>
+<span class="kd">class</span> <span class="nc">Meat</span> <span class="kd">extends</span> <span class="nc">AbstractPart</span>
+<span class="p">{</span>
+<span class="p">}</span>
+
+                      </code></pre></figure>
+
+                    </details>
+                </li>
+                
+                <li>
+                    <details>
+                      <summary> <b>Muffin.php</b> </summary>
+                      
+<figure class="highlight"><pre><code class="language-php" data-lang="php">                      
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Builder\Burger\Parts</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Muffin
+ * @package DesignPatterns\Creational\Builder\Burger\Parts
+ */</span>
+<span class="kd">class</span> <span class="nc">Muffin</span> <span class="kd">extends</span> <span class="nc">AbstractPart</span>
+<span class="p">{</span>
+<span class="p">}</span>
+
+                      </code></pre></figure>
+
+                    </details>
+                </li>
+                
+                <li>
+                    <details>
+                      <summary> <b>Sauce.php</b> </summary>
+                      
+<figure class="highlight"><pre><code class="language-php" data-lang="php">                      
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Builder\Burger\Parts</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Sauce
+ * @package DesignPatterns\Creational\Builder\Burger\Parts
+ */</span>
+<span class="kd">class</span> <span class="nc">Sauce</span> <span class="kd">extends</span> <span class="nc">AbstractPart</span>
+<span class="p">{</span>
+<span class="p">}</span>
+
+                      </code></pre></figure>
+
+                    </details>
+                </li>
+                
+            </ul>
+         
+    
+  
+    
+        
+          <li>
+            <details>
+              <summary> <b>AbstractBurger.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Builder\Burger</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\Parts\AbstractPart</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class AbstractBurger
+ * @package DesignPatterns\Creational\Builder\Burger
+ */</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">AbstractBurger</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var AbstractPart[]
+     */</span>
+    <span class="k">private</span> <span class="nv">$burgerParts</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @param string $partName
+     * @param AbstractPart $partObject
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setBurgerParts</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$partName</span><span class="p">,</span> <span class="kt">AbstractPart</span> <span class="nv">$partObject</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">burgerParts</span><span class="p">[</span><span class="nv">$partName</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$partObject</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+         
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+      <b><i>Director</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        
+          <li>
+            <details>
+              <summary> <b>Chef.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Builder\Director</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Builders\BurgerBuilderInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\AbstractBurger</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Chef
+ * @package DesignPatterns\Creational\Builder\Director
+ */</span>
+<span class="kd">class</span> <span class="nc">Chef</span> <span class="kd">implements</span> <span class="nc">DirectorInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @param BurgerBuilderInterface $builder
+     *
+     * @return AbstractBurger
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">buildBurger</span><span class="p">(</span><span class="kt">BurgerBuilderInterface</span> <span class="nv">$builder</span><span class="p">):</span> <span class="kt">AbstractBurger</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">createBurger</span><span class="p">();</span>
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">addMeat</span><span class="p">();</span>
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">addSauce</span><span class="p">();</span>
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">addMuffin</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">getBurger</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+         
+    
+  
+    
+        
+          <li>
+            <details>
+              <summary> <b>DirectorInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Creational\Builder\Director</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Builders\BurgerBuilderInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Burger\AbstractBurger</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface DirectorInterface
+ * @package DesignPatterns\Creational\Builder\Director
+ */</span>
+<span class="kd">interface</span> <span class="nc">DirectorInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @param BurgerBuilderInterface $builder
+     *
+     * @return AbstractBurger
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">buildBurger</span><span class="p">(</span><span class="kt">BurgerBuilderInterface</span> <span class="nv">$builder</span><span class="p">):</span> <span class="kt">AbstractBurger</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+         
+    
+  
+  
+  
+    </ul>  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> BuilderTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Creational\Builder</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Builders\CheeseburgerBuilder</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Builders\HamburgerBuilder</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Creational\Builder\Director\Chef</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">BuilderTest</span> <span class="k">extends</span> <span class="err">\</span><span class="n">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var Chef
+     */</span>
+    <span class="k">private</span> <span class="nv">$chef</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">setUp</span><span class="p">():</span> <span class="kt">void</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">chef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Chef</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCanCreateHamburger</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HamburgerBuilder</span><span class="p">();</span>
+
+        <span class="nv">$hamburger</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">chef</span><span class="o">-&gt;</span><span class="nf">buildBurger</span><span class="p">(</span><span class="nv">$builder</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\Builder\Burger\Burger'</span><span class="p">,</span> <span class="nv">$hamburger</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCanCreateCheeseburger</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CheeseburgerBuilder</span><span class="p">();</span>
+
+        <span class="nv">$cheeseburger</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">chef</span><span class="o">-&gt;</span><span class="nf">buildBurger</span><span class="p">(</span><span class="nv">$builder</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Creational\Builder\Burger\Burger'</span><span class="p">,</span> <span class="nv">$cheeseburger</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></li></li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

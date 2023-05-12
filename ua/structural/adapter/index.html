@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/" >Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/"  class="active">Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/structural/">
+      <span property="name">Структурні шаблони</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Адаптер</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Structural/Adapter/diagram.png" alt="adapter" class="img-responsive" />
+<strong>Адаптер</strong> (англ. <strong>Adapter</strong>) - структурний шаблон проєктування, призначений для організації використання функцій
+об’єкта, недоступного для модифікації, через спеціально створений інтерфейс.</p>
+
+<p>Дозволяє привести нестандартний або незручний інтерфейс якогось класу до інтерфейсу, сумісного з вашим кодом.
+Адаптер дозволяє класам працювати разом стандартним чином, що зазвичай не виходить через несумісні інтерфейси,
+надаючи для цього прошарок із інтерфейсом, зручним для клієнтів, самостійно використовуючи оригінальний інтерфейс.</p>
+
+<p>Ми маємо клас <strong><code class="language-plaintext highlighter-rouge">CashBox</code></strong>. <strong><code class="language-plaintext highlighter-rouge">CashBox-&gt;setCash()</code></strong> приймає тільки об’єкти типу <strong><code class="language-plaintext highlighter-rouge">DollarInterface</code></strong>.
+Уявімо, що у нас є кількох закусочних у різних куточках світу. У кожному з них своя валюта. А наш метод вміє працювати
+лише з доларами. Плюс для правильного підрахунку необхідно конвертувати валюту. Щоб привести все до одного вигляду, нам
+і потрібен <strong>Адаптер</strong>.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+      <b><i>Dollar</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>DollarInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Adapter\Dollar</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface DollarInterface
+ * @package DesignPatterns\Structural\Adapter\Dollar
+ */</span>
+<span class="kd">interface</span> <span class="nc">DollarInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCash</span><span class="p">():</span> <span class="kt">float</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>DollarsCash.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Adapter\Dollar</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class DollarsCash
+ * @package DesignPatterns\Structural\Adapter\Dollar
+ */</span>
+<span class="kd">class</span> <span class="nc">DollarsCash</span> <span class="kd">implements</span> <span class="nc">DollarInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var float
+     */</span>
+    <span class="k">protected</span> <span class="nv">$cash</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * DollarsCash constructor.
+     *
+     * @param float $cash
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">float</span> <span class="nv">$cash</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span> <span class="o">=</span> <span class="nv">$cash</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCash</span><span class="p">():</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+      <b><i>Euro</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>EuroCash.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Adapter\Euro</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class EuroCash
+ * @package DesignPatterns\Structural\Adapter\Euro
+ */</span>
+<span class="kd">class</span> <span class="nc">EuroCash</span> <span class="kd">implements</span> <span class="nc">EuroInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var float
+     */</span>
+    <span class="k">protected</span> <span class="nv">$cash</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * EuroCash constructor.
+     *
+     * @param float $cash
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">float</span> <span class="nv">$cash</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span> <span class="o">=</span> <span class="nv">$cash</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCash</span><span class="p">():</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>EuroInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Adapter\Euro</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface EuroInterface
+ * @package DesignPatterns\Structural\Adapter\Euro
+ */</span>
+<span class="kd">interface</span> <span class="nc">EuroInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCash</span><span class="p">():</span> <span class="kt">float</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>CashBox.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Adapter</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Adapter\Dollar\DollarInterface</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class CashBox
+ * @package DesignPatterns\Structural\Adapter
+ */</span>
+<span class="kd">class</span> <span class="nc">CashBox</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var float
+     */</span>
+    <span class="k">protected</span> <span class="nv">$cash</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getSumCashInCashBox</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param DollarInterface $dollarCash
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setCash</span><span class="p">(</span><span class="kt">DollarInterface</span> <span class="nv">$dollarCash</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cash</span> <span class="o">+=</span> <span class="nv">$dollarCash</span><span class="o">-&gt;</span><span class="nf">getCash</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>EuroAdapter.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Adapter</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Adapter\Dollar\DollarInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Adapter\Euro\EuroInterface</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class EuroAdapter
+ * @package DesignPatterns\Structural\Adapter
+ */</span>
+<span class="kd">class</span> <span class="nc">EuroAdapter</span> <span class="kd">implements</span> <span class="nc">DollarInterface</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">EXCHANGE_RATE</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var EuroInterface
+     */</span>
+    <span class="k">protected</span> <span class="nv">$euroCash</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * EuroAdapter constructor.
+     *
+     * @param EuroInterface $euroCash
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">EuroInterface</span> <span class="nv">$euroCash</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">euroCash</span> <span class="o">=</span> <span class="nv">$euroCash</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getCash</span><span class="p">():</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">euroCash</span><span class="o">-&gt;</span><span class="nf">getCash</span><span class="p">()</span> <span class="o">*</span> <span class="k">self</span><span class="o">::</span><span class="no">EXCHANGE_RATE</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> AdapterTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Structural\Adapter</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Adapter\CashBox</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Adapter\Dollar\DollarsCash</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Adapter\Euro\EuroCash</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Adapter\EuroAdapter</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">TypeError</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">AdapterTest</span> <span class="k">extends</span> <span class="err">\</span><span class="n">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testGetSumWithDollarCash</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$cashBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CashBox</span><span class="p">();</span>
+        <span class="nv">$dollarCash</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DollarsCash</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+
+        <span class="nv">$cashBox</span><span class="o">-&gt;</span><span class="nf">setCash</span><span class="p">(</span><span class="nv">$dollarCash</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$cashBox</span><span class="o">-&gt;</span><span class="nf">getSumCashInCashBox</span><span class="p">(),</span> <span class="nv">$dollarCash</span><span class="o">-&gt;</span><span class="nf">getCash</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testTypeErrorGetSumWithEuroCash</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectException</span><span class="p">(</span><span class="nc">TypeError</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+        <span class="nv">$cashBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CashBox</span><span class="p">();</span>
+        <span class="nv">$euroCash</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EuroCash</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+
+        <span class="nv">$cashBox</span><span class="o">-&gt;</span><span class="nf">setCash</span><span class="p">(</span><span class="nv">$euroCash</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testAdapterForEuroCash</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$cashBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CashBox</span><span class="p">();</span>
+        <span class="nv">$euroCash</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EuroCash</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+        <span class="nv">$dollarCash</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DollarsCash</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+        <span class="nv">$euroCashAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EuroAdapter</span><span class="p">(</span><span class="nv">$euroCash</span><span class="p">);</span>
+
+        <span class="nv">$cashBox</span><span class="o">-&gt;</span><span class="nf">setCash</span><span class="p">(</span><span class="nv">$euroCashAdapter</span><span class="p">);</span>
+        <span class="nv">$cashBox</span><span class="o">-&gt;</span><span class="nf">setCash</span><span class="p">(</span><span class="nv">$dollarCash</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$cashBox</span><span class="o">-&gt;</span><span class="nf">getSumCashInCashBox</span><span class="p">(),</span> <span class="nv">$euroCashAdapter</span><span class="o">-&gt;</span><span class="nf">getCash</span><span class="p">()</span> <span class="o">+</span> <span class="nv">$dollarCash</span><span class="o">-&gt;</span><span class="nf">getCash</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+
+
+</li></li></li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

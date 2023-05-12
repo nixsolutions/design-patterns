@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/" >Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/"  class="active">Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/structural/">
+      <span property="name">Структурні шаблони</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Заступник</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Structural/Proxy/diagram.png" alt="proxy" class="img-responsive" />
+<strong>Замісник</strong> (англ. <strong>Proxy</strong>) — структурний шаблон проєктування, надає об’єкт, який контролює
+доступ до іншого об’єкта, перехоплюючи всі виклики (виконує функцію контейнера).</p>
+
+<p>Найбільш частим застосуванням шаблону <strong>Проксі</strong> є ліниве завантаження (<strong>lazy load</strong>).
+“Важкі” об’єкти не завжди розумно завантажувати в момент ініціалізації. Більш правильним рішенням буде завантажити
+його на першу вимогу.</p>
+
+<p>Представимо нашу кухню (** Kitchen).</p>
+
+<p>У нас є якийсь склад булок(<strong><code class="language-plaintext highlighter-rouge">Kitchen-&gt;muffinPool</code></strong>) для бургерів. Замовлення йдуть – булки витрачаються.
+У нас є контакти перевіреного постачальника (<strong><code class="language-plaintext highlighter-rouge">MuffinForwarder</code></strong>), який надає нам булки. У постачальника також є
+якесь сховище і зв’язок із фабрикою (<strong><code class="language-plaintext highlighter-rouge">MuffinFactory</code></strong>), яка виробляла булки.
+У нашому прикладі “Заступників” буде два. Це кухня та постачальник.</p>
+
+<p>Розглянемо всю суть трохи ближче.</p>
+
+<ul>
+  <li><strong>Фабрика(<code class="language-plaintext highlighter-rouge">MuffinFactory</code>)</strong> просто виробляє булки. Вам потрібна булка?
+<strong><code class="language-plaintext highlighter-rouge">MuffinFactory-&gt;getProduct()</code></strong> віддасть вам новий об’єкт типу <strong>Product</strong>.</li>
+  <li><strong>Постачальник(<code class="language-plaintext highlighter-rouge">MuffinForwarder</code>)</strong> має якесь сховище для булок.
+<strong><code class="language-plaintext highlighter-rouge">MuffinForwarder-&gt;getProduct()</code></strong> віддасть вам об’єкт типу <strong><code class="language-plaintext highlighter-rouge">Product</code></strong> зі свого сховища.
+Як тільки булки закінчуються, він звертається до Фабрики та робить закупівлю.</li>
+  <li><strong>Кухня(<code class="language-plaintext highlighter-rouge">Kitchen</code>)</strong> як і постачальник, має сховище.
+<strong><code class="language-plaintext highlighter-rouge">Kitchen-&gt;getProduct()</code></strong> так само віддасть вам об’єкт типу <strong><code class="language-plaintext highlighter-rouge">Product</code></strong> зі свого сховища.
+Як тільки є необхідність у булках, ми звертаємося до постачальника.</li>
+</ul>
+
+<p>А зараз давайте зрозуміємо, навіщо нам все це потрібно?
+Якщо постачальник має булки, час їх доставляння на кухню займає якийсь час. Наприклад, <strong>10</strong> хвилин.
+Якщо у постачальника їх немає, він замовляє їх у фабрики. Виробництво однієї займає, наприклад, <strong>1</strong> хвилину.
+Час це ресурс, який споживають наші об’єкти. І ініціалізація їх потрібна лише за необхідності.
+Даний шаблон дуже схожий на Декоратора. Що б вловити суть, уявімо, що клієнту недоступна ні фабрика, ні постачальник.
+Він просто не зможе отримати продукт. Він знає, що є кухня, і все.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+      <b><i>Factory</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        
+            <b><i>Product</i></b>
+            <ul class="spoiler-list">
+                
+                <li>
+                    <details>
+                      <summary> <b>Product.php</b> </summary>
+                      
+<figure class="highlight"><pre><code class="language-php" data-lang="php">                      
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Proxy\Factory\Product</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Product
+ * @package DesignPatterns\Structural\Proxy\Factory\Product
+ */</span>
+<span class="kd">class</span> <span class="nc">Product</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+                      </code></pre></figure>
+
+                    </details>
+                </li>
+                
+            </ul>
+         
+    
+  
+    
+        
+          <li>
+            <details>
+              <summary> <b>FactoryInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Proxy\Factory</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Proxy\Factory\Product\Product</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface FactoryInterface
+ * @package DesignPatterns\Structural\Proxy\Factory
+ */</span>
+<span class="kd">interface</span> <span class="nc">FactoryInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return Product
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getProduct</span><span class="p">():</span> <span class="kt">Product</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+         
+    
+  
+    
+        
+          <li>
+            <details>
+              <summary> <b>MuffinFactory.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Proxy\Factory</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Proxy\Factory\Product\Product</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class MuffinFactory
+ * @package DesignPatterns\Structural\Proxy\Factory
+ */</span>
+<span class="kd">class</span> <span class="nc">MuffinFactory</span> <span class="kd">implements</span> <span class="nc">FactoryInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @return Product
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getProduct</span><span class="p">():</span> <span class="kt">Product</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">Product</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+         
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+      <b><i>Forwarder</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        
+          <li>
+            <details>
+              <summary> <b>MuffinForwarder.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Proxy\Forwarder</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Proxy\AbstractPurchase</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Proxy\Factory\FactoryInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Proxy\Factory\MuffinFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Proxy\Factory\Product\Product</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class MuffinForwarder
+ * @package DesignPatterns\Structural\Proxy\Forwarder
+ */</span>
+<span class="kd">class</span> <span class="nc">MuffinForwarder</span> <span class="kd">extends</span> <span class="nc">AbstractPurchase</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">PARTY_SIZE</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var FactoryInterface
+     */</span>
+    <span class="k">protected</span> <span class="nv">$factory</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var Product[]
+     */</span>
+    <span class="k">public</span> <span class="nv">$muffinPool</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @return FactoryInterface
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">getFactory</span><span class="p">():</span> <span class="kt">FactoryInterface</span>
+    <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">is_null</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">factory</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">factory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MuffinFactory</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">factory</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return Product
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getProduct</span><span class="p">():</span> <span class="kt">Product</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">count</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">muffinPool</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">purchaseProducts</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nb">array_pop</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">muffinPool</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">purchaseProducts</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="k">self</span><span class="o">::</span><span class="no">PARTY_SIZE</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">array_push</span><span class="p">(</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">muffinPool</span><span class="p">,</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getFactory</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">getProduct</span><span class="p">()</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">incrementCountPurchase</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+         
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+      <b><i>Kitchen</i></b>
+      <ul class="spoiler-list">
+  
+    
+  
+    
+        
+          <li>
+            <details>
+              <summary> <b>Kitchen.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Proxy\Kitchen</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Proxy\AbstractPurchase</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Proxy\Factory\Product\Product</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Proxy\Forwarder\MuffinForwarder</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Kitchen
+ * @package DesignPatterns\Structural\Proxy\Kitchen
+ */</span>
+<span class="kd">class</span> <span class="nc">Kitchen</span> <span class="kd">extends</span> <span class="nc">AbstractPurchase</span>
+<span class="p">{</span>
+
+    <span class="k">const</span> <span class="no">PARTY_SIZE</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var Product[]
+     */</span>
+    <span class="k">public</span> <span class="nv">$muffinPool</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @var MuffinForwarder
+     */</span>
+    <span class="k">protected</span> <span class="nv">$forwarder</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return Product
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getProduct</span><span class="p">():</span> <span class="kt">Product</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">count</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">muffinPool</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">purchaseProducts</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nb">array_pop</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">muffinPool</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return MuffinForwarder
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getForwarder</span><span class="p">():</span> <span class="kt">MuffinForwarder</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">is_null</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">forwarder</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">forwarder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MuffinForwarder</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">forwarder</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">purchaseProducts</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="k">self</span><span class="o">::</span><span class="no">PARTY_SIZE</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">array_push</span><span class="p">(</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">muffinPool</span><span class="p">,</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getForwarder</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">getProduct</span><span class="p">()</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">incrementCountPurchase</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+         
+    
+  
+  
+  
+    </ul>  
+  
+
+  <li>
+  
+    
+  
+    
+        
+          <li>
+            <details>
+              <summary> <b>AbstractPurchase.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Structural\Proxy</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class AbstractPurchase
+ * @package DesignPatterns\Structural\Proxy
+ */</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">AbstractPurchase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$muffinPurchaseCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="n">purchaseProducts</span><span class="p">();</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">incrementCountPurchase</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">muffinPurchaseCount</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return int
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getPartySize</span><span class="p">():</span> <span class="kt">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="no">PARTY_SIZE</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+         
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> ProxyTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Structural\Proxy</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Proxy\Forwarder\MuffinForwarder</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Structural\Proxy\Kitchen\Kitchen</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">ProxyTest</span> <span class="k">extends</span> <span class="err">\</span><span class="n">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var Kitchen
+     */</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$kitchen</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">setUpBeforeClass</span><span class="p">():</span> <span class="kt">void</span>
+    <span class="p">{</span>
+        <span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Kitchen</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testKitchenMuffinPoolEmpty</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">count</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="n">muffinPool</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testKitchenNotPurchaseMuffins</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="n">muffinPurchaseCount</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testKitchenGetForwarder</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$forwarder</span> <span class="o">=</span> <span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="nf">getForwarder</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Structural\Proxy\Forwarder\MuffinForwarder'</span><span class="p">,</span> <span class="nv">$forwarder</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="nf">getForwarder</span><span class="p">(),</span> <span class="nv">$forwarder</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$forwarder</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @depends testKitchenGetForwarder
+     *
+     * @param MuffinForwarder $forwarder
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testForwarderNotPurchaseMuffins</span><span class="p">(</span><span class="kt">MuffinForwarder</span> <span class="nv">$forwarder</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$forwarder</span><span class="o">-&gt;</span><span class="n">muffinPurchaseCount</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @depends testKitchenGetForwarder
+     *
+     * @param MuffinForwarder $forwarder
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testPurchase</span><span class="p">(</span><span class="kt">MuffinForwarder</span> <span class="nv">$forwarder</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="nf">purchaseProducts</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="nf">getPartySize</span><span class="p">(),</span> <span class="nb">count</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="n">muffinPool</span><span class="p">));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="n">muffinPurchaseCount</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">$forwarder</span><span class="o">-&gt;</span><span class="n">muffinPurchaseCount</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testKitchenGetProduct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$product</span> <span class="o">=</span> <span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="nf">getProduct</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="s1">'DesignPatterns\Structural\Proxy\Factory\Product\Product'</span><span class="p">,</span> <span class="nv">$product</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertNotEquals</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="nf">getPartySize</span><span class="p">(),</span> <span class="nb">count</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="n">muffinPool</span><span class="p">));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="nf">getPartySize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">count</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$kitchen</span><span class="o">-&gt;</span><span class="n">muffinPool</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></li></li></li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/"  class="active">Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/" >Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/behavioral/">
+      <span property="name">Шаблони поведінки</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Команда</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Behavioral/Command/diagram.png" alt="command" class="img-responsive" />
+<strong>Команда</strong> (англ. <strong>Command</strong>) належить до класу шаблонів поведінки. Команда є деякою дією
+та її параметрами. Суть шаблону полягає в тому, щоб відокремити ініціатора та одержувача команди.</p>
+
+<p>Припустимо, у нас є об’єкти Вимикач (Командир) та Лампа (Виконавець). Цей шаблон використовує реалізацію інтерфейсу
+<strong><code class="language-plaintext highlighter-rouge">CommandInterface</code></strong>, щоб викликати якийсь метод Виконавця, використовуючи для цього відомий Командирові метод <strong><code class="language-plaintext highlighter-rouge">execute()</code></strong>.
+Командир просто знає, що потрібно викликати метод <strong><code class="language-plaintext highlighter-rouge">execute()</code></strong> для обробки команди клієнта,
+не розбираючись у деталях реалізації Виконавця. Виконавець відокремлений від команди.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>CommandInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Command</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface CommandInterface
+ * @package DesignPatterns\Behavioral\Command
+ */</span>
+<span class="kd">interface</span> <span class="nc">CommandInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">execute</span><span class="p">();</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>CommandRegistry.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Command</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Countable</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">RuntimeException</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">CommandRegistry</span> <span class="kd">implements</span> <span class="nc">Countable</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var CommandInterface[]
+     */</span>
+    <span class="k">private</span> <span class="nv">$registry</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @param string $type
+     * @param CommandInterface $command
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">add</span><span class="p">(</span><span class="kt">CommandInterface</span> <span class="nv">$command</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$type</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">registry</span><span class="p">[</span><span class="nv">$type</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$command</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $type
+     * @return CommandInterface
+     * @throws RuntimeException
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">get</span><span class="p">(</span><span class="nv">$type</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">registry</span><span class="p">[</span><span class="nv">$type</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nc">RuntimeException</span><span class="p">(</span><span class="s1">'Cannot find command '</span> <span class="mf">.</span> <span class="nv">$type</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">registry</span><span class="p">[</span><span class="nv">$type</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">count</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">registry</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Lamp.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Command</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Lamp</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">turnOn</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">'I\'m bright and cheerful light.'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">turnOff</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">'I am quiet and peaceful shadow.'</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>TurnOffCommand.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Command</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">TurnOffCommand</span> <span class="kd">implements</span> <span class="nc">CommandInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var Lamp
+     */</span>
+    <span class="k">protected</span> <span class="nv">$lamp</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @param Lamp $lamp
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">Lamp</span> <span class="nv">$lamp</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">lamp</span> <span class="o">=</span> <span class="nv">$lamp</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">execute</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">lamp</span><span class="o">-&gt;</span><span class="nf">turnOff</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>TurnOnCommand.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Command</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">TurnOnCommand</span> <span class="kd">implements</span> <span class="nc">CommandInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var Lamp
+     */</span>
+    <span class="k">protected</span> <span class="nv">$lamp</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @param Lamp $lamp
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">Lamp</span> <span class="nv">$lamp</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">lamp</span> <span class="o">=</span> <span class="nv">$lamp</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">execute</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">lamp</span><span class="o">-&gt;</span><span class="nf">turnOn</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> CommandTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Behavioral\Command</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Command\CommandRegistry</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Command\Lamp</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Command\TurnOffCommand</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Command\TurnOnCommand</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">CommandTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var CommandRegistry
+     */</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$registry</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var Lamp
+     */</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$lamp</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">setUpBeforeClass</span><span class="p">():</span> <span class="kt">void</span>
+    <span class="p">{</span>
+        <span class="k">self</span><span class="o">::</span><span class="nv">$registry</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CommandRegistry</span><span class="p">();</span>
+        <span class="k">self</span><span class="o">::</span><span class="nv">$lamp</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Lamp</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testAddCommandToRegistry</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">self</span><span class="o">::</span><span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">TurnOnCommand</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$lamp</span><span class="p">),</span> <span class="s1">'ON'</span><span class="p">);</span>
+        <span class="k">self</span><span class="o">::</span><span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">TurnOffCommand</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$lamp</span><span class="p">),</span> <span class="s1">'OFF'</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="nv">$registry</span><span class="o">-&gt;</span><span class="nb">count</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testTurnOnCommand</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">self</span><span class="o">::</span><span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">TurnOnCommand</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$lamp</span><span class="p">),</span> <span class="s1">'ON'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$lamp</span><span class="o">-&gt;</span><span class="nf">turnOn</span><span class="p">(),</span> <span class="k">self</span><span class="o">::</span><span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'ON'</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">execute</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testTurnOffCommand</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">self</span><span class="o">::</span><span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">TurnOffCommand</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$lamp</span><span class="p">),</span> <span class="s1">'OFF'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$lamp</span><span class="o">-&gt;</span><span class="nf">turnOff</span><span class="p">(),</span> <span class="k">self</span><span class="o">::</span><span class="nv">$registry</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'OFF'</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">execute</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

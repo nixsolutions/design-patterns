@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/"  class="active">Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/" >Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/behavioral/">
+      <span property="name">Шаблони поведінки</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Спостерігач</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Behavioral/Observer/diagram.png" alt="observer" class="img-responsive" />
+<strong>Спостерігач</strong> (англ. <strong>Observer</strong>) створює механізм передплати, за допомогою якого одні об’єкти можуть
+підписуватись на оновлення, що відбуваються в інших об’єктах під час виконання програми.
+Як тільки об’єкт, що спостерігається, змінюється, він сповіщає всіх своїх слухачів, щоб вони змогли зреагувати на цю зміну.</p>
+
+<p>Для реалізації публікації/підписки на поведінку об’єкта щоразу, коли об’єкт <strong><code class="language-plaintext highlighter-rouge">Subject</code></strong> змінює свій стан,
+прикріплені об’єкти <strong>Observers</strong> сповіщаються. Шаблон використовується, щоб скоротити кількість пов’язаних безпосередньо об’єктів, і замість цього використовує слабкий зв’язок (<em>loose coupling</em>).</p>
+
+<p>PHP надає два стандартні інтерфейси, які можуть допомогти реалізувати цей шаблон: <strong><code class="language-plaintext highlighter-rouge">SplObserver</code></strong> та <strong><code class="language-plaintext highlighter-rouge">SplSubject</code></strong>.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Newspaper.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Observer</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">SplObserver</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">SplSubject</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Newspaper
+ * @package DesignPatterns\Behavioral\Observer
+ */</span>
+<span class="kd">class</span> <span class="nc">Newspaper</span> <span class="kd">implements</span> <span class="nc">SplSubject</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var SplObserver[]
+     */</span>
+    <span class="k">protected</span> <span class="nv">$observers</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$content</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * Newspaper constructor.
+     *
+     * @param string $name
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param SplObserver $observer
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">attach</span><span class="p">(</span><span class="kt">SplObserver</span> <span class="nv">$observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nb">array_push</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">observers</span><span class="p">,</span> <span class="nv">$observer</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param SplObserver $observer
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">detach</span><span class="p">(</span><span class="kt">SplObserver</span> <span class="nv">$observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$key</span> <span class="o">=</span> <span class="nb">array_search</span><span class="p">(</span><span class="nv">$observer</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">observers</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">observers</span><span class="p">[</span><span class="nv">$key</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param $content
+     *
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">breakOutNews</span><span class="p">(</span><span class="nv">$content</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">content</span> <span class="o">=</span> <span class="nv">$content</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">notify</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getContent</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">content</span> <span class="mf">.</span> <span class="s1">'( '</span> <span class="mf">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="mf">.</span> <span class="s1">' )'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return void
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">notify</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">observers</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$value</span><span class="o">-&gt;</span><span class="nf">update</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Reader.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Observer</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">SplObserver</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">SplSubject</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Reader
+ * @package DesignPatterns\Behavioral\Observer
+ */</span>
+<span class="kd">class</span> <span class="nc">Reader</span> <span class="kd">implements</span> <span class="nc">SplObserver</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">protected</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * Reader constructor.
+     *
+     * @param string $name
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param SplSubject|Newspaper $subject
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">update</span><span class="p">(</span><span class="kt">SplSubject</span> <span class="nv">$subject</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="mf">.</span> <span class="s1">' is reading breakout news '</span> <span class="mf">.</span> <span class="nv">$subject</span><span class="o">-&gt;</span><span class="nf">getContent</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> ObserverTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Behavioral\Observer</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Observer\Newspaper</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Observer\Reader</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">ObserverTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testPostedNewsAndUserNotify</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$newspaper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Newspaper</span><span class="p">(</span><span class="s1">'New York Times'</span><span class="p">);</span>
+        <span class="nv">$allen</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Reader</span><span class="p">(</span><span class="s1">'Allen'</span><span class="p">);</span>
+
+        <span class="nv">$newspaper</span><span class="o">-&gt;</span><span class="nf">attach</span><span class="p">(</span><span class="nv">$allen</span><span class="p">);</span>
+        <span class="nv">$newspaper</span><span class="o">-&gt;</span><span class="nf">breakOutNews</span><span class="p">(</span><span class="s1">'Good news!'</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectOutputString</span><span class="p">(</span><span class="s1">'Allen is reading breakout news Good news!( New York Times )'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-4": {
+      "DesignPatterns\\": "patterns/",
+      "DesignPatterns\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^7.0",
+    "codeception/codeception": "3.1.3"
+  }
+}

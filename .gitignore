@@ -1,0 +1,23 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea/
+out
+gen
+/vendor/
+
+tests/_output/*
+.project
+/tests/_support/_generated/
+
+_site
+.DS_Store
+.jekyll
+.jekyll-metadata
+.bundle
+.sass-cache
+Gemfile.lock
+node_modules
+package.json

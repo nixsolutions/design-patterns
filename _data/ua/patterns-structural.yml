@@ -1,0 +1,248 @@
+title: Структурні шаблони
+permalink: /structural/
+path: patterns/ua/Structural/ReadMe.md
+patterns:
+  adapter:
+    title: Адаптер
+    permalink: /ua/structural/adapter/
+    path: patterns/ua/Structural/Adapter/ReadMe.md
+    img: /_includes/patterns/ua/Structural/Adapter/diagram.png
+    test:
+      name: AdapterTest.php
+      path: tests/unit/Structural/Adapter/AdapterTest.php
+    structure:
+      folders: ["Dollar", "Euro", "main"]
+      files:
+        main:
+          CashBox.php:
+            path: patterns/ua/Structural/Adapter/CashBox.php
+          EuroAdapter.php:
+            path: patterns/ua/Structural/Adapter/EuroAdapter.php
+        Dollar:
+          DollarInterface.php:
+            path: patterns/ua/Structural/Adapter/Dollar/DollarInterface.php
+          DollarsCash.php:
+            path: patterns/ua/Structural/Adapter/Dollar/DollarsCash.php
+        Euro:
+          EuroCash.php:
+            path: patterns/ua/Structural/Adapter/Euro/EuroCash.php
+          EuroInterface.php:
+            path: patterns/ua/Structural/Adapter/Euro/EuroInterface.php
+  bridge:
+    title: Міст
+    permalink: /ua/structural/bridge/
+    path: patterns/ua/Structural/Bridge/ReadMe.md
+    img: /_includes/patterns/ua/Structural/Bridge/diagram.png
+    test:
+      name: BridgeTest.php
+      path: tests/unit/Structural/Bridge/BridgeTest.php
+    structure:
+      folders: ["Abstraction", "Implementation"]
+      files:
+        Abstraction:
+          AbstractCashBox.php:
+            path: patterns/ua/Structural/Bridge/Abstraction/AbstractCashBox.php
+          EuropeCashBox.php:
+            path: patterns/ua/Structural/Bridge/Abstraction/EuropeCashBox.php
+          UsaCashBox.php:
+            path: patterns/ua/Structural/Bridge/Abstraction/UsaCashBox.php
+        Implementation:
+          AbstractCurrency.php:
+            path: patterns/ua/Structural/Bridge/Implementation/AbstractCurrency.php
+          CurrencyInterface.php:
+            path: patterns/ua/Structural/Bridge/Implementation/CurrencyInterface.php
+          DollarCurrency.php:
+            path: patterns/ua/Structural/Bridge/Implementation/DollarCurrency.php
+          EuroCurrency.php:
+            path: patterns/ua/Structural/Bridge/Implementation/EuroCurrency.php
+  composite:
+    title: Компонувальник
+    permalink: /ua/structural/composite/
+    path: patterns/ua/Structural/Composite/ReadMe.md
+    img: /_includes/patterns/ua/Structural/Composite/diagram.png
+    test:
+      name: CompositeTest.php
+      path: tests/unit/Structural/Composite/CompositeTest.php
+    structure:
+      folders: ["Abstraction", "Helper", "Html"]
+      files:
+        Abstraction:
+          Composite.php:
+            path: patterns/ua/Structural/Composite/Abstraction/Composite.php
+          CompositeInterface.php:
+            path: patterns/ua/Structural/Composite/Abstraction/CompositeInterface.php
+          Leaf.php:
+            path: patterns/ua/Structural/Composite/Abstraction/Leaf.php
+        Helper:
+          NewLineHelper.php:
+            path: patterns/ua/Structural/Composite/Helper/NewLineHelper.php
+        Html:
+          Body.php:
+            path: patterns/ua/Structural/Composite/Html/Body.php
+          Div.php:
+            path: patterns/ua/Structural/Composite/Html/Div.php
+          H4.php:
+            path: patterns/ua/Structural/Composite/Html/H4.php
+          Header.php:
+            path: patterns/ua/Structural/Composite/Html/Header.php
+          Html.php:
+            path: patterns/ua/Structural/Composite/Html/Html.php
+          Paragraph.php:
+            path: patterns/ua/Structural/Composite/Html/Paragraph.php
+          Title.php:
+            path: patterns/ua/Structural/Composite/Html/Title.php
+  data-mapper:
+    title: Перетворювач Даних
+    permalink: /ua/structural/data-mapper/
+    path: patterns/ua/Structural/DataMapper/ReadMe.md
+    img: /_includes/patterns/ua/Structural/DataMapper/diagram.png
+    test:
+      name: UserMapperTest.php
+      path: tests/unit/Structural/DataMapper/UserMapperTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Storage.php:
+            path: patterns/ua/Structural/DataMapper/Storage.php
+          User.php:
+            path: patterns/ua/Structural/DataMapper/User.php
+          UserMapper.php:
+            path: patterns/ua/Structural/DataMapper/UserMapper.php
+  decorator:
+    title: Декоратор
+    permalink: /ua/structural/decorator/
+    path: patterns/ua/Structural/Decorator/ReadMe.md
+    img: /_includes/patterns/ua/Structural/Decorator/diagram.png
+    test:
+      name: DecoratorTest.php
+      path: tests/unit/Structural/Decorator/DecoratorTest.php
+    structure:
+      folders: ["Burgers", "main"]
+      files:
+        Burgers:
+          BurgerInterface.php:
+            path: patterns/ua/Structural/Decorator/Burgers/BurgerInterface.php
+          Cheeseburger.php:
+            path: patterns/ua/Structural/Decorator/Burgers/Cheeseburger.php
+        main:
+          AbstractDecorator.php:
+            path: patterns/ua/Structural/Decorator/AbstractDecorator.php
+          CheeseburgerCheeseDecorator.php:
+            path: patterns/ua/Structural/Decorator/CheeseburgerCheeseDecorator.php
+          CheeseburgerSauceDecorator.php:
+            path: patterns/ua/Structural/Decorator/CheeseburgerSauceDecorator.php
+  dependency-injection:
+    title: Використання залежностей
+    permalink: /ua/structural/dependency-injection/
+    path: patterns/ua/Structural/DependencyInjection/ReadMe.md
+    img: /_includes/patterns/ua/Structural/DependencyInjection/diagram.png
+    test:
+      name: DependencyInjectionTest.php
+      path: tests/unit/Structural/DependencyInjection/DependencyInjectionTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          BurgerInterface.php:
+            path: patterns/ua/Structural/DependencyInjection/BurgerInterface.php
+          Worker.php:
+            path: patterns/ua/Structural/DependencyInjection/Worker.php
+  facade:
+    title: Фасад
+    permalink: /ua/structural/facade/
+    path: patterns/ua/Structural/Facade/ReadMe.md
+    img: /_includes/patterns/ua/Structural/Facade/diagram.png
+    test:
+      name: FacadeTest.php
+      path: tests/unit/Structural/Facade/FacadeTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          BurgerWorker.php:
+            path: patterns/ua/Structural/Facade/BurgerWorker.php
+          CashBox.php:
+            path: patterns/ua/Structural/Facade/CashBox.php
+          CashMan.php:
+            path: patterns/ua/Structural/Facade/CashMan.php
+          WaterWorker.php:
+            path: patterns/ua/Structural/Facade/WaterWorker.php
+  fluent-interface:
+    title: Поточний інтерфейс
+    permalink: /ua/structural/fluent-interface/
+    path: patterns/ua/Structural/FluentInterface/ReadMe.md
+    img: /_includes/patterns/ua/Structural/FluentInterface/diagram.png
+    test:
+      name: BurgerMakerTest.php
+      path: tests/unit/Structural/FluentInterface/BurgerMakerTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          BurgerMaker.php:
+            path: patterns/ua/Structural/FluentInterface/BurgerMaker.php
+  flyweight:
+    title: Пристосуванець
+    permalink: /ua/structural/flyweight/
+    path: patterns/ua/Structural/Flyweight/ReadMe.md
+    img: /_includes/patterns/ua/Structural/Flyweight/diagram.png
+    test:
+      name: FactoryTest.php
+      path: tests/unit/Structural/Flyweight/FactoryTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Factory.php:
+            path: patterns/ua/Structural/Flyweight/Factory.php
+          Title.php:
+            path: patterns/ua/Structural/Flyweight/Title.php
+          TitleFlyweightInterface.php:
+            path: patterns/ua/Structural/Flyweight/TitleFlyweightInterface.php
+  proxy:
+    title: Заступник
+    permalink: /ua/structural/proxy/
+    path: patterns/ua/Structural/Proxy/ReadMe.md
+    img: /_includes/patterns/ua/Structural/Proxy/diagram.png
+    test:
+      name: ProxyTest.php
+      path: tests/unit/Structural/Proxy/ProxyTest.php
+    structure:
+      folders: ["Factory", "Forwarder", "Kitchen", "main"]
+      sub-folders:
+        - Product
+      files:
+        Factory:
+          Product:
+            Product.php:
+              path: patterns/ua/Structural/Proxy/Factory/Product/Product.php
+          FactoryInterface.php:
+            path: patterns/ua/Structural/Proxy/Factory/FactoryInterface.php
+          MuffinFactory.php:
+            path: patterns/ua/Structural/Proxy/Factory/MuffinFactory.php
+        Forwarder:
+          MuffinForwarder.php:
+            path: patterns/ua/Structural/Proxy/Forwarder/MuffinForwarder.php
+        Kitchen:
+          Kitchen.php:
+            path: patterns/ua/Structural/Proxy/Kitchen/Kitchen.php
+        main:
+          AbstractPurchase.php:
+            path: patterns/ua/Structural/Proxy/AbstractPurchase.php
+  registry:
+    title: Реєстр
+    permalink: /ua/structural/registry/
+    path: patterns/ua/Structural/Registry/ReadMe.md
+    img: /_includes/patterns/ua/Structural/Registry/diagram.png
+    test:
+      name: RegistryTest.php
+      path: tests/unit/Structural/Registry/RegistryTest.php
+    structure:
+      folders: ["main"]
+      files:
+        main:
+          Registry.php:
+            path: patterns/ua/Structural/Registry/Registry.php
+          WorkerData.php:
+            path: patterns/ua/Structural/Registry/WorkerData.php

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Шаблоны Проектирования – Design patterns – Шаблоны проектирования</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+    <meta property="og:title" content="Шаблоны Проектирования" />
+    <meta property="twitter:title" content="Шаблоны Проектирования" />
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/ru/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" >Ua</a></li>
+    <li><a href="/design-patterns/ru/" class="active">Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/ru/">Шаблоны проектирования</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/ru/"  class="active">Главная</a>
+        <a href="/design-patterns/ru/creational/" >Порождающие шаблоны</a>
+        <a href="/design-patterns/ru/behavioral/" >Шаблоны поведения</a>
+        <a href="/design-patterns/ru/structural/" >Структурные шаблоны</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+  <p><strong>Паттерн</strong> (от англ. <strong>Pattern</strong>) — образец, шаблон.
+Представьте, что вы хотите сделать новый автомобиль, но вы никогда этим не занимались.
+Сколько колес и почему вы спроектируете для него?</p>
+
+<p>Сейчас вы уже скорее всего, скажете - 4, однако почему не 3, 5, 10, 20?
+Потому что практикой использования уже было выяснено,
+что обычные автомобили лучше всего делать на 4-х колесах — это шаблон проектирования сформированный временем.</p>
+
+<p>Именно такому же подходу и служат шаблоны в ООП, и вы не столкнетесь с ними в разработке до тех пор,
+пока вам не потребуется “сделать автомобиль”. Однако иногда случается так, что вы создаете “трицикл”, и только потом,
+набив несколько шишек с его устойчивостью и неудачным вписыванием в колею на дороге,
+узнаете, что существует шаблон “автомобиль”, который значительно упростил бы вам жизнь, знай вы про него ранее.</p>
+
+<p><strong>Примечание:</strong>
+Шаблоны не привязаны к какому-либо конкретному языку программирования. Это просто подход к проектированию чего-либо.
+Если смотреть глубже, то многие шаблоны ООП были созданы на основе реальных жизненных ситуаций в проектировании 
+вполне себе осязаемых объектов нашего мира.</p>
+
+<h2 id="ресурсы-которые-использовались">Ресурсы, которые использовались:</h2>
+<ol>
+  <li>Книги:
+    <ul>
+      <li><em>Зандстра М.</em> - PHP. Объекты, шаблоны и методики программирования, 4-е издание;</li>
+      <li><em>Фримен Э., Фримен Э.</em> - Паттерны проектирования;</li>
+      <li><em>Гамма Э., Хелм Р., Джонсон Р., Влиссидес Дж.</em> - Приемы объектно-ориентированного проектирования.
+ Паттерны проектирования;</li>
+    </ul>
+  </li>
+  <li>Статьи и ресурсы:
+    <ul>
+      <li><a href="https://ru.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F">Шаблон проектирования WIKI</a></li>
+      <li><a href="http://makedev.org/patterns/index.html">Паттерны (шаблоны) проектирования</a></li>
+      <li><a href="https://sourcemaking.com/design_patterns">Design Patterns</a></li>
+      <li><a href="https://github.com/domnikl/DesignPatternsPHP">Design Patterns PHP</a></li>
+      <li><a href="http://dron.by/post/patterny-shablony-proektirovanie-v-php-vvedenie.html">Паттерны (шаблоны) проектирование в PHP.</a></li>
+      <li><a href="http://getjump.me/ru-php-the-right-way/pages/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F.html">PHP Правильный путь. Шаблоны проектирования</a></li>
+      <li><a href="https://refactoring.guru/ru/design-patterns/">Паттерны проектирования</a></li>
+    </ul>
+  </li>
+</ol>
+
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>

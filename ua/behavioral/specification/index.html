@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Design patterns – Шаблони проєктування</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    
+    <meta name="author" content="Design patterns" />
+
+    
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" type="image/x-icon" href="/design-patterns/images/favicon.ico" >
+  <link rel="stylesheet" type="text/css" href="/design-patterns/style.css"/>
+  <link rel="alternate" type="application/rss+xml" title="Design patterns - "
+        href="/design-patterns/feed.xml"/>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+
+<body>
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="/design-patterns/" class="site-avatar"><img src="/design-patterns/images/logo.png"/></a>
+      <div>
+  <ul class="lang">
+    <li><a href="/design-patterns/" class="active">Ua</a></li>
+    <li><a href="/design-patterns/ru/" >Ru</a></li>
+  </ul>
+</div>
+      <div class="site-info">
+        <h1 class="site-name"><a href="/design-patterns/">Шаблони проєктування</a></h1>
+      </div>
+
+      <nav id="main">
+        <a href="/design-patterns/" >Головна</a>
+        <a href="/design-patterns/ua/creational/" >Породжувальні шаблони</a>
+        <a href="/design-patterns/ua/behavioral/"  class="active">Шаблони поведінки</a>
+        <a href="/design-patterns/ua/structural/" >Структурні шаблони</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div id="main" role="main" class="container">
+  
+
+<nav class="breadcrumbs hidden-sm-down">
+
+  <a class="breadcrumb-item" href="/design-patterns/">Головна</a>
+
+  <ol class="breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+
+    <!-- Iteration breadcrumb item -->
+    
+    
+
+    <!-- Skip if root -->
+    
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="WebPage" href="http://nixsolutions.github.io/design-patterns/ua/behavioral/">
+      <span property="name">Шаблони поведінки</span>
+      </a>
+      <meta property="position" content="1" />
+    </li>
+
+    
+
+    <!-- Skip if root -->
+    
+
+    <!-- Skip if language directory -->
+    
+    
+    
+    
+
+    <!-- Get breadcrumb title. Insert snippet from configuration description to translates breadcrumb if language plugin is installed and YAML subset is set -->
+    
+
+    <!-- SEO data -->
+    
+
+    <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem">
+      
+      <span property="name">Специфікація</span>
+      
+      <meta property="position" content="2" />
+    </li>
+
+    
+
+  </ol>
+
+</nav>
+
+  <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    <p><img src="/design-patterns/_includes/patterns/ua/Behavioral/Specification/diagram.png" alt="specification" class="img-responsive" />
+<strong>Специфікація</strong> (англ. <strong>Specification</strong>) — це шаблон проєктування, за допомогою якого представлення правил бізнес
+логіки може бути перетворено на ланцюжок об’єктів, пов’язаних операціями булевої логіки.</p>
+
+<p>Цей шаблон виділяє такі специфікації (правила) у бізнес-логіці, які підходять для “зчеплення” з іншими специфікаціями.
+Об’єкт бізнес-логіки успадковує свою функціональність від абстрактного класу, що агрегує <strong><code class="language-plaintext highlighter-rouge">SpecificationInterface</code></strong>,
+який містить лише один метод, <strong><code class="language-plaintext highlighter-rouge">SpecificationInterface-&gt;IsSatisfiedBy()</code></strong>, що повертає булеве значення. Після інстанціювання
+об’єкт об’єднується в ланцюжок з іншими об’єктами. В результаті, не втрачаючи гнучкості в налаштуванні, бізнес-логіки,
+ми можемо легко додавати нові правила.</p>
+
+<ul class="spoiler-list">
+
+
+  <li>
+  
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>AndSpecification.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Specification</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class AndSpecification
+ * @package DesignPatterns\Behavioral\Specification
+ */</span>
+<span class="kd">class</span> <span class="nc">AndSpecification</span> <span class="kd">implements</span> <span class="nc">SpecificationInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var SpecificationInterface[]
+     */</span>
+    <span class="k">private</span> <span class="nv">$specifications</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @param SpecificationInterface[] ...$specifications
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">SpecificationInterface</span> <span class="mf">...</span><span class="nv">$specifications</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">specifications</span> <span class="o">=</span> <span class="nv">$specifications</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param Item $item
+     *
+     * @return bool
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">isSatisfiedBy</span><span class="p">(</span><span class="kt">Item</span> <span class="nv">$item</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="nv">$satisfied</span> <span class="o">=</span> <span class="p">[];</span>
+
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">specifications</span> <span class="k">as</span> <span class="nv">$specification</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$satisfied</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$specification</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="nv">$item</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="o">!</span><span class="nb">in_array</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="nv">$satisfied</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>Item.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Specification</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class Item
+ * @package DesignPatterns\Behavioral\Specification
+ */</span>
+<span class="kd">class</span> <span class="nc">Item</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var float
+     */</span>
+    <span class="k">private</span> <span class="nv">$price</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * Item constructor.
+     *
+     * @param float $price
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">float</span> <span class="nv">$price</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">price</span> <span class="o">=</span> <span class="nv">$price</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return float
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getPrice</span><span class="p">():</span> <span class="kt">float</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">price</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>NotSpecification.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Specification</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class NotSpecification
+ * @package DesignPatterns\Behavioral\Specification
+ */</span>
+<span class="kd">class</span> <span class="nc">NotSpecification</span> <span class="kd">implements</span> <span class="nc">SpecificationInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var SpecificationInterface
+     */</span>
+    <span class="k">private</span> <span class="nv">$specification</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * NotSpecification constructor.
+     *
+     * @param SpecificationInterface $specification
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">SpecificationInterface</span> <span class="nv">$specification</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">specification</span> <span class="o">=</span> <span class="nv">$specification</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param Item $item
+     *
+     * @return bool
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">isSatisfiedBy</span><span class="p">(</span><span class="kt">Item</span> <span class="nv">$item</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">specification</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="nv">$item</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>OrSpecification.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Specification</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class OrSpecification
+ * @package DesignPatterns\Behavioral\Specification
+ */</span>
+<span class="kd">class</span> <span class="nc">OrSpecification</span> <span class="kd">implements</span> <span class="nc">SpecificationInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var SpecificationInterface[]
+     */</span>
+    <span class="k">private</span> <span class="nv">$specifications</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @param SpecificationInterface[] ...$specifications
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">SpecificationInterface</span> <span class="mf">...</span><span class="nv">$specifications</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">specifications</span> <span class="o">=</span> <span class="nv">$specifications</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param Item $item
+     *
+     * @return bool
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">isSatisfiedBy</span><span class="p">(</span><span class="kt">Item</span> <span class="nv">$item</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="nv">$satisfied</span> <span class="o">=</span> <span class="p">[];</span>
+
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">specifications</span> <span class="k">as</span> <span class="nv">$specification</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$satisfied</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$specification</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="nv">$item</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nb">in_array</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nv">$satisfied</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>PriceSpecification.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Specification</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Class PriceSpecification
+ * @package DesignPatterns\Behavioral\Specification
+ */</span>
+<span class="kd">class</span> <span class="nc">PriceSpecification</span> <span class="kd">implements</span> <span class="nc">SpecificationInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var float
+     */</span>
+    <span class="k">private</span> <span class="nv">$maxPrice</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var float
+     */</span>
+    <span class="k">private</span> <span class="nv">$minPrice</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @param float $minPrice
+     * @param float $maxPrice
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">float</span> <span class="nv">$minPrice</span><span class="p">,</span> <span class="kt">float</span> <span class="nv">$maxPrice</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">minPrice</span> <span class="o">=</span> <span class="nv">$minPrice</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">maxPrice</span> <span class="o">=</span> <span class="nv">$maxPrice</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param Item $item
+     *
+     * @return bool
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">isSatisfiedBy</span><span class="p">(</span><span class="kt">Item</span> <span class="nv">$item</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="nf">getPrice</span><span class="p">()</span> <span class="o">&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">maxPrice</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="nf">getPrice</span><span class="p">()</span> <span class="o">&lt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">minPrice</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+    
+        <li>
+            <details>
+              <summary> <b>SpecificationInterface.php</b> </summary>
+              
+<figure class="highlight"><pre><code class="language-php" data-lang="php">              
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Behavioral\Specification</span><span class="p">;</span>
+
+<span class="cd">/**
+ * Interface SpecificationInterface
+ * @package DesignPatterns\Behavioral\Specification
+ */</span>
+<span class="kd">interface</span> <span class="nc">SpecificationInterface</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @param Item $item
+     *
+     * @return bool
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">isSatisfiedBy</span><span class="p">(</span><span class="kt">Item</span> <span class="nv">$item</span><span class="p">):</span> <span class="kt">bool</span><span class="p">;</span>
+<span class="p">}</span>
+
+              </code></pre></figure>
+
+            </details>
+          </li>
+    
+  
+  
+  
+
+
+<div class="test-example">
+<h2>Test case: </h2>
+<details>
+<summary> <b> SpecificationTest.php </b> </summary>
+  
+<figure class="highlight"><pre><code class="language-php" data-lang="php">  
+<span class="cp">&lt;?php</span>
+<span class="kn">namespace</span> <span class="nn">DesignPatterns\Tests\Behavioral\Specification</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Specification\Item</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Specification\NotSpecification</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Specification\OrSpecification</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Specification\AndSpecification</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DesignPatterns\Behavioral\Specification\PriceSpecification</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nf">PHPUnit_Framework_TestCase</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">SpecificationTest</span> <span class="kd">extends</span> <span class="nc">PHPUnit_Framework_TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCanOr</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$spec1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PriceSpecification</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">99</span><span class="p">);</span>
+        <span class="nv">$spec2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PriceSpecification</span><span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+
+        <span class="nv">$orSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OrSpecification</span><span class="p">(</span><span class="nv">$spec1</span><span class="p">,</span> <span class="nv">$spec2</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertFalse</span><span class="p">(</span><span class="nv">$orSpec</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="k">new</span> <span class="nc">Item</span><span class="p">(</span><span class="mi">100</span><span class="p">)));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertTrue</span><span class="p">(</span><span class="nv">$orSpec</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="k">new</span> <span class="nc">Item</span><span class="p">(</span><span class="mi">51</span><span class="p">)));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertTrue</span><span class="p">(</span><span class="nv">$orSpec</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="k">new</span> <span class="nc">Item</span><span class="p">(</span><span class="mi">150</span><span class="p">)));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCanAnd</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$spec1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PriceSpecification</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+        <span class="nv">$spec2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PriceSpecification</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+
+        <span class="nv">$orSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AndSpecification</span><span class="p">(</span><span class="nv">$spec1</span><span class="p">,</span> <span class="nv">$spec2</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertFalse</span><span class="p">(</span><span class="nv">$orSpec</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="k">new</span> <span class="nc">Item</span><span class="p">(</span><span class="mi">150</span><span class="p">)));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertFalse</span><span class="p">(</span><span class="nv">$orSpec</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="k">new</span> <span class="nc">Item</span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertFalse</span><span class="p">(</span><span class="nv">$orSpec</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="k">new</span> <span class="nc">Item</span><span class="p">(</span><span class="mi">51</span><span class="p">)));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertTrue</span><span class="p">(</span><span class="nv">$orSpec</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="k">new</span> <span class="nc">Item</span><span class="p">(</span><span class="mi">100</span><span class="p">)));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">testCanNot</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$spec1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PriceSpecification</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+        <span class="nv">$orSpec</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NotSpecification</span><span class="p">(</span><span class="nv">$spec1</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertTrue</span><span class="p">(</span><span class="nv">$orSpec</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="k">new</span> <span class="nc">Item</span><span class="p">(</span><span class="mi">150</span><span class="p">)));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertFalse</span><span class="p">(</span><span class="nv">$orSpec</span><span class="o">-&gt;</span><span class="nf">isSatisfiedBy</span><span class="p">(</span><span class="k">new</span> <span class="nc">Item</span><span class="p">(</span><span class="mi">50</span><span class="p">)));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+  </code></pre></figure>
+
+</details>
+</div>
+</li></ul>
+
+  </div>
+</article>
+
+</div>
+
+<div class="wrapper-footer">
+  <div class="container">
+    <footer class="footer">
+      
+
+
+
+<a href="https://github.com/nixsolutions/design-patterns"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+    </footer>
+  </div>
+</div>
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155094-10"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155094-10');
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>
