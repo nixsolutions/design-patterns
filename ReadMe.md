@@ -23,3 +23,9 @@ To run the project locally, use the Jekyll static site generator:
 
 1. `$ docker-compose up`
 2. `$ http://0.0.0.0:4000/design-patterns/`
+
+Deploy site to GitHub Page:
+--
+
+The site is deployed to the GitHub Pages automatically in the **maser** branch,
+after pushing to the **source** branch.
